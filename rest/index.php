@@ -6,4 +6,3 @@ error_reporting(E_ALL);
 require_once dirname(__FILE__)."/dao/baseDao.class.php";
 
 $dao = new baseDao();
-  echo "vjezbam";

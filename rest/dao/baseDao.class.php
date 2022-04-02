@@ -2,7 +2,8 @@
 
 require_once dirname(__FILE__)."/../config.php";
 class baseDao {
-private $connection;
+protected  $connection;
+
 public function __construct() {
   try {
     $this->connection = new PDO("mysql:host=".config::DB_HOST.";dbname=".config::DB_SCHEME, config::DB_USERNAME, config::DB_PASSWORD);
