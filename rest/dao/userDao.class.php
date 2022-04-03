@@ -14,9 +14,6 @@ public function get_user_by_id($userID) {
     return $this->query_unique("SELECT * FROM user WHERE userID = :user_id", ["user_id" => $userID]);
   }
 
-// public function update_user_by_email($email, $user){
-//     $this->execute_update("users", $email, $user, "email");
-//   }
 
 // public function get_users($search, $offset, $limit, $order = "-id"){
 //   list($order_column, $order_direction) = self::parse_order($order);
@@ -29,23 +26,21 @@ public function get_user_by_id($userID) {
 //                        ["name" => strtolower($search)]);
 //  }
 //
+
  public function add_user($user){
   $sql = "INSERT INTO user (name, surname, username, email, password) VALUES (:name, :surname, :username, :email, :password)";
   $stmt= $this->connection->prepare($sql);
  $stmt->execute($user);
 }
 
-public function update_user($userID, $user){
-  $query = "UPDATE user SET ";
-  foreach($user as $name => $value){
-    $query .= $name ."= :". $name. ", ";
-  }
-  $query = substr($query, 0, -2);
-  $query .= " WHERE userID = :userID";
-
-  $stmt= $this->connection->prepare($query);
-  $user['userID'] = $userID;
-  $stmt->execute($user);
+//parcijalni update podataka by id
+  public function update_user($userID, $user){
+$this->update("user", $userID, $user);
 }
+
+public function update_user_by_email($email, $user){
+    $this->update("user", $email, $user, "email");
+  }
+
 }
 ?>
