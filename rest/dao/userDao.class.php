@@ -14,25 +14,25 @@ public function get_user_by_id($userID) {
     return $this->query_unique("SELECT * FROM user WHERE userID = :user_id", ["user_id" => $userID]);
   }
 
-public function update_user_by_email($email, $user){
-    $this->execute_update("users", $email, $user, "email");
-  }
+// public function update_user_by_email($email, $user){
+//     $this->execute_update("users", $email, $user, "email");
+//   }
 
-public function get_users($search, $offset, $limit, $order = "-id"){
-  list($order_column, $order_direction) = self::parse_order($order);
-
-      return $this->query("SElECT *
-                       FROM user
-                       WHERE LOWER(name) LIKE CONCAT('%', :name, '%')
-                       ORDER BY ${order_column} ${order_direction}
-                       LIMIT ${limit} OFFSET ${offset}",
-                       ["name" => strtolower($search)]);
- }
-
- public function add_user($user1){
+// public function get_users($search, $offset, $limit, $order = "-id"){
+//   list($order_column, $order_direction) = self::parse_order($order);
+//
+//       return $this->query("SElECT *
+//                        FROM user
+//                        WHERE LOWER(name) LIKE CONCAT('%', :name, '%')
+//                        ORDER BY ${order_column} ${order_direction}
+//                        LIMIT ${limit} OFFSET ${offset}",
+//                        ["name" => strtolower($search)]);
+//  }
+//
+ public function add_user($user){
   $sql = "INSERT INTO user (name, surname, username, email, password) VALUES (:name, :surname, :username, :email, :password)";
   $stmt= $this->connection->prepare($sql);
-  $stmt->execute($user1);
+ $stmt->execute($user);
 }
 }
 ?>
