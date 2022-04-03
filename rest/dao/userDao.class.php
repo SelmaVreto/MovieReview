@@ -10,37 +10,36 @@ class userDao extends baseDao {
      return $this->query_unique("SELECT * FROM user WHERE email = :email", ["email" => $email]);
   }
 
-public function get_user_by_id($userID) {
+ public function get_user_by_id($userID) {
     return $this->query_unique("SELECT * FROM user WHERE userID = :user_id", ["user_id" => $userID]);
   }
-
-
-// public function get_users($search, $offset, $limit, $order = "-id"){
-//   list($order_column, $order_direction) = self::parse_order($order);
-//
-//       return $this->query("SElECT *
-//                        FROM user
-//                        WHERE LOWER(name) LIKE CONCAT('%', :name, '%')
-//                        ORDER BY ${order_column} ${order_direction}
-//                        LIMIT ${limit} OFFSET ${offset}",
-//                        ["name" => strtolower($search)]);
-//  }
-//
 
  public function add_user($user){
   $sql = "INSERT INTO user (name, surname, username, email, password) VALUES (:name, :surname, :username, :email, :password)";
   $stmt= $this->connection->prepare($sql);
- $stmt->execute($user);
-}
+  $stmt->execute($user);
+ }
 
 //parcijalni update podataka by id
   public function update_user($userID, $user){
-$this->update("user", $userID, $user);
+    $this->update("user", $userID, $user);
 }
 
 public function update_user_by_email($email, $user){
     $this->update("user", $email, $user, "email");
   }
+
+  // public function get_users($search, $offset, $limit, $order = "-id"){
+  //   list($order_column, $order_direction) = self::parse_order($order);
+  //
+  //       return $this->query("SElECT *
+  //                        FROM user
+  //                        WHERE LOWER(name) LIKE CONCAT('%', :name, '%')
+  //                        ORDER BY ${order_column} ${order_direction}
+  //                        LIMIT ${limit} OFFSET ${offset}",
+  //                        ["name" => strtolower($search)]);
+  //  }
+  //
 
 }
 ?>

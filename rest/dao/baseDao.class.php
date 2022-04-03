@@ -13,8 +13,6 @@ public function __construct() {
 }
 }
 
-
-
 public function insert() {
 
 }
@@ -42,7 +40,5 @@ public function query($query, $params){
     $results = $this->query($query, $params);
     return reset($results);
 }
-
 }
-
  ?>

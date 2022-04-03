@@ -13,8 +13,6 @@ $user1 = [
 ];
 // $user_dao->add_user($user1);
 // $user = $user_dao->update_user(7, $user1);
-$user = $user_dao->update_user_by_email("azrabasic46@gmail.com", $user1);
+// $user = $user_dao->update_user_by_email("azrabasic46@gmail.com", $user1);
 
-
-print_r($user);
 ?>
