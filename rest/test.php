@@ -9,14 +9,15 @@ $user_dao = new userDao();
 // $user = $user_dao -> get_user_by_id(3);
 // $user = $user_dao -> get_user_by_email("v.selmaaaa@gmail.com");
 $user1 = [
-  "name" => "Ena",
-  "surname" => "Soljic",
-  "username" => "EnaSoljic",
-  "email" => "ena.soljic@gmail.com",
-  "password" => "soljicenasoljic"
+  "name" => "Senaida",
+  "surname" => "Vreto",
+  "username" => "Senaida_Vreto",
+  "email" => "senaida2909@gmail.com",
+  "password" => "Senaida123"
 ];
-$user_dao->add_user($user1);
+// $user_dao->add_user($user1);
+$user = $user_dao->update_user(7, $user1);
 
 
-echo "bravo";
+print_r($user);
 ?>
