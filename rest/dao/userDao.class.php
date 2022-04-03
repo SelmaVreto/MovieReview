@@ -29,16 +29,21 @@ public function get_user_by_id($userID) {
 //                        ["name" => strtolower($search)]);
 //  }
 //
-//  public function add_user($user){
-//   $sql = "INSERT INTO user (name, surname, username, email, password) VALUES (:name, :surname, :username, :email, :password)";
-//   $stmt= $this->connection->prepare($sql);
-//  $stmt->execute($user);
-// }
+ public function add_user($user){
+  $sql = "INSERT INTO user (name, surname, username, email, password) VALUES (:name, :surname, :username, :email, :password)";
+  $stmt= $this->connection->prepare($sql);
+ $stmt->execute($user);
+}
 
 public function update_user($userID, $user){
+  $query = "UPDATE user SET ";
+  foreach($user as $name => $value){
+    $query .= $name ."= :". $name. ", ";
+  }
+  $query = substr($query, 0, -2);
+  $query .= " WHERE userID = :userID";
 
-  $sql = "UPDATE user SET name = :name, surname = :surname, username = :username, email = :email, password = :password WHERE userID = :userID";
-  $stmt= $this->connection->prepare($sql);
+  $stmt= $this->connection->prepare($query);
   $user['userID'] = $userID;
   $stmt->execute($user);
 }
