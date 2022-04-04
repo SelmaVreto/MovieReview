@@ -11,8 +11,8 @@ $user_dao = new userDao();
 $user1 = [
 "name" => "password",
 "surname" => "password",
-"username" => "password",
-"email" => "password",
+"username" => "password1",
+"email" => "password1",
 "password" => "password"
 
 ];

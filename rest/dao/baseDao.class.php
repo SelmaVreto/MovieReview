@@ -28,7 +28,7 @@ public function insert($table, $entity){
 
     $stmt= $this->connection->prepare($query);
     $stmt->execute($entity); // sql injection prevention
-    $entity['Userid'] = $this->connection->lastInsertId();
+    $entity['id'] = $this->connection->lastInsertId();
     return $entity;
   }
 
