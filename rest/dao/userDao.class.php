@@ -15,9 +15,22 @@ class userDao extends baseDao {
   }
 
  public function add_user($user){
-  $sql = "INSERT INTO user (name, surname, username, email, password) VALUES (:name, :surname, :username, :email, :password)";
-  $stmt= $this->connection->prepare($sql);
-  $stmt->execute($user);
+   $query = "INSERT INTO user (";
+   foreach ($user as $column => $value) {
+     $query .= $column.", ";
+   }
+   $query = substr($query, 0, -2);
+   $query .= ") VALUES (";
+   foreach ($user as $column => $value) {
+     $query .= ":".$column.", ";
+   }
+   $query = substr($query, 0, -2);
+   $query .= ")";
+
+   $stmt= $this->connection->prepare($query);
+   $stmt->execute($user); // sql injection prevention
+   $user['id'] = $this->connection->lastInsertId();
+   return $user;
  }
 
 //parcijalni update podataka by id
