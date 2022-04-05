@@ -3,18 +3,15 @@
 class directorsDao extends baseDao{
 
   public function __construct(){
-    $servername = "localhost";
-    $username = "moviesrandr";
-    $password = "movie";
-    $this->conn = new PDO("mysql:host=$servername;dbname=moviesr", $username, $password);
-    $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  }
-
-  public function add_directors($directors) {
-
-
+      parent::__construct("directors");
     }
 
+  public function get_all_directors() {
+    return $this->query("SELECT * FROM directors", []);
+    }
+    public function get_by_id($id){
+      return $this->query_unique("SELECT * FROM directors WHERE id = :id", ["id" => $id]);
+    }
 
 }
 
