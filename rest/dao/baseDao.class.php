@@ -55,5 +55,9 @@ public function query($query, $params){
     $results = $this->query($query, $params);
     return reset($results);
 }
+
+public function add($entity){
+  return $this->insert($this->table, $entity);
+}
 }
  ?>

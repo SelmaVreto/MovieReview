@@ -4,21 +4,28 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once dirname(__FILE__)."/dao/userDao.class.php";
+require_once dirname(__FILE__)."/dao/movieDao.class.php";
 
-$user_dao = new userDao();
+$Mdao = new movieDao();
 // $user = $user_dao -> get_user_by_id(3);
 // $user = $user_dao -> get_user_by_email("v.selmaaaa@gmail.com");
-$user1 = [
-"name" => "password",
-"surname" => "password",
-"username" => "password1",
-"email" => "password1",
-"password" => "password"
-
+$movie = [
+  "movie_title" => "proba",
+  "movie_year" => 2000,
+  "movie_summary" => "proba",
+  "movie_rating" => "3",
+  "movie_director" => "proba",
+  "genre" => "proba"
 ];
+// $dao->update(1, [
+//   "end_date" => "2021-04-01 00:00:00",
+//   "status" => "BLOCKED"
+// ]);
 
- $user = $user_dao->add_user($user1);
+$movie = $Mdao -> add($movie);// $dao->add($campaing);
+print_r($movie);
 
+// $user = $user_dao->add_user($user1);
 // $user_dao->add_user($user1);
 // $user = $user_dao->update_user(7, $user1);
 // $user = $user_dao->update_user_by_email("azrabasic46@gmail.com", $user1);
