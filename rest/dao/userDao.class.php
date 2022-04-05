@@ -28,17 +28,5 @@ public function update_user_by_email($email, $user){
     $this->update("user", $email, $user, "email");
   }
 
-  // public function get_users($search, $offset, $limit, $order = "-id"){
-  //   list($order_column, $order_direction) = self::parse_order($order);
-  //
-  //       return $this->query("SElECT *
-  //                        FROM user
-  //                        WHERE LOWER(name) LIKE CONCAT('%', :name, '%')
-  //                        ORDER BY ${order_column} ${order_direction}
-  //                        LIMIT ${limit} OFFSET ${offset}",
-  //                        ["name" => strtolower($search)]);
-  //  }
-  //
-
 }
 ?>
