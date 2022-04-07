@@ -79,10 +79,11 @@ public function __construct($table){
                        LIMIT ${limit} OFFSET ${offset}", []);
 }
 
-  public function delete($id){ //records
-   $stmt = $this->conn->prepare("DELETE FROM todos WHERE id=:id");
-   $stmt->bindParam(':id', $id); // SQL injection prevention
-   $stmt->execute();
-}
+//   public function delete($id){ //records
+//
+//    $stmt = $this->conn->prepare("DELETE FROM ".$this->table." WHERE id=:id");
+//    $stmt->bindParam(':id', $id); // SQL injection prevention
+//    $stmt->execute();
+// }
 }
  ?>
