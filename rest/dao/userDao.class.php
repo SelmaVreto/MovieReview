@@ -31,5 +31,6 @@ public function update_user_by_email($email, $user){
     $this->update("user", $email, $user, "email");
   }
 
+
 }
 ?>

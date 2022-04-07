@@ -14,8 +14,9 @@ class genreDao extends baseDao {
     return $this->query("SELECT * FROM genre", []);
     }
 
-  public function get_by_id($id){
-        return $this->query_unique("SELECT * FROM genre WHERE id = :id", ["id" => $id]);
+  public function get_by_idg($id){
+        return $this->query("SELECT * FROM genre WHERE id = :id", ["id" => $id]);
       }
+    }
 
 ?>

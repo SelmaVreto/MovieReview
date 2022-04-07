@@ -10,17 +10,18 @@ class movieRatDao extends baseDao {
     parent::__construct("movieRat");
   }
 
-  public function add_comment($movie_rat_rew){
+  public function add_rew($movie_rat_rew){
     return $this->insert("comments", $movie_rat_rew);
-  }
-
-  public function add_rat($movie_rat_rew){
     return $this->insert("rating", $movie_rat_rew);
-  }
+}
 
-  public function get_comm_by_MOvieid($movieID) {
-     return $this->query_unique("SELECT * FROM movie_rat_rew WHERE movieID = :movieid", ["movieid" => $movieID]);
-   }
 
+  // public function get_comm_by_Movieid($movieID) {
+  //    return $this->query("SELECT * FROM movie_rat_rew WHERE movieID = :movie_id", ["movie_id" => $movieID]);
+  //  }
+
+   // public function get_comm_by_userid($userID) {
+   //    return $this->query("SELECT * FROM movie_rat_rew WHERE userID = :user_id", ["user_id" => $userID]);
+   //  }
    }
    ?>

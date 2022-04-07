@@ -6,13 +6,19 @@ error_reporting(E_ALL);
 require_once dirname(__FILE__)."/dao/userDao.class.php";
 require_once dirname(__FILE__)."/dao/movieDao.class.php";
 require_once dirname(__FILE__)."/dao/directorsDao.class.php";
+require_once dirname(__FILE__)."/dao/movieRatDao.class.php";
+require_once dirname(__FILE__)."/dao/genreDao.class.php";
 
-$dao = new directorsDao();
-$directors = $dao -> get_by_id(1);// $dao->add($campaing);
-print_r($directors);
 
-// $user = $user_dao -> get_user_by_id(3);
-// $user = $user_dao -> get_user_by_email("v.selmaaaa@gmail.com");
+$movie_id = new movieDao();
+// $directors = $dao -> get_by_id(1);// $dao->add($campaing);
+// print_r($directors);
+//
+// $movie = $movie_id -> get_rat_by_Movieid(5);
+// print_r($movie);
+$genre = $movie_id ->get_movie_by_genre(2);
+ print_r($genre);
+
 // $movie = [
 //   "movie_title" => "proba",
 //   "movie_year" => 2000,
