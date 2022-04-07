@@ -20,7 +20,6 @@ class userDao extends baseDao {
 
  public function add_user($user){
    return $this->insert("user", $user);
-
  }
 
 //parcijalni update podataka by id
