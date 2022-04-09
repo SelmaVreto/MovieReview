@@ -70,14 +70,14 @@ public function __construct($table){
     return $this->query_unique("SELECT * FROM ".$this->table." WHERE id = :id", ["id" => $id]);
   }
 
-  public function get_all($offset = 0, $limit = 25, $order="-id"){
-  list($order_column, $order_direction) = self::parse_order($order);
+ public function get_all($offset = 0, $limit = 10){ // offset -from, limit number of records
+  // list($order_column, $order_direction) = self::parse_order($order);
 
   return $this->query("SELECT *
                        FROM ".$this->table."
-                       ORDER BY ${order_column} ${order_direction}
                        LIMIT ${limit} OFFSET ${offset}", []);
 }
+// ORDER BY ${order_column} ${order_direction}
 
 //   public function delete($id){ //records
 //
