@@ -4,7 +4,14 @@ Flight::route('GET /genre', function(){
   $offset = Flight::query('offset', 0);
   $limit = Flight::query('limit', 10);
 
-  Flight::json(Flight::genreDao()->get_all($offset,$limit));
+  $search = Flight::query('search');
+
+   if ($search){
+     Flight::json(Flight::genreDao()->get_genre($search, $offset, $limit));
+   }else{
+     Flight::json(Flight::genreDao()->get_all($offset,$limit));
+   }
+
 });
 
 Flight::route('GET /genre/@id', function($id){
