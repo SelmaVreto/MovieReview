@@ -1,10 +1,8 @@
 <?php
 
 require_once dirname(__FILE__).'/../dao/genreDao.class.php';
-
-class genreService {
-
-  private $dao;
+require_once dirname(__FILE__). '/baseService.class.php';
+class genreService extends baseService{
 
   public function __construct(){
     $this->dao = new genreDao();
@@ -17,5 +15,11 @@ class genreService {
       return $this->dao->get_all($offset, $limit);
     }
   }
+
+  public function add($genre){
+  // validation of account data
+  if (!isset($genre['genre_name'])) throw new Exception("Genre name is missing");
+  return parent::add($genre);
+}
 }
 ?>

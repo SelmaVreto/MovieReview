@@ -11,25 +11,18 @@ Flight::route('GET /genre', function(){
 });
 
 Flight::route('GET /genre/@id', function($id){
-  Flight::json(Flight::genreDao()->get_by_id($id));
+  Flight::json(Flight::genreService()->get_by_id($id));
 
 
 });
 Flight::route('POST /genre', function(){
-  $request = Flight::request();
-  $data = $request->data->getData();
-  $dao = new genreDao();
-  $genre = $dao->add($data);
-  Flight::json($genre);
+  $data = Flight::request()->data->getData();
+  Flight::json(Flight::genreService()->add($data));
 });
 
 Flight::route('PUT /genre/@id', function($id){
-  $dao = new genreDao();
-  $request = Flight::request();
-  $data = $request->data->getData();
-  $dao->update($id,$data);
-  $genre=$dao->get_by_id($id);
-    Flight::json($genre);
+  $data = Flight::request()->data->getData();
+  Flight::json(Flight::genreService()->update($id, $data));
 });
 
  ?>
