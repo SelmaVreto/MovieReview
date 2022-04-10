@@ -6,11 +6,7 @@ Flight::route('GET /genre', function(){
 
   $search = Flight::query('search');
 
-   if ($search){
-     Flight::json(Flight::genreDao()->get_genre($search, $offset, $limit));
-   }else{
-     Flight::json(Flight::genreDao()->get_all($offset,$limit));
-   }
+   Flight::json(Flight::genreService()->get_genre($search, $offset, $limit));
 
 });
 
