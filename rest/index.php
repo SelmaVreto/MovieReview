@@ -7,10 +7,15 @@ require_once dirname(__FILE__).'/../vendor/autoload.php';
 require_once dirname(__FILE__).'/dao/directorsDao.class.php';
 require_once dirname(__FILE__).'/dao/genreDao.class.php';
 require_once dirname(__FILE__).'/dao/movieDao.class.php';
+require_once dirname(__FILE__).'/dao/userDao.class.php';
+require_once dirname(__FILE__).'/dao/movieRatDao.class.php';
+
+
 require_once dirname(__FILE__).'/services/genreService.class.php';
 require_once dirname(__FILE__).'/services/directorsService.class.php';
 require_once dirname(__FILE__).'/services/movieService.class.php';
-
+require_once dirname(__FILE__).'/services/userService.class.php';
+require_once dirname(__FILE__).'/services/movieRatService.class.php';
 
 /* utility function for reading query parameters from URL */
 Flight::map('query', function($name, $default_value = NULL){
@@ -24,14 +29,20 @@ Flight::map('query', function($name, $default_value = NULL){
 Flight::register('genreDao', 'genreDao');
 Flight::register('directorsDao', 'directorsDao');
 Flight::register('movieDao', 'movieDao');
+Flight::register('movieRatDao', 'movieRatDao');
+Flight::register('userDao', 'userDao');
 /* register Business Logic layer services */
 Flight::register('genreService', 'genreService');
 Flight::register('directorsService', 'directorsService');
 Flight::register('movieService', 'movieService');
+Flight::register('userService', 'userService');
+Flight::register('movieRatService', 'movieRatService');
 /* include all routes */
 require_once dirname(__FILE__).'/routes/genre.php';
 require_once dirname(__FILE__).'/routes/directors.php';
 require_once dirname(__FILE__).'/routes/movie.php';
+require_once dirname(__FILE__).'/routes/user.php';
+require_once dirname(__FILE__).'/routes/movieRat.php';
 
 Flight::route('/', function(){
   echo "Hello";

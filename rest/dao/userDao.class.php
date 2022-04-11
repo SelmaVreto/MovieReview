@@ -29,7 +29,9 @@ class userDao extends baseDao {
 public function update_user_by_email($email, $user){
     $this->update("user", $email, $user, "email");
   }
-
+  public function get_all($offset, $limit) {
+    return $this->query("SELECT * FROM user", []);
+    }
 
 }
 ?>
