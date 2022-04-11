@@ -6,7 +6,8 @@ Flight::route('GET /directors', function(){
 
   $search = Flight::query('search');
 
-   Flight::json(Flight::directorsService()->get_directors($search, $offset, $limit));
+   Flight::json(Flight::directorsService()->get_directors_by_name($search, $offset, $limit));
+   Flight::json(Flight::directorsService()->get_directors_by_surname($search, $offset, $limit));
 
 });
 

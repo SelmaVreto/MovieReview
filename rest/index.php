@@ -6,8 +6,10 @@ error_reporting(E_ALL);
 require_once dirname(__FILE__).'/../vendor/autoload.php';
 require_once dirname(__FILE__).'/dao/directorsDao.class.php';
 require_once dirname(__FILE__).'/dao/genreDao.class.php';
+require_once dirname(__FILE__).'/dao/movieDao.class.php';
 require_once dirname(__FILE__).'/services/genreService.class.php';
 require_once dirname(__FILE__).'/services/directorsService.class.php';
+require_once dirname(__FILE__).'/services/movieService.class.php';
 
 
 /* utility function for reading query parameters from URL */
@@ -21,12 +23,15 @@ Flight::map('query', function($name, $default_value = NULL){
 /* register Dao layer */
 Flight::register('genreDao', 'genreDao');
 Flight::register('directorsDao', 'directorsDao');
+Flight::register('movieDao', 'movieDao');
 /* register Business Logic layer services */
 Flight::register('genreService', 'genreService');
 Flight::register('directorsService', 'directorsService');
+Flight::register('movieService', 'movieService');
 /* include all routes */
 require_once dirname(__FILE__).'/routes/genre.php';
 require_once dirname(__FILE__).'/routes/directors.php';
+require_once dirname(__FILE__).'/routes/movie.php';
 
 Flight::route('/', function(){
   echo "Hello";
