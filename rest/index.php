@@ -5,7 +5,6 @@ error_reporting(E_ALL);
 
 require_once dirname(__FILE__).'/../vendor/autoload.php';
 
-
 require_once dirname(__FILE__).'/services/genreService.class.php';
 require_once dirname(__FILE__).'/services/directorsService.class.php';
 require_once dirname(__FILE__).'/services/movieService.class.php';
@@ -38,10 +37,6 @@ require_once dirname(__FILE__).'/routes/directors.php';
 require_once dirname(__FILE__).'/routes/movie.php';
 require_once dirname(__FILE__).'/routes/user.php';
 require_once dirname(__FILE__).'/routes/movieRat.php';
-
-Flight::route('/', function(){
-  echo "Hello";
-});
 
 Flight::start();
 

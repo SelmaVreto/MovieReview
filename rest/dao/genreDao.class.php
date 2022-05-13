@@ -1,8 +1,5 @@
 <?php
 require_once dirname(__FILE__)."/baseDao.class.php";
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 class genreDao extends baseDao {
 
@@ -14,7 +11,7 @@ class genreDao extends baseDao {
     return $this->query("SELECT * FROM genre", []);
     }
 
-  public function get_by_idg($id){
+  public function get_by_id($id){
         return $this->query("SELECT * FROM genre WHERE id = :id", ["id" => $id]);
       }
 
