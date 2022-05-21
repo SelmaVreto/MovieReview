@@ -58,13 +58,18 @@ public function __construct($table){
     return reset($results);
   }
 
-  public function add($entity){
-    return $this->insert($this->table, $entity);
+  public function delete($id){
+    $stmt = $this->conn->prepare("DELETE FROM ".$this->table_name." WHERE id=:id");
+    $stmt->bindParam(':id', $id); // SQL injection prevention
+    $stmt->execute();
   }
-
-  public function update($id, $entity){
-    $this->execute_update($this->table, $id, $entity);
-  }
+  // public function add($entity){
+  //   return $this->insert($this->table, $entity);
+  // }
+  //
+  // public function update($id, $entity){
+  //   $this->execute_update($this->table, $id, $entity);
+  // }
 
   public function get_by_id($id){
     return $this->query_unique("SELECT * FROM ".$this->table." WHERE id = :id", ["id" => $id]);

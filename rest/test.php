@@ -11,23 +11,25 @@ require_once dirname(__FILE__)."/dao/genreDao.class.php";
 
 
 $dao = new movieRatDao();
-$directors = $dao -> delete(5);// $dao->add($campaing);
+// $user = $user_dao->add_comm($comments);
+
+// $directors = $dao -> get_all_comments();// $dao->add($campaing);
 // print_r($directors);
 //
-// $movie = $movie_id -> get_rat_by_Movieid(5);
+// $movie = $dao -> get_comments_by_movieID(5);
 // print_r($movie);
 // $genre = $movie_id ->get_movie_by_genre(2);
 //  print_r($genre);
-// $rat = [
-//   "userID" => "1",
-//   "movieID" => "1",
-//   "comments" => "proba",
-//   "date_of_comm" => date("Y-m-d H:i:s"),
-//   "rating" => "3"
-// ];
-//
-// $rat = $dao->add_rew($rat);
-//  print_r($rat);
+$rat = [
+  "userID" => "1",
+  "movieID" => "1",
+  "comments" => "proba",
+  "date_of_comm" => date("Y-m-d H:i:s"),
+  "rating" => "3"
+];
+
+$rat = $dao->add_comm($rat);
+ print_r($rat);
 // $dao->update(1, [
 //   "end_date" => "2021-04-01 00:00:00",
 //   "status" => "BLOCKED"
