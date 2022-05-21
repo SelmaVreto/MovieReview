@@ -15,8 +15,11 @@ public function get_comments_by_movieID($movieID) {
         return $this->query_unique("SELECT * FROM movie_rat_rew WHERE movieID = :movieID", ["movieID" => $movieID]);
     }
 
-public function add_comm($rat){
-      return $this->insert("comments", $rat);
+public function add_rew($comments){
+      return $this->insert("movie_rat_rew", $comments);
     }
+// public function delete($id){
+//       return $this->delete(":id", $id);
+//     }
   }
 ?>

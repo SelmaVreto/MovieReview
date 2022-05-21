@@ -20,15 +20,15 @@ $dao = new movieRatDao();
 // print_r($movie);
 // $genre = $movie_id ->get_movie_by_genre(2);
 //  print_r($genre);
-$rat = [
-  "userID" => "1",
-  "movieID" => "1",
-  "comments" => "proba",
-  "date_of_comm" => date("Y-m-d H:i:s"),
-  "rating" => "3"
-];
+// $rat = [
+//   "userID" => "1",
+//   "movieID" => "1",
+//   "comments" => "jos jedna proba",
+//   "date_of_comm" => date("Y-m-d H:i:s"),
+//   "rating" => "3"
+// ];
 
-$rat = $dao->add_comm($rat);
+$rat = $dao->delete(13);
  print_r($rat);
 // $dao->update(1, [
 //   "end_date" => "2021-04-01 00:00:00",
