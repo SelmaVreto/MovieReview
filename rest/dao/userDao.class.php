@@ -35,6 +35,8 @@ public function update_user_by_email($email, $user){
 public function get_all_users($offset, $limit) {
     return $this->query("SELECT * FROM user", []);
     }
-
+public function get_user_by_token($token){
+      return $this->query_unique("SELECT * FROM users WHERE token = :token", ["token" => $token]);
+    }
 }
 ?>
