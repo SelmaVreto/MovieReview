@@ -9,9 +9,17 @@ class userService extends baseService{
     $this->dao = new userDao();
   }
 
-  public function get_all_user() {
-    return $this->query("SELECT * FROM user", []);
+  public function get_all_user($search, $offset, $limit){
+    if ($search){
+      return $this->dao->get_user($search, $offset, $limit);
+    }else{
+      return $this->dao->get_all_users($offset, $limit);
     }
-
+  }
+  public function add($user){
+       if (!isset($user['name'])) throw new Exception("Name is missing");
+       $user['created_at'] = date(Config::DATE_FORMAT);
+       return parent::add($user);
+     }
 }
 ?>

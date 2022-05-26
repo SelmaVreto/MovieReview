@@ -1,5 +1,14 @@
 <?php
 
+Flight::route('GET /user', function(){
+  $offset = Flight::query('offset', 0);
+  $limit = Flight::query('limit', 10);
+
+  $search = Flight::query('search');
+
+   Flight::json(Flight::userService()->get_all_user($search, $offset, $limit));
+
+});
 
 Flight::route('GET /user', function($offser,$limit){
   Flight::json(Flight::movieService()->get_all(0,10));

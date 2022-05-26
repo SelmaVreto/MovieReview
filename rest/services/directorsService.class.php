@@ -24,7 +24,6 @@ class directorsService extends baseService{
     }
   }
   public function add($directors){
-  // validation of account data
   if (!isset($directors['directors_name'])) throw new Exception("director is missing");
   return parent::add($directors);
 }
