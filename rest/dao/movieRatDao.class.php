@@ -22,8 +22,8 @@ public function add($comments){
 //       return $this->delete(":id", $id);
 //     }
 //parcijalni update podataka by id
-  public function update_comm($id, $id){
-    $this->update("comments", $id, $id);
-}
+//   public function update_comm($id, $id){
+//     $this->update("comments", $id, $id);
+// }
   }
 ?>

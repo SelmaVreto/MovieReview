@@ -8,7 +8,9 @@ class userService extends baseService{
   public function __construct(){
     $this->dao = new userDao();
   }
-
+  public function get_all(){
+      return $this->dao->get_all_directors();
+    }
   public function get_user_by_name($search, $offset, $limit){//by name
     if ($search){
       return $this->dao->get_user_by_name($search, $offset, $limit);
@@ -20,7 +22,7 @@ class userService extends baseService{
     if ($search){
       return $this->dao->get_user_by_surname($search, $offset, $limit);
     }else{
-      return $this->dao->get_all($offset, $limit);
+      return $this->dao->get_all_users($offset, $limit);
     }
   }
   public function add($user){

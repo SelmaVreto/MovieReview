@@ -15,6 +15,8 @@ Flight::route('GET /directors/@id', function($id){
 
 
 });
+
+
 Flight::route('POST /directors', function(){
   $data = Flight::request()->data->getData();
   Flight::json(Flight::directorsService()->add($data));
