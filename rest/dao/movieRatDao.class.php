@@ -11,15 +11,19 @@ class movieRatDao extends baseDao {
     return $this->query("SELECT * FROM movie_rat_rew", []);
     }
 
-public function get_comments_by_movieID($movieID) {
-        return $this->query_unique("SELECT * FROM movie_rat_rew WHERE movieID = :movieID", ["movieID" => $movieID]);
+public function get_comments_by_movieID($MovieID) {
+        return $this->query("SELECT * FROM movie_rat_rew WHERE MovieID = :MovieID", ["MovieID" => $MovieID]);
     }
 
-public function add_rew($comments){
+public function add($comments){
       return $this->insert("movie_rat_rew", $comments);
     }
 // public function delete($id){
 //       return $this->delete(":id", $id);
 //     }
+//parcijalni update podataka by id
+  public function update_comm($id, $id){
+    $this->update("comments", $id, $id);
+}
   }
 ?>

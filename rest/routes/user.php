@@ -6,7 +6,8 @@ Flight::route('GET /user', function(){
 
   $search = Flight::query('search');
 
-   Flight::json(Flight::userService()->get_all_user($search, $offset, $limit));
+   Flight::json(Flight::userService()->get_user_by_name($search, $offset, $limit));
+   Flight::json(Flight::userService()->get_user_by_surname($search, $offset, $limit));
 
 });
 

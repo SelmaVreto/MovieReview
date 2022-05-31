@@ -9,11 +9,18 @@ class userService extends baseService{
     $this->dao = new userDao();
   }
 
-  public function get_all_user($search, $offset, $limit){
+  public function get_user_by_name($search, $offset, $limit){//by name
     if ($search){
-      return $this->dao->get_user($search, $offset, $limit);
+      return $this->dao->get_user_by_name($search, $offset, $limit);
     }else{
       return $this->dao->get_all_users($offset, $limit);
+    }
+  }
+  public function get_user_by_surname($search, $offset, $limit){
+    if ($search){
+      return $this->dao->get_user_by_surname($search, $offset, $limit);
+    }else{
+      return $this->dao->get_all($offset, $limit);
     }
   }
   public function add($user){

@@ -11,8 +11,8 @@ Flight::route('GET /movie', function(){
 
 });
 
-Flight::route('GET /movie/@id', function($id){
-  Flight::json(Flight::movieService()->get_by_id($id));
+Flight::route('GET /movie/@id', function($MovieID){
+  Flight::json(Flight::movieService()->get_by_id($MovieID));
 
 
 });
