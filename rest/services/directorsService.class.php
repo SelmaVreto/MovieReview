@@ -13,14 +13,14 @@ class directorsService extends baseService{
     if ($search){
       return $this->dao->get_directors_by_name($search, $offset, $limit);
     }else{
-      return $this->dao->get_all($offset, $limit);
+      return $this->dao->get_all_directors();
     }
   }
   public function get_directors_by_surname($search, $offset, $limit){
     if ($search){
       return $this->dao->get_directors_by_surname($search, $offset, $limit);
     }else{
-      return $this->dao->get_all($offset, $limit);
+      return $this->dao->get_all_directors();
     }
   }
   public function add($directors){
