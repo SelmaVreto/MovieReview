@@ -58,11 +58,11 @@ public function __construct($table){
     return reset($results);
   }
 
-  // public function delete($id){
-  //   $stmt = $this->conn->prepare("DELETE FROM ".$this->table_name." WHERE id=:id");
-  //   $stmt->bindParam(':id', $id); // SQL injection prevention
-  //   $stmt->execute();
-  // }
+  public function delete($id){
+    $stmt = $this->conn->prepare("DELETE FROM ".$this->table_name." WHERE id=:id");
+    // $stmt->bindParam(':id', $id); // SQL injection prevention
+    $stmt->execute();
+  }
   // public function add($entity){
   //   return $this->insert($this->table, $entity);
   // }
@@ -76,7 +76,7 @@ public function __construct($table){
   }
 
  public function get_all($offset = 0, $limit = 10){ // offset -from, limit number of records
-  list($order_column, $order_direction) = self::parse_order($order);
+  // list($order_column, $order_direction) = self::parse_order($order);
   return $this->query("SELECT *
     FROM ".$this->table."
     LIMIT ${limit} OFFSET ${offset}", []);

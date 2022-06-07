@@ -10,7 +10,7 @@ require_once dirname(__FILE__).'/services/directorsService.class.php';
 require_once dirname(__FILE__).'/services/movieService.class.php';
 require_once dirname(__FILE__).'/services/userService.class.php';
 require_once dirname(__FILE__).'/services/movieRatService.class.php';
-
+require_once dirname(__FILE__).'/dao/userDao.class.php';
 /* utility function for reading query parameters from URL */
 Flight::map('query', function($name, $default_value = NULL){
   $request = Flight::request();
@@ -20,11 +20,11 @@ Flight::map('query', function($name, $default_value = NULL){
 });
 
 /* register Dao layer */
-// Flight::register('genreDao', 'genreDao');
-// Flight::register('directorsDao', 'directorsDao');
-// Flight::register('movieDao', 'movieDao');
-// Flight::register('movieRatDao', 'movieRatDao');
-// Flight::register('userDao', 'userDao');
+Flight::register('genreDao', 'genreDao');
+Flight::register('directorsDao', 'directorsDao');
+Flight::register('movieDao', 'movieDao');
+Flight::register('movieRatDao', 'movieRatDao');
+Flight::register('userDao', 'userDao');
 /* register Business Logic layer services */
 Flight::register('genreService', 'genreService');
 Flight::register('directorsService', 'directorsService');

@@ -1,7 +1,6 @@
 <?php
 
 class baseService {
-
   protected $dao;
 
   public function get_by_id($id){

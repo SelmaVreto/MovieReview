@@ -18,12 +18,8 @@ public function get_comments_by_movieID($MovieID) {
 public function add($comments){
       return $this->insert("movie_rat_rew", $comments);
     }
-// public function delete($id){
-//       return $this->delete(":id", $id);
-//     }
-//parcijalni update podataka by id
-//   public function update_comm($id, $id){
-//     $this->update("comments", $id, $id);
-// }
+public function delete($id){
+      return $this->query("DELETE FROM movie_rat_rew WHERE id=:id");
+    }
   }
 ?>

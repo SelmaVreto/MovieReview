@@ -32,8 +32,9 @@ class userService extends baseService{
   public function register($user){
      // if (!isset($user['username'])) throw new Exception("Username field is required");
      try{
-     $user = parent::add([
-       "id" => $user['id'],
+       $dao= new userDao();
+     $user = $dao->add_user([
+       // "id" => $user['id'],
        "name" => $user['name'],
        "surname" => $user['surname'],
        "username" => $user['username'],
