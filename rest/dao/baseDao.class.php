@@ -81,9 +81,5 @@ public function __construct($table){
     FROM ".$this->table."
     LIMIT ${limit} OFFSET ${offset}", []);
 }
-public function get_all_bezoffset(){ // offset -from, limit number of records
- return $this->query("SELECT *
-   FROM ".$this->table."");
-}
 }
  ?>

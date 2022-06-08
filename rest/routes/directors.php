@@ -15,9 +15,6 @@ Flight::route('GET /directors', function(){
 Flight::route('GET /directors/@id', function($id){
   Flight::json(Flight::directorsService()->get_by_id($id));
 });
-// Flight::route('GET /directors', function(){
-//   Flight::json(Flight::directorsService()->get_all_directors());
-// });
 
 
 Flight::route('POST /directors', function(){

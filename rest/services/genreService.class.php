@@ -17,7 +17,7 @@ class genreService extends baseService{
   }
 
   public function add($genre){
-  // validation of account data
+  // validation of data
   if (!isset($genre['genre_name'])) throw new Exception("Genre is missing");
   return parent::add($genre);
 }
