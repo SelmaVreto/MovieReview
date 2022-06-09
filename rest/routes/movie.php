@@ -7,7 +7,7 @@ Flight::route('GET /movie', function(){
   $search = Flight::query('search');
 
    Flight::json(Flight::movieService()->get_movie($search, $offset, $limit));
-   Flight::json(Flight::movieService()->get_movie_by_year($search, $offset, $limit));
+   // Flight::json(Flight::movieService()->get_movie_by_year($search, $offset, $limit));
 
 });
 
