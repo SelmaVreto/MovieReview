@@ -24,6 +24,9 @@
         <!-- Morris Charts CSS -->
         <link href="./assets/css/morris.css" rel="stylesheet">
 
+        <!-- jQuerySPApp css-->
+        <link href="./assets/css/jQuerySPApp.css" rel="stylesheet">
+
         <!-- Custom Fonts -->
         <link href="./assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -142,7 +145,10 @@
                                 <!-- /input-group -->
                             </li>
                             <li>
-                                <a href="index.html" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                <a href="#dashboard" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="#tables"><i class="fa fa-table fa-fw"></i> Tables</a>
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
@@ -156,9 +162,7 @@
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
-                            <li>
-                                <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
-                            </li>
+
                             <li>
                                 <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
                             </li>
@@ -231,8 +235,13 @@
                         </ul>
                     </div>
                 </div>
-            </nav>
+      </nav>
+      <main id="jqueryspapp" role="main">
+        <section id="dashboard" data-load="dash.html" ></section>
+        <section id="tables" data-load="tables.html" ></section>
+        <section id="error_404"><h1>Page not found</h1></section>
 
+      </main>
         </div>
         <!-- /#wrapper -->
 
@@ -251,7 +260,25 @@
         <script src="./assets/js/morris-data.js"></script> -->
 
         <!-- Custom Theme JavaScript -->
-        <script src="./js/startmin.js"></script>
+        <script src="./assets/js/startmin.js"></script>
+
+        <!-- SpApp-->
+        <script src="./assets/js/jQuerySPApp.js"></script>
+
+        <script type="text/javascript">
+          $(document).ready(function() {
+            var app = $.jQuerySPApp({defaultView  : "dashboard"}); // initialize
+
+            // define routes
+
+            app.route({view: 'dashboard', load: 'dash.html' });
+            app.route({view: 'tables', load: 'tables.html' });
+
+
+            // run app
+            app.run();
+          });
+        </script>
 
     </body>
 </html>
