@@ -1,5 +1,4 @@
 <?php
-
 Flight::route('GET /directors', function(){
   $offset = Flight::query('offset', 0);
   $limit = Flight::query('limit', 10);
