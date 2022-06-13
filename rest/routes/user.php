@@ -3,12 +3,16 @@
  * @OA\Info(title="My First API", version="0.1")
  * @OA\OpenApi(
  *   @OA\Server(url="http://localhost/movies/rest/", description="dev environment")
+ *   @OA\Server(url="http://movie.biznet.ba/api", description="producrtion environment")
  * )
  */
 
 /**
  * @OA\Get(
- *     path="/user",
+ *     path="/user", tags={"users"}
+ *     @OA\Parameter(@OA\Schema(type="integer", in="query", name="offset", default=0, description="Offset for pagination"),
+ *     @OA\Parameter(@OA\Schema(type="integer", in="query", name="limit", default=25, description="Limit for pagination")),
+ *     @OA\Parameter(@OA\Schema(type="string", in="query", name="search", description="search string")),
  *     @OA\Response(response="200", description="List user from db")
  * )
  */

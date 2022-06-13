@@ -33,12 +33,7 @@ Flight::register('userService', 'userService');
 Flight::register('movieRatService', 'movieRatService');
 
 /* swager doc */
-/**
- * @OA\Info(title="My First API", version="0.1")
- * @OA\OpenApi(
- *   @OA\Server(url="http://localhost/movies/rest/", description="dev environment")
- * )
- */
+
 Flight::route('GET /directors', function(){
   require("../vendor/autoload.php");
   $openapi = @\OpenApi\scan(dirname(__FILE__)."/routes");
