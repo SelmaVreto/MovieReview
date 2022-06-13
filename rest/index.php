@@ -19,6 +19,11 @@ Flight::map('query', function($name, $default_value = NULL){
   return $query_param;
 });
 
+/* error handling for our API */
+Flight::map('error', function(Exception $ex){
+  Flight::json(["message" => $ex->getMessage()], $ex->getCode() ? $ex->getCode() : 500);
+});
+
 /* register Dao layer */
 Flight::register('genreDao', 'genreDao');
 Flight::register('directorsDao', 'directorsDao');

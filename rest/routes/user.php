@@ -9,10 +9,10 @@
 
 /**
  * @OA\Get(
- *     path="/user", tags={"users"}
+ *     path="/user", tags={"users"},
  *     @OA\Parameter(@OA\Schema(type="integer", in="query", name="offset", default=0, description="Offset for pagination"),
- *     @OA\Parameter(@OA\Schema(type="integer", in="query", name="limit", default=25, description="Limit for pagination")),
- *     @OA\Parameter(@OA\Schema(type="string", in="query", name="search", description="search string")),
+ *     @OA\Parameter(@OA\Schema(type="integer", in="query", name="limit", default=25, description="Limit for pagination"),
+ *     @OA\Parameter(@OA\Schema(type="string", in="query", name="search", description="search string"),
  *     @OA\Response(response="200", description="List user from db")
  * )
  */
@@ -33,9 +33,9 @@ Flight::route('GET /user', function(){
 // });
 
 /**
- * @OA\Get(path="/user/{id}",
- *     @OA\Parameter(@OA\Schema(type="integer"), in="path", allowReserved=true, name="id", example=1),
- *     @OA\Response(response="200", description="List user from database")
+ * @OA\Get(path="/user/{id}",tags={"users"},
+ *     @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", default=1, description="id of user"),
+ *     @OA\Response(response="200", description="fetch individual user")
  * )
  */
 Flight::route('GET /user/@id', function($id){
@@ -45,6 +45,14 @@ Flight::route('GET /user/@id', function($id){
 
 /**
  * @OA\Post(path="/user",
+*  @OA\RequestBody(description="objest that needs to be added", required=true,
+*       @OA\MediaType(mediaType="application/json",
+*    			@OA\Schema(
+*    				 @OA\Property(property="force_push", type="string", example="",	description="" ),
+*          )
+*        )
+*     ),
+
  *     @OA\Response(response="200", description="Add user")
  * )
  */
