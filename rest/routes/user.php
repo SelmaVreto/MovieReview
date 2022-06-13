@@ -1,5 +1,17 @@
 <?php
+/**
+ * @OA\Info(title="My First API", version="0.1")
+ * @OA\OpenApi(
+ *   @OA\Server(url="http://localhost/movies/rest/", description="dev environment")
+ * )
+ */
 
+/**
+ * @OA\Get(
+ *     path="/user",
+ *     @OA\Response(response="200", description="List user from db")
+ * )
+ */
 Flight::route('GET /user', function(){
   $offset = Flight::query('offset', 0);
   $limit = Flight::query('limit', 10);
@@ -10,32 +22,61 @@ Flight::route('GET /user', function(){
    Flight::json(Flight::userService()->get_user_by_surname($search, $offset, $limit));
 
 });
+//
+// Flight::route('GET /user', function($offser,$limit){
+//   Flight::json(Flight::movieService()->get_all(0,10));
+//
+// });
 
-Flight::route('GET /user', function($offser,$limit){
-  Flight::json(Flight::movieService()->get_all(0,10));
-
-});
-
+/**
+ * @OA\Get(path="/user/{id}",
+ *     @OA\Parameter(@OA\Schema(type="integer"), in="path", allowReserved=true, name="id", example=1),
+ *     @OA\Response(response="200", description="List user from database")
+ * )
+ */
 Flight::route('GET /user/@id', function($id){
   Flight::json(Flight::userService()->get_by_id($id));
 
 });
 
+/**
+ * @OA\Post(path="/user",
+ *     @OA\Response(response="200", description="Add user")
+ * )
+ */
 Flight::route('POST /user', function(){
   $data = Flight::request()->data->getData();
   Flight::json(Flight::userService()->add($data));
 });
 
+/**
+ * @OA\Post(path="/user/register",
+ *     @OA\Response(response="200", description="Register user")
+ * )
+ */
 Flight::route('POST /user/register', function(){
   $data = Flight::request()->data->getData();
   Flight::json(Flight::userService()->register($data));
 });
-
+/**
+ * @OA\Put(path="/user/{id}",
+ *     @OA\Parameter(@OA\Schema(type="integer"), in="path", allowReserved=true, name="id", example=1),
+ *     @OA\Response(response="200", description="Update user based on id")
+ * )
+ */
 Flight::route('PUT /user/@id', function($id){
   $data = Flight::request()->data->getData();
   Flight::json(Flight::movieService()->update($id, $data));
 });
+
+/**
+ * @OA\Get(path="/users/confirm/{token}", tags={"users"},
+ *     @OA\Parameter(type="string", in="path", name="token", default=123, description="Temporary token for activating account"),
+ *     @OA\Response(response="200", description="Message upon successfull activation.")
+ * )
+ */
 Flight::route('GET /confirm/@token', function($token){
   Flight::json(Flight::jwt(Flight::userService()->confirm($token)));
+  Flight::json(["message" => "Your account has been activated"]);
 });
  ?>

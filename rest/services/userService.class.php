@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__).'/../dao/userDao.class.php';
 require_once dirname(__FILE__). '/baseService.class.php';
 
