@@ -45,15 +45,20 @@ Flight::route('GET /user/@id', function($id){
 
 /**
  * @OA\Post(path="/user",
-*  @OA\RequestBody(description="objest that needs to be added", required=true,
+*    @OA\RequestBody(description="objest that needs to be added", required=true,
 *       @OA\MediaType(mediaType="application/json",
 *    			@OA\Schema(
-*    				 @OA\Property(property="force_push", type="string", example="",	description="" ),
+*    				 @OA\Property(property="name", type="string", example="",	description="" ),
+*    				 @OA\Property(property="surname", type="string", example="",	description="" ),
+*    				 @OA\Property(property="username", type="string", example="",	description="" ),
+*    				 @OA\Property(property="email", type="string", example="",	description="" ),
+*    				 @OA\Property(property="status", type="string", example="PANDING",	description="" ),
+*    				 @OA\Property(property="password", type="string", example="",	description="" ),
+*    				 @OA\Property(property="role", type="string", example="",	description="" ),
 *          )
 *        )
 *     ),
-
- *     @OA\Response(response="200", description="Add user")
+*  @OA\Response(response="200", description="Add user")
  * )
  */
 Flight::route('POST /user', function(){
@@ -63,7 +68,20 @@ Flight::route('POST /user', function(){
 
 /**
  * @OA\Post(path="/user/register",
- *     @OA\Response(response="200", description="Register user")
+*    @OA\RequestBody(description="objest that needs to be added", required=true,
+*       @OA\MediaType(mediaType="application/json",
+*    			@OA\Schema(
+*    				 @OA\Property(property="name", type="string", example="",	description="" ),
+*    				 @OA\Property(property="surname", type="string", example="",	description="" ),
+*    				 @OA\Property(property="username", type="string", example="",	description="" ),
+*    				 @OA\Property(property="email", type="string", example="",	description="" ),
+*    				 @OA\Property(property="status", type="string", example="PANDING",	description="" ),
+*    				 @OA\Property(property="password", type="string", example="",	description="" ),
+*    				 @OA\Property(property="role", type="string", example="",	description="" ),
+*          )
+*        )
+*     ),
+*  @OA\Response(response="200", description="Add user")
  * )
  */
 Flight::route('POST /user/register', function(){
@@ -71,8 +89,20 @@ Flight::route('POST /user/register', function(){
   Flight::json(Flight::userService()->register($data));
 });
 /**
- * @OA\Put(path="/user/{id}",
- *     @OA\Parameter(@OA\Schema(type="integer"), in="path", allowReserved=true, name="id", example=1),
+ * @OA\Put(path="/user/{id}", tags={"users"},
+ *     @OA\Parameter(@OA\Schema(type="integer"), in="path", allowReserved=true, name="id", example=1,
+*       @OA\MediaType(mediaType="application/json",
+*    			@OA\Schema(
+*    				 @OA\Property(property="name", type="string", example="",	description="" ),
+*    				 @OA\Property(property="surname", type="string", example="",	description="" ),
+*    				 @OA\Property(property="username", type="string", example="",	description="" ),
+*    				 @OA\Property(property="email", type="string", example="",	description="" ),
+*    				 @OA\Property(property="status", type="string", example="PANDING",	description="" ),
+*    				 @OA\Property(property="password", type="string", example="",	description="" ),
+*    				 @OA\Property(property="role", type="string", example="",	description="" ),
+*          )
+*        )
+*     ),
  *     @OA\Response(response="200", description="Update user based on id")
  * )
  */
