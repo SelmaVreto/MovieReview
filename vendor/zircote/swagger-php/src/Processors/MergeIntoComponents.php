@@ -19,8 +19,10 @@ class MergeIntoComponents
     public function __invoke(Analysis $analysis)
     {
         $components = $analysis->openapi->components;
-        if (Generator::isDefault($components)) {
-            $components = new Components(['_context' => new Context(['generated' => true], $analysis->context)]);
+        if ($components === Generator::UNDEFINED) {
+            $context = new Context([], $analysis->context);
+            $components = new Components(['_context' => $context]);
+            $components->_context->generated = true;
         }
 
         foreach ($analysis->annotations as $annotation) {

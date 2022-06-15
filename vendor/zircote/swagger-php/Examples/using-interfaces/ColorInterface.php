@@ -1,12 +1,13 @@
 <?php
 
-namespace OpenApi\Examples\UsingInterfaces;
+namespace UsingInterfaces;
 
 /**
  * Not a schema.
  */
 interface ColorInterface
 {
+
     /**
      * The product color.
      *

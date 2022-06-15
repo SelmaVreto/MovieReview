@@ -1,56 +1,57 @@
 ---
 home: true
-actionText: User Guide →
-actionLink: /guide/
+actionText: Get Started →
+actionLink: /Getting-started
 features:
-  - title: OpenAPI conformant
-    details: Generate OpenAPI documents in version 3.0 or 3.1.
-  - title: Document your API inside PHP source code
-    details: Using swagger-php lets you write the API documentation inside the PHP source files
-      which helps keeping the documentation up-to-date.
-  - title: Annotation and Attribute support
-    details: Annotations can be either docblocks or PHP 8.1 attributes.
+  - title: OpenAPI specification
+    details: Compatible with the OpenAPI Specification version 3.
+      formerly known as Swagger.
+  - title: Use @Annotations
+    details: Write the documentation inside the php source files which helps to keep the documentation in sync.
+  - title: Useful error messages
+    details: Enhanced errors messages with hints and context.
 ---
 
-### 1. Install with composer:
+Install with composer:
 
-```shell
-> composer require zircote/swagger-php
+```bash
+composer require zircote/swagger-php
 ```
 
-### 2. Update your code
+Create a php file:
 
-Add `swagger-php` annotations or attributes to your source code.
-
-<codeblock id="minimal">
-  <template v-slot:an>
-
-<<< @/snippets/minimal_api_annotations.php
-
-</template>
-  <template v-slot:at>
-
-<<< @/snippets/minimal_api_attributes.php
-
-  </template>
-</codeblock>
-
-### 3. Generate OpenAPI documentation
-
-```shell
-> ./bin/openapi src -o openapi.yaml
+```php
+<?php
+require("vendor/autoload.php");
+$openapi = \OpenApi\Generator::scan(['/path/to/project']);
+header('Content-Type: application/x-yaml');
+echo $openapi->toYaml();
 ```
 
-### 4. Explore and interact with your API
+Add annotations to your php files.
 
-Use an OpenAPI tool like [Swagger UI ](https://swagger.io/tools/swagger-ui/) to explore and interact with your API.
+```php
+/**
+ * @OA\Info(title="My First API", version="0.1")
+ */
+
+/**
+ * @OA\Get(
+ *     path="/api/resource.json",
+ *     @OA\Response(response="200", description="An example resource")
+ * )
+ */
+```
+
+And view and interact with your API using [Swagger UI ](https://swagger.io/tools/swagger-ui/)
 
 ## Links
 
-- [User Guide](guide/index.md)
-- [Reference](reference/index.md)
-- [OpenApi Documentation](https://oai.github.io/Documentation/)
-- [OpenApi Specification](https://spec.openapis.org/oas/v3.1.0.html)
-- [Learn by example](https://github.com/zircote/swagger-php/tree/master/Examples)
-- [Related projects](related-projects.md)
-- [Swagger-php 2.x documentation](https://github.com/zircote/swagger-php/tree/2.x/docs)
+- [Getting started guide](Getting-started.md)
+- [OpenApi Documentation](https://swagger.io/docs/)
+- [OpenApi Specification](http://swagger.io/specification/)
+- [Migration from 2.x to 3.x](Migrating-to-v3.md)
+- [Learn by example](https://github.com/zircote/swagger-php/tree/master/Examples) lots of example of how to generate
+- [Related projects](Related-projects.md)
+- [Swagger-php 2.x documentation](https://github.com/zircote/swagger-php/tree/2.x/docs) The docs for swagger-php v2
+- [Swagger-php 1.x documentation](/1.x/) The docs for swagger-php v1

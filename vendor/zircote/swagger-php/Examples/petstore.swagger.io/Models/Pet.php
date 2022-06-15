@@ -1,6 +1,6 @@
 <?php
 
-namespace OpenApi\Examples\PetstoreSwaggerIo\Models;
+namespace PetstoreIO;
 
 /**
  * @OA\Schema(required={"name", "photoUrls"}, @OA\Xml(name="Pet"))
@@ -10,21 +10,19 @@ class Pet
 
     /**
      * @OA\Property(format="int64")
-     *
      * @var int
      */
     public $id;
 
     /**
      * @OA\Property(example="doggie")
-     *
      * @var string
      */
     public $name;
 
     /**
      * @var Category
-     * @OA\Property
+     * @OA\Property()
      */
     public $category;
 
@@ -41,8 +39,7 @@ class Pet
     public $tags;
 
     /**
-     * pet status in the store.
-     *
+     * pet status in the store
      * @var string
      * @OA\Property(enum={"available", "pending", "sold"})
      */

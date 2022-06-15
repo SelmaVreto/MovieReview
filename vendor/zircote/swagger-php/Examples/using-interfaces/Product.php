@@ -1,26 +1,34 @@
 <?php
 
-namespace OpenApi\Examples\UsingInterfaces;
+namespace UsingInterfaces;
 
 /**
  * @OA\Schema(title="Product model")
  */
-class Product implements ProductInterface
+class Product implements ProductInterface, ColorInterface
 {
 
     /**
      * The unique identifier of a product in our catalog.
      *
-     * @var int
+     * @var integer
      * @OA\Property(format="int64", example=1)
      */
     public $id;
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getName()
     {
-        return 'kettle';
+        return "kettle";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getColor()
+    {
+        return "green";
     }
 }

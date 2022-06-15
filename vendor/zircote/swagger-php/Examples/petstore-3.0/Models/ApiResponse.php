@@ -4,10 +4,12 @@
  * @license Apache 2.0
  */
 
-namespace OpenApi\Examples\Petstore30\Models;
+namespace Petstore30;
 
 /**
- * Class ApiResponse.
+ * Class ApiResponse
+ *
+ * @package Petstore30
  *
  * @author  Donii Sergii <doniysa@gmail.com>
  *
@@ -33,7 +35,7 @@ class ApiResponse
      * OA\Property(
      *    description="Type",
      *    title="Type",
-     * ).
+     * )
      *
      * @var string
      */

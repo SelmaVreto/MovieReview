@@ -1,19 +1,18 @@
 <?php
 
-namespace OpenApi\Examples\UsingTraits;
+namespace UsingTraits;
 
 /**
  * @OA\Schema(title="Product model")
  */
-class Product
-{
-    use \OpenApi\Examples\UsingTraits\Colour;
+class Product {
+    use \UsingTraits\Colour;
     use BellsAndWhistles;
 
     /**
      * The unique identifier of a product in our catalog.
      *
-     * @var int
+     * @var integer
      * @OA\Property(format="int64", example=1)
      */
     public $id;

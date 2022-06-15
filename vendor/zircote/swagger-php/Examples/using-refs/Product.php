@@ -1,12 +1,9 @@
 <?php
-
-namespace OpenApi\Examples\UsingRefs;
-
-/**
- * A common scenario is to let swagger-php generate a definition based on your model class.
- * These definitions can then be referenced with `ref="#/components/schemas/$classname".
- */
-
+namespace UsingRefs;
+?>
+A common scenario is to let swagger-php generate a definition based on your model class.
+These definitions can then be referenced with `ref="#/components/schemas/$classname"
+<?php
 /**
  * @OA\Schema(
  *     description="Product model",
@@ -14,12 +11,12 @@ namespace OpenApi\Examples\UsingRefs;
  *     title="Product model"
  * )
  */
-class Product extends Model
-{
+class Product extends Model {
+
     /**
      * The unique identifier of a product in our catalog.
      *
-     * @var int
+     * @var integer
      * @OA\Property(format="int64", example=1)
      */
     public $id;
@@ -28,9 +25,4 @@ class Product extends Model
      * @OA\Property(ref="#/components/schemas/product_status")
      */
     public $status;
-
-    /**
-     * @OA\Property
-     */
-    public StockLevel $stockLevel;
 }

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace OpenApi\Examples\Nesting;
+namespace OpenApi\Tests\Fixtures\Processors\Nesting;
 
 /**
  * No schema!
@@ -8,9 +8,10 @@ namespace OpenApi\Examples\Nesting;
 class SoCloseModel extends AlmostModel
 {
     /**
-     * @OA\Property
+     * @OA\Property()
      *
      * @var string
      */
     public $soClose;
+
 }

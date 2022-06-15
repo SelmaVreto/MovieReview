@@ -1,15 +1,14 @@
 <?php
 
-namespace OpenApi\Examples\UsingTraits\Decoration;
+namespace UsingTraits\Decoration;
 
 /**
  * @OA\Schema(title="Bells trait")
  */
-trait Bells
-{
+trait Bells {
 
     /**
-     * The bell (clashes with Product::bell).
+     * The bell.
      *
      * @OA\Property(example="chime")
      */

@@ -4,10 +4,12 @@
  * @license Apache 2.0
  */
 
-namespace OpenApi\Examples\Petstore30\Controllers;
+namespace Petstore30\controllers;
 
 /**
- * Class Store.
+ * Class Store
+ *
+ * @package Petstore30\controllers
  *
  * @author  Donii Sergii <doniysa@gmail.com>
  */
@@ -22,13 +24,13 @@ class Store
      *     operationId="getInventory",
      *     @OA\Response(
      *         response=200,
-     *         description="successful operation",
-     *         @OA\JsonContent(
-     *             @OA\AdditionalProperties(
-     *                 type="integer",
-     *                 format="int32"
-     *             )
-     *         )
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              @OA\AdditionalProperties(
+     *                  type="integer",
+     *                  format="int32"
+     *              )
+     *          )
      *     ),
      *     security={
      *         {"api_key": {}}

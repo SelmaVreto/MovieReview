@@ -35,17 +35,15 @@ class MergeJsonContent
                 }
                 continue;
             }
-            if (Generator::isDefault($parent->content)) {
+            if ($parent->content === Generator::UNDEFINED) {
                 $parent->content = [];
             }
-            $parent->content['application/json'] = $mediaType = new MediaType([
+            $parent->content['application/json'] = new MediaType([
                 'schema' => $jsonContent,
                 'example' => $jsonContent->example,
                 'examples' => $jsonContent->examples,
                 '_context' => new Context(['generated' => true], $jsonContent->_context),
-                '_aux' => true,
             ]);
-            $analysis->addAnnotation($mediaType, $mediaType->_context);
             if (!$parent instanceof Parameter) {
                 $parent->content['application/json']->mediaType = 'application/json';
             }

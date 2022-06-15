@@ -1,16 +1,15 @@
 <?php
 
-namespace OpenApi\Examples\UsingTraits;
+namespace UsingTraits;
 
-use OpenApi\Examples\UsingTraits\Decoration\Bells;
+use UsingTraits\Decoration\Bells;
 
 /**
  * @OA\Schema(title="Bells and Whistles trait")
  */
-trait BellsAndWhistles
-{
+trait BellsAndWhistles {
     use Bells;
-    use \OpenApi\Examples\UsingTraits\Decoration\Whistles;
+    use \UsingTraits\Decoration\Whistles;
 
     /**
      * The plating.

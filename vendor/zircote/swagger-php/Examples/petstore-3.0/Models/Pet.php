@@ -4,10 +4,12 @@
  * @license Apache 2.0
  */
 
-namespace OpenApi\Examples\Petstore30\Models;
+namespace Petstore30;
 
 /**
- * Class Pet.
+ * Class Pet
+ *
+ * @package Petstore30
  *
  * @author  Donii Sergii <doniysa@gmail.com>
  *
@@ -30,16 +32,17 @@ class Pet
      *     title="ID",
      * )
      *
-     * @var int
+     * @var integer
      */
     private $id;
 
     /**
      * @OA\Property(
+     *     description="Category relation",
      *     title="Category",
      * )
      *
-     * @var Category
+     * @var \Petstore30\Category
      */
     private $category;
 
@@ -50,7 +53,7 @@ class Pet
      *     title="Pet name",
      * )
      *
-     * @var int
+     * @var integer
      */
     private $name;
 
@@ -82,7 +85,7 @@ class Pet
      *     ),
      * )
      *
-     * @var Tag[]
+     * @var \Petstore30\Tag[]
      */
     private $tags;
 }

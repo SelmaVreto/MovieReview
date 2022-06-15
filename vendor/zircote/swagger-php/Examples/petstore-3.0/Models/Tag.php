@@ -4,10 +4,12 @@
  * @license Apache 2.0
  */
 
-namespace OpenApi\Examples\Petstore30\Models;
+namespace Petstore30;
 
 /**
- * Tag.
+ * Tag
+ *
+ * @package Petstore30
  *
  * @author  Donii Sergii <doniysa@gmail.com>
  *
@@ -27,7 +29,7 @@ class Tag
      *     title="ID"
      * )
      *
-     * @var int
+     * @var integer
      */
     private $id;
 

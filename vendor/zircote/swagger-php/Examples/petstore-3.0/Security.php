@@ -4,8 +4,6 @@
  * @license Apache 2.0
  */
 
-namespace OpenApi\Examples\Petstore30;
-
 /**
  * @OA\SecurityScheme(
  *     type="oauth2",
@@ -27,6 +25,3 @@ namespace OpenApi\Examples\Petstore30;
  *     name="api_key"
  * )
  */
-class Security
-{
-}

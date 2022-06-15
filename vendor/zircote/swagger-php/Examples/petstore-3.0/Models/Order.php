@@ -4,13 +4,14 @@
  * @license Apache 2.0
  */
 
-namespace OpenApi\Examples\Petstore30\Models;
+namespace Petstore30;
 
 /**
- * Class Order.
+ * Class Order
+ *
+ * @package Petstore30
  *
  * @author  Donii Sergii <doniysa@gmail.com>
- *
  * @OA\Schema(
  *     title="Order model",
  *     description="Order model",
@@ -26,7 +27,7 @@ class Order
      *     description="ID",
      * )
      *
-     * @var int
+     * @var integer
      */
     private $id;
 
@@ -38,7 +39,7 @@ class Order
      *     title="Pet ID",
      * )
      *
-     * @var int
+     * @var integer
      */
     private $petId;
 
@@ -50,7 +51,7 @@ class Order
      *     title="Quantity",
      * )
      *
-     * @var int
+     * @var integer
      */
     private $quantity;
 
@@ -70,8 +71,8 @@ class Order
     /**
      * @OA\Property(
      *     default="placed",
-     *     title="Order status.",
-     *     description="Order status.",
+     *     title="Order status",
+     *     description="Order status",
      *     enum={"placed", "approved", "delivered"},
      * )
      *
@@ -87,7 +88,7 @@ class Order
      *     title="Complete status",
      * )
      *
-     * @var bool
+     * @var boolean
      */
     private $complete;
 }

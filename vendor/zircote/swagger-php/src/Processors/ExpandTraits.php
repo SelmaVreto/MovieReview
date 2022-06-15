@@ -7,8 +7,7 @@
 namespace OpenApi\Processors;
 
 use OpenApi\Analysis;
-use OpenApi\Annotations\Schema as AnnotationSchema;
-use OpenApi\Attributes\Schema as AttributeSchema;
+use OpenApi\Annotations\Schema;
 use OpenApi\Generator;
 
 /**
@@ -22,8 +21,8 @@ class ExpandTraits
 
     public function __invoke(Analysis $analysis)
     {
-        /** @var AnnotationSchema[] $schemas */
-        $schemas = $analysis->getAnnotationsOfType([AnnotationSchema::class, AttributeSchema::class], true);
+        /** @var Schema[] $schemas */
+        $schemas = $analysis->getAnnotationsOfType(Schema::class, true);
 
         foreach ($schemas as $schema) {
             if ($schema->_context->is('class') || $schema->_context->is('trait')) {
@@ -33,8 +32,8 @@ class ExpandTraits
                 foreach ($traits as $trait) {
                     $traitSchema = $analysis->getSchemaForSource($trait['context']->fullyQualifiedName($trait['trait']));
                     if ($traitSchema) {
-                        $refPath = !Generator::isDefault($traitSchema->schema) ? $traitSchema->schema : $trait['trait'];
-                        $this->inheritFrom($analysis, $schema, $traitSchema, $refPath, $trait['context']);
+                        $refPath = $traitSchema->schema !== Generator::UNDEFINED ? $traitSchema->schema : $trait['trait'];
+                        $this->inheritFrom($schema, $traitSchema, $refPath, $trait['context']);
                     } else {
                         if ($schema->_context->is('class')) {
                             $this->mergeAnnotations($schema, $trait, $existing);

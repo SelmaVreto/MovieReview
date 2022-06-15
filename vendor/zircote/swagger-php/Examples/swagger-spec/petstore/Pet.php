@@ -1,6 +1,6 @@
 <?php
 
-namespace OpenApi\Examples\SwaggerSpec\Petstore;
+namespace petstore;
 
 /**
  * @OA\Schema(required={"id", "name"})
@@ -14,15 +14,13 @@ class Pet
     public $id;
 
     /**
-     * @OA\Property
-     *
+     * @OA\Property()
      * @var string
      */
     public $name;
 
     /**
-     * @OA\Property
-     *
+     * @OA\Property()
      * @var string
      */
     public $tag;

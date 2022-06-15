@@ -1,19 +1,9 @@
 <?php
-/**
- * @OA\Info(title="My First API", version="0.1")
- * @OA\OpenApi(
- *   @OA\Server(url="http://localhost/movies/rest/", description="dev environment")
- *   @OA\Server(url="http://movie.biznet.ba/api", description="producrtion environment")
- * )
- */
 
 /**
- * @OA\Get(
- *     path="/user", tags={"users"},
- *     @OA\Parameter(@OA\Schema(type="integer", in="query", name="offset", default=0, description="Offset for pagination"),
- *     @OA\Parameter(@OA\Schema(type="integer", in="query", name="limit", default=25, description="Limit for pagination"),
- *     @OA\Parameter(@OA\Schema(type="string", in="query", name="search", description="search string"),
- *     @OA\Response(response="200", description="List user from db")
+ * @OA\Get(path="/user", tags={"user"}, security={{"ApiKeyAuth": {}}},
+ *         summary="Return all user notes from the API. ",
+ *         @OA\Response( response=200, description="List of notes.")
  * )
  */
 Flight::route('GET /user', function(){
@@ -26,99 +16,5 @@ Flight::route('GET /user', function(){
    Flight::json(Flight::userService()->get_user_by_surname($search, $offset, $limit));
 
 });
-//
-// Flight::route('GET /user', function($offser,$limit){
-//   Flight::json(Flight::movieService()->get_all(0,10));
-//
-// });
 
-/**
- * @OA\Get(path="/user/{id}",tags={"users"},
- *     @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", default=1, description="id of user"),
- *     @OA\Response(response="200", description="fetch individual user")
- * )
- */
-Flight::route('GET /user/@id', function($id){
-  Flight::json(Flight::userService()->get_by_id($id));
-
-});
-
-/**
- * @OA\Post(path="/user",
-*    @OA\RequestBody(description="objest that needs to be added", required=true,
-*       @OA\MediaType(mediaType="application/json",
-*    			@OA\Schema(
-*    				 @OA\Property(property="name", type="string", example="",	description="" ),
-*    				 @OA\Property(property="surname", type="string", example="",	description="" ),
-*    				 @OA\Property(property="username", type="string", example="",	description="" ),
-*    				 @OA\Property(property="email", type="string", example="",	description="" ),
-*    				 @OA\Property(property="status", type="string", example="PANDING",	description="" ),
-*    				 @OA\Property(property="password", type="string", example="",	description="" ),
-*    				 @OA\Property(property="role", type="string", example="",	description="" ),
-*          )
-*        )
-*     ),
-*  @OA\Response(response="200", description="Add user")
- * )
- */
-Flight::route('POST /user', function(){
-  $data = Flight::request()->data->getData();
-  Flight::json(Flight::userService()->add($data));
-});
-
-/**
- * @OA\Post(path="/user/register",
-*    @OA\RequestBody(description="objest that needs to be added", required=true,
-*       @OA\MediaType(mediaType="application/json",
-*    			@OA\Schema(
-*    				 @OA\Property(property="name", type="string", example="",	description="" ),
-*    				 @OA\Property(property="surname", type="string", example="",	description="" ),
-*    				 @OA\Property(property="username", type="string", example="",	description="" ),
-*    				 @OA\Property(property="email", type="string", example="",	description="" ),
-*    				 @OA\Property(property="status", type="string", example="PANDING",	description="" ),
-*    				 @OA\Property(property="password", type="string", example="",	description="" ),
-*    				 @OA\Property(property="role", type="string", example="",	description="" ),
-*          )
-*        )
-*     ),
-*  @OA\Response(response="200", description="Add user")
- * )
- */
-Flight::route('POST /user/register', function(){
-  $data = Flight::request()->data->getData();
-  Flight::json(Flight::userService()->register($data));
-});
-/**
- * @OA\Put(path="/user/{id}", tags={"users"},
- *     @OA\Parameter(@OA\Schema(type="integer"), in="path", allowReserved=true, name="id", example=1,
-*       @OA\MediaType(mediaType="application/json",
-*    			@OA\Schema(
-*    				 @OA\Property(property="name", type="string", example="",	description="" ),
-*    				 @OA\Property(property="surname", type="string", example="",	description="" ),
-*    				 @OA\Property(property="username", type="string", example="",	description="" ),
-*    				 @OA\Property(property="email", type="string", example="",	description="" ),
-*    				 @OA\Property(property="status", type="string", example="PANDING",	description="" ),
-*    				 @OA\Property(property="password", type="string", example="",	description="" ),
-*    				 @OA\Property(property="role", type="string", example="",	description="" ),
-*          )
-*        )
-*     ),
- *     @OA\Response(response="200", description="Update user based on id")
- * )
- */
-Flight::route('PUT /user/@id', function($id){
-  $data = Flight::request()->data->getData();
-  Flight::json(Flight::movieService()->update($id, $data));
-});
-
-/**
- * @OA\Get(path="/users/confirm/{token}", tags={"users"},
- *     @OA\Parameter(type="string", in="path", name="token", default=123, description="Temporary token for activating account"),
- *     @OA\Response(response="200", description="Message upon successfull activation.")
- * )
- */
-Flight::route('GET /confirm/@token', function($token){
-  Flight::json(Flight::jwt(Flight::userService()->confirm($token)));
-  Flight::json(["message" => "Your account has been activated"]);
-});
  ?>

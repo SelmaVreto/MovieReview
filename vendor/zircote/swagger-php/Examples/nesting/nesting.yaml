@@ -1,21 +1,14 @@
 openapi: 3.0.0
 info:
   title: 'Nested schemas'
-  description: 'Example info'
-  contact:
-    name: 'Swagger API Team'
+  description: 'An entity controller class.'
   version: 1.0.0
-servers:
-  -
-    url: 'https://example.localhost'
-    description: 'API server'
 paths:
   '/entity/{id}':
     get:
       tags:
         - api
-      description: 'Get the entity'
-      operationId: dd148eadcee53770e24b2350f932e3bd
+      operationId: 4db0bcd1e9358f78c662034e39c702b6
       parameters:
         -
           name: id
@@ -25,7 +18,7 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        default:
           description: 'successful operation'
           content:
             application/json:
@@ -37,30 +30,26 @@ components:
       type: object
       allOf:
         -
-          $ref: '#/components/schemas/AlmostModel'
-        -
           properties:
             actual:
               type: string
             soClose:
               type: string
+        -
+          $ref: '#/components/schemas/AlmostModel'
     AlmostModel:
       type: object
       allOf:
-        -
-          $ref: '#/components/schemas/BaseModel'
         -
           properties:
             almost:
               type: string
             intermediate:
               type: string
+        -
+          $ref: '#/components/schemas/BaseModel'
     BaseModel:
       properties:
         base:
           type: string
       type: object
-tags:
-  -
-    name: api
-    description: 'All API endpoints'

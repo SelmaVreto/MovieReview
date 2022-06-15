@@ -4,10 +4,12 @@
  * @license Apache 2.0
  */
 
-namespace OpenApi\Examples\Petstore30\Models;
+namespace Petstore30;
 
 /**
- * Class User.
+ * Class User
+ *
+ * @package Petstore30
  *
  * @author  Donii Sergii <doniysa@gmail.com>
  *
@@ -25,7 +27,7 @@ class User
      *     title="ID",
      * )
      *
-     * @var int
+     * @var integer
      */
     private $id;
 
@@ -100,7 +102,7 @@ class User
      *     title="User status",
      * )
      *
-     * @var int
+     * @var integer
      */
     private $userStatus;
 }

@@ -1,31 +1,12 @@
 <?php
 
-namespace OpenApi\Examples\SwaggerSpec\PetstoreWithExternalDocs\Models;
-
 /**
  * @OA\Schema(
- *     schema="Pet",
- *     type="object",
- *     allOf={
- *         @OA\Schema(ref="#/components/schemas/NewPet"),
- *         @OA\Schema(
- *             required={"id"},
- *             @OA\Property(property="id", format="int64", type="integer")
- *         )
- *     }
+ *   schema="NewPet",
+ *   required={"name"}
  * )
  */
 class Pet
-{
-}
-
-/**
- * @OA\Schema(
- *     schema="NewPet",
- *     required={"name"}
- * )
- */
-class NewPet
 {
     public $id;
     /**
@@ -38,3 +19,17 @@ class NewPet
      */
     public $tag;
 }
+
+/**
+ *  @OA\Schema(
+ *   schema="Pet",
+ *   type="object",
+ *   allOf={
+ *       @OA\Schema(ref="#/components/schemas/NewPet"),
+ *       @OA\Schema(
+ *           required={"id"},
+ *           @OA\Property(property="id", format="int64", type="integer")
+ *       )
+ *   }
+ * )
+ */

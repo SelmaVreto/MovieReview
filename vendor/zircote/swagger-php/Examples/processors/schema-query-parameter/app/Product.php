@@ -14,7 +14,7 @@ class Product
     /**
      * The unique identifier of a product in our catalog.
      *
-     * @var int
+     * @var integer
      * @OA\Property(format="int64", example=1)
      */
     public $id;

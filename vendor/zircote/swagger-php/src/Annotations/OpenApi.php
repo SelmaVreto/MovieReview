@@ -11,31 +11,21 @@ use OpenApi\Generator;
 use OpenApi\Util;
 
 /**
+ * @Annotation
  * This is the root document object for the API specification.
  *
- * @see [OAI OpenApi Object](https://github.com/OAI/OpenAPI-Specification/blob/OpenAPI.next/versions/3.0.md#openapi-object)
- *
- * @Annotation
+ * A  "OpenApi Object": https://github.com/OAI/OpenAPI-Specification/blob/OpenAPI.next/versions/3.0.md#openapi-object
  */
 class OpenApi extends AbstractAnnotation
 {
-    public const VERSION_3_0_0 = '3.0.0';
-    public const VERSION_3_1_0 = '3.1.0';
-    public const DEFAULT_VERSION = self::VERSION_3_0_0;
-    public const SUPPORTED_VERSIONS = [self::VERSION_3_0_0, self::VERSION_3_1_0];
-
     /**
      * The semantic version number of the OpenAPI Specification version that the OpenAPI document uses.
-     *
      * The openapi field should be used by tooling specifications and clients to interpret the OpenAPI document.
-     *
-     * A version specified via `Generator::setVersion()` will overwrite this value.
-     *
-     * This is not related to the API info::version string.
+     * This is not related to the API info.version string.
      *
      * @var string
      */
-    public $openapi = self::DEFAULT_VERSION;
+    public $openapi = '3.0.0';
 
     /**
      * Provides metadata about the API. The metadata may be used by tooling as required.
@@ -45,9 +35,8 @@ class OpenApi extends AbstractAnnotation
     public $info = Generator::UNDEFINED;
 
     /**
-     * An array of <code>@OA\Server</code> objects, which provide connectivity information to a target server.
-     *
-     * If not provided, or is an empty array, the default value would be a Server Object with an url value of <code>/</code>.
+     * An array of Server Objects, which provide connectivity information to a target server.
+     * If the servers property is not provided, or is an empty array, the default value would be a Server Object with a url value of /.
      *
      * @var Server[]
      */
@@ -69,7 +58,6 @@ class OpenApi extends AbstractAnnotation
 
     /**
      * Lists the required security schemes to execute this operation.
-     *
      * The name used for each property must correspond to a security scheme declared
      * in the Security Schemes under the Components Object.
      * Security Requirement Objects that contain multiple schemes require that
@@ -86,7 +74,6 @@ class OpenApi extends AbstractAnnotation
 
     /**
      * A list of tags used by the specification with additional metadata.
-     *
      * The order of the tags can be used to reflect on their order by the parsing tools.
      * Not all tags that are used by the Operation Object must be declared.
      * The tags that are not declared may be organized randomly or based on the tools' logic.
@@ -107,6 +94,11 @@ class OpenApi extends AbstractAnnotation
      * @var Analysis
      */
     public $_analysis = Generator::UNDEFINED;
+
+    /**
+     * @inheritdoc
+     */
+    public static $_blacklist = ['_context', '_unmerged', '_analysis'];
 
     /**
      * @inheritdoc
@@ -134,21 +126,15 @@ class OpenApi extends AbstractAnnotation
     /**
      * @inheritdoc
      */
-    public function validate(array $stack = null, array $skip = null, string $ref = '', $context = null): bool
+    public function validate(array $parents = null, array $skip = null, string $ref = ''): bool
     {
-        if ($stack !== null || $skip !== null || $ref !== '') {
+        if ($parents !== null || $skip !== null || $ref !== '') {
             $this->_context->logger->warning('Nested validation for ' . $this->identity() . ' not allowed');
 
             return false;
         }
 
-        if (!in_array($this->openapi, self::SUPPORTED_VERSIONS)) {
-            $this->_context->logger->warning('Unsupported OpenAPI version "' . $this->openapi . '". Allowed versions are: ' . implode(', ', self::SUPPORTED_VERSIONS));
-
-            return false;
-        }
-
-        return parent::validate([], [], '#', new \stdClass());
+        return parent::validate([], [], '#');
     }
 
     /**

@@ -4,18 +4,20 @@
  * @license Apache 2.0
  */
 
-namespace OpenApi\Examples\Petstore30\Controllers;
+namespace Petstore30\controllers;
 
 /**
- * Class Pet.
+ * Class Pet
+ *
+ * @package Petstore30\controllers
  *
  * @author  Donii Sergii <doniysa@gmail.com>
  */
 class Pet
 {
     /**
-     * Add a new pet to the store.
-     *
+     * Add a new pet to the store
+     * 
      * @OA\Post(
      *     path="/pet",
      *     tags={"pet"},
@@ -27,7 +29,7 @@ class Pet
      *     security={
      *         {"petstore_auth": {"write:pets", "read:pets"}}
      *     },
-     *     @OA\RequestBody(ref="#/components/requestBodies/Pet")
+     *     requestBody={"$ref": "#/components/requestBodies/Pet"}
      * )
      */
     public function addPet()
@@ -35,7 +37,7 @@ class Pet
     }
 
     /**
-     * Update an existing pet.
+     * Update an existing pet
      *
      * @OA\Put(
      *     path="/pet",
@@ -56,7 +58,7 @@ class Pet
      *     security={
      *         {"petstore_auth": {"write:pets", "read:pets"}}
      *     },
-     *     @OA\RequestBody(ref="#/components/requestBodies/Pet")
+     *     requestBody={"$ref": "#/components/requestBodies/Pet"}
      * )
      */
     public function updatePet()
@@ -80,7 +82,7 @@ class Pet
      *         @OA\Schema(
      *             default="available",
      *             type="string",
-     *             enum={"available", "pending", "sold"},
+     *             enum = {"available", "pending", "sold"},
      *         )
      *     ),
      *     @OA\Response(

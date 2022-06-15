@@ -7,7 +7,7 @@ use OpenApi\Annotations\Components;
 use OpenApi\Annotations\Operation;
 use OpenApi\Annotations\Parameter;
 use OpenApi\Annotations\Schema;
-use OpenApi\Generator;
+use const OpenApi\UNDEFINED;
 
 /**
  * Custom processor to translate the vendor tag `query-args-$ref` into query parameter annotations.
@@ -20,13 +20,11 @@ class SchemaQueryParameter
 
     public function __invoke(Analysis $analysis)
     {
-        /** @var Schema[] $schemas */
         $schemas = $analysis->getAnnotationsOfType(Schema::class, true);
-        /** @var Operation[] $operations */
         $operations = $analysis->getAnnotationsOfType(Operation::class);
 
         foreach ($operations as $operation) {
-            if ($operation->x !== Generator::UNDEFINED && array_key_exists(self::X_QUERY_AGS_REF, $operation->x)) {
+            if ($operation->x !== UNDEFINED && array_key_exists(self::X_QUERY_AGS_REF, $operation->x)) {
                 if ($schema = $this->schemaForRef($schemas, $operation->x[self::X_QUERY_AGS_REF])) {
                     $this->expandQueryArgs($operation, $schema);
                     $this->cleanUp($operation);
@@ -41,7 +39,7 @@ class SchemaQueryParameter
     protected function schemaForRef(array $schemas, string $ref)
     {
         foreach ($schemas as $schema) {
-            if (Components::ref($schema) === $ref) {
+            if (Components::SCHEMA_REF . $schema->schema === $ref) {
                 return $schema;
             }
         }
@@ -54,11 +52,11 @@ class SchemaQueryParameter
      */
     protected function expandQueryArgs(Operation $operation, Schema $schema)
     {
-        if ($schema->properties == Generator::UNDEFINED || !$schema->properties) {
+        if ($schema->properties === UNDEFINED || !$schema->properties) {
             return;
         }
 
-        $operation->parameters = $operation->parameters == Generator::UNDEFINED ? [] : $operation->parameters;
+        $operation->parameters = $operation->parameters === UNDEFINED ? [] : $operation->parameters;
         foreach ($schema->properties as $property) {
             $parameter = new Parameter([
                 'name' => $property->property,
@@ -76,7 +74,8 @@ class SchemaQueryParameter
     {
         unset($operation->x[self::X_QUERY_AGS_REF]);
         if (!$operation->x) {
-            $operation->x = Generator::UNDEFINED;
+            $operation->x = UNDEFINED;
         }
     }
 }
+

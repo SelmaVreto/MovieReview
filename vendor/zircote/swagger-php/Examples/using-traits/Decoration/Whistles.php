@@ -1,12 +1,12 @@
 <?php
 
-namespace OpenApi\Examples\UsingTraits\Decoration;
+namespace UsingTraits\Decoration;
 
 /**
  * @OA\Schema(title="Whistles trait")
  */
-trait Whistles
-{
+trait Whistles {
+
     /**
      * The bell.
      *

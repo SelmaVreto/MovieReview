@@ -35,17 +35,15 @@ class MergeXmlContent
                 }
                 continue;
             }
-            if (Generator::isDefault($parent->content)) {
+            if ($parent->content === Generator::UNDEFINED) {
                 $parent->content = [];
             }
-            $parent->content['application/xml'] = $mediaType = new MediaType([
+            $parent->content['application/xml'] = new MediaType([
                 'schema' => $xmlContent,
                 'example' => $xmlContent->example,
                 'examples' => $xmlContent->examples,
                 '_context' => new Context(['generated' => true], $xmlContent->_context),
-                '_aux' => true,
             ]);
-            $analysis->addAnnotation($mediaType, $mediaType->_context);
             if (!$parent instanceof Parameter) {
                 $parent->content['application/xml']->mediaType = 'application/xml';
             }

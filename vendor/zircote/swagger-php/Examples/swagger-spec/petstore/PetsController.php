@@ -1,9 +1,10 @@
 <?php
 
-namespace OpenApi\Examples\SwaggerSpec\Petstore;
+namespace petstore;
 
 class PetsController
 {
+
     /**
      * @OA\Get(
      *     path="/pets",
@@ -39,16 +40,16 @@ class PetsController
 
     /**
      * @OA\Post(
-     *     path="/pets",
-     *     summary="Create a pet",
-     *     operationId="createPets",
-     *     tags={"pets"},
-     *     @OA\Response(response=201, description="Null response"),
-     *     @OA\Response(
-     *         response="default",
-     *         description="unexpected error",
-     *         @OA\Schema(ref="#/components/schemas/Error")
-     *     )
+     *    path="/pets",
+     *    summary="Create a pet",
+     *    operationId="createPets",
+     *    tags={"pets"},
+     *    @OA\Response(response=201, description="Null response"),
+     *    @OA\Response(
+     *        response="default",
+     *        description="unexpected error",
+     *        @OA\Schema(ref="#/components/schemas/Error")
+     *    )
      * )
      */
     public function createPets()

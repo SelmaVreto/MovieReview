@@ -2,8 +2,6 @@ openapi: 3.0.0
 info:
   title: 'Testing annotations from bugreports'
   description: "NOTE:\nThis sentence is on a new line"
-  contact:
-    name: 'Swagger API Team'
   version: 1.0.0
 servers:
   -
@@ -18,11 +16,7 @@ servers:
 paths:
   /api/endpoint:
     get:
-      tags:
-        - endpoints
       summary: 'An API endpoint.'
-      description: 'An endpoint'
-      operationId: endpoint
       parameters:
         -
           name: filter
@@ -36,37 +30,14 @@ paths:
                 type: object
       responses:
         '200':
-          $ref: '#/components/responses/200'
-      security:
-        -
-          bearerAuth: []
-  /api/anotherendpoint:
-    get:
-      tags:
-        - endpoints
-      summary: 'Another API endpoint.'
-      description: 'Another endpoint'
-      operationId: anotherendpoints
-      parameters:
-        -
-          name: 'things[]'
-          in: query
-          description: 'A list of things.'
-          required: false
-          schema:
-            type: array
-            items:
-              type: integer
-      responses:
-        '200':
-          $ref: '#/components/responses/200'
+          description: Success
       security:
         -
           bearerAuth: []
 components:
   responses:
     '200':
-      description: Success
+      description: ''
       content:
         application/json:
           schema:
@@ -95,6 +66,3 @@ components:
 security:
   -
     bearerAuth: []
-tags:
-  -
-    name: endpoints

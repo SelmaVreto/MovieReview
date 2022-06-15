@@ -26,15 +26,13 @@ class AugmentSchemas
 
         // Use the class names for @OA\Schema()
         foreach ($schemas as $schema) {
-            if (Generator::isDefault($schema->schema)) {
+            if ($schema->schema === Generator::UNDEFINED) {
                 if ($schema->_context->is('class')) {
                     $schema->schema = $schema->_context->class;
                 } elseif ($schema->_context->is('interface')) {
                     $schema->schema = $schema->_context->interface;
                 } elseif ($schema->_context->is('trait')) {
                     $schema->schema = $schema->_context->trait;
-                } elseif ($schema->_context->is('enum')) {
-                    $schema->schema = $schema->_context->enum;
                 }
             }
         }
@@ -45,11 +43,7 @@ class AugmentSchemas
             if ($property->_context->nested) {
                 continue;
             }
-
-            $schemaContext = $property->_context->with('class')
-                    ?: $property->_context->with('interface')
-                    ?: $property->_context->with('trait')
-                    ?: $property->_context->with('enum');
+            $schemaContext = $property->_context->with('class') ?: $property->_context->with('trait') ?: $property->_context->with('interface');
             if ($schemaContext->annotations) {
                 foreach ($schemaContext->annotations as $annotation) {
                     if ($annotation instanceof Schema) {
@@ -58,10 +52,10 @@ class AugmentSchemas
                             continue;
                         }
 
-                        if (!Generator::isDefault($annotation->allOf)) {
+                        if ($annotation->allOf !== Generator::UNDEFINED) {
                             $schema = null;
                             foreach ($annotation->allOf as $nestedSchema) {
-                                if (!Generator::isDefault($nestedSchema->ref)) {
+                                if ($nestedSchema->ref !== Generator::UNDEFINED) {
                                     continue;
                                 }
 
@@ -69,11 +63,7 @@ class AugmentSchemas
                             }
 
                             if ($schema === null) {
-                                $schema = new Schema([
-                                    '_context' => $annotation->_context,
-                                    '_aux' => true,
-                                ]);
-                                $analysis->addAnnotation($schema, $schema->_context);
+                                $schema = new Schema(['_context' => $annotation->_context]);
                                 $annotation->allOf[] = $schema;
                             }
 
@@ -90,7 +80,7 @@ class AugmentSchemas
 
         // set schema type based on various properties
         foreach ($schemas as $schema) {
-            if (Generator::isDefault($schema->type)) {
+            if ($schema->type === Generator::UNDEFINED) {
                 if (is_array($schema->properties) && count($schema->properties) > 0) {
                     $schema->type = 'object';
                 } elseif (is_array($schema->additionalProperties) && count($schema->additionalProperties) > 0) {
@@ -100,37 +90,56 @@ class AugmentSchemas
                 } elseif (is_array($schema->propertyNames) && count($schema->propertyNames) > 0) {
                     $schema->type = 'object';
                 }
-            } else {
-                if ($typeSchema = $analysis->getSchemaForSource($schema->type)) {
-                    if (Generator::isDefault($schema->format)) {
-                        $schema->ref = Components::ref($typeSchema);
-                        $schema->type = Generator::UNDEFINED;
-                    }
-                }
             }
         }
 
         // move schema properties into allOf if both exist
         foreach ($schemas as $schema) {
-            if (!Generator::isDefault($schema->properties) && !Generator::isDefault($schema->allOf)) {
+            if ($schema->properties !== Generator::UNDEFINED and $schema->allOf !== Generator::UNDEFINED) {
                 $allOfPropertiesSchema = null;
                 foreach ($schema->allOf as $allOfSchema) {
-                    if (!Generator::isDefault($allOfSchema->properties)) {
+                    if ($allOfSchema->properties !== Generator::UNDEFINED) {
                         $allOfPropertiesSchema = $allOfSchema;
                         break;
                     }
                 }
                 if (!$allOfPropertiesSchema) {
-                    $allOfPropertiesSchema = new Schema([
-                        'properties' => [],
-                        '_context' => $schema->_context,
-                        '_aux' => true,
-                    ]);
-                    $analysis->addAnnotation($allOfPropertiesSchema, $allOfPropertiesSchema->_context);
+                    $allOfPropertiesSchema = new Schema(['_context' => $schema->_context, 'properties' => []]);
                     $schema->allOf[] = $allOfPropertiesSchema;
                 }
                 $allOfPropertiesSchema->properties = array_merge($allOfPropertiesSchema->properties, $schema->properties);
                 $schema->properties = Generator::UNDEFINED;
+            }
+        }
+
+        // ref rewriting
+        $updatedRefs = [];
+        foreach ($schemas as $schema) {
+            if ($schema->allOf !== Generator::UNDEFINED) {
+                // do we have to keep track of properties refs that need updating?
+                foreach ($schema->allOf as $allOfSchema) {
+                    if ($allOfSchema->properties !== Generator::UNDEFINED) {
+                        $updatedRefs[Components::SCHEMA_REF . $schema->schema . '/properties'] = Components::SCHEMA_REF . $schema->schema . '/allOf/0/properties';
+                        break;
+                    }
+                }
+
+                // rewriting is simpler if properties is first...
+                usort($schema->allOf, function ($a, $b) {
+                    return $a->properties !== Generator::UNDEFINED ? -1 : ($b->properties !== Generator::UNDEFINED ? 1 : 0);
+                });
+            }
+        }
+
+        if ($updatedRefs) {
+            foreach ($analysis->annotations as $annotation) {
+                if (property_exists($annotation, 'ref') && $annotation->ref !== Generator::UNDEFINED && $annotation->ref !== null) {
+                    foreach ($updatedRefs as $origRef => $updatedRef) {
+                        if (0 === strpos($annotation->ref, $origRef)) {
+                            $annotation->ref = str_replace($origRef, $updatedRef, $annotation->ref);
+                        }
+                    }
+                }
             }
         }
     }

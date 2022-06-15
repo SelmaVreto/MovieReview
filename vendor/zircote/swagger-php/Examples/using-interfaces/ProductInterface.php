@@ -1,12 +1,13 @@
 <?php
 
-namespace OpenApi\Examples\UsingInterfaces;
+namespace UsingInterfaces;
 
 /**
- * @OA\Schema
+ * @OA\Schema()
  */
 interface ProductInterface
 {
+
     /**
      * The product name.
      *

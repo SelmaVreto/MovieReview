@@ -1,12 +1,11 @@
 <?php
 
-namespace OpenApi\Examples\UsingTraits;
+namespace UsingTraits;
 
 /**
  * @OA\Schema(title="Blink trait", schema="CustomName/Blink")
  */
-trait Blink
-{
+trait Blink {
 
     /**
      * The frequency.

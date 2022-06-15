@@ -4,12 +4,13 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitd70be3affc762c5cebd99869587859a4
+class ComposerStaticInit5e2147127a93d1fb5cc6aea1a0a5feef
 {
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         'fc73bab8d04e21bcdda37ca319c63800' => __DIR__ . '/..' . '/mikecao/flight/flight/autoload.php',
         '5b7d984aab5ae919d3362ad9588977eb' => __DIR__ . '/..' . '/mikecao/flight/flight/Flight.php',
+        '0ccdf99b8f62f02c52cba55802e0c2e7' => __DIR__ . '/..' . '/zircote/swagger-php/src/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -77,9 +78,9 @@ class ComposerStaticInitd70be3affc762c5cebd99869587859a4
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitd70be3affc762c5cebd99869587859a4::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitd70be3affc762c5cebd99869587859a4::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitd70be3affc762c5cebd99869587859a4::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit5e2147127a93d1fb5cc6aea1a0a5feef::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit5e2147127a93d1fb5cc6aea1a0a5feef::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit5e2147127a93d1fb5cc6aea1a0a5feef::$classMap;
 
         }, null, ClassLoader::class);
     }

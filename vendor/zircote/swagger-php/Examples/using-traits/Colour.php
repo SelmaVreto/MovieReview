@@ -1,12 +1,11 @@
 <?php
 
-namespace OpenApi\Examples\UsingTraits;
+namespace UsingTraits;
 
 /**
  * @OA\Schema(title="Colour trait")
  */
-trait Colour
-{
+trait Colour {
 
     /**
      * The colour.

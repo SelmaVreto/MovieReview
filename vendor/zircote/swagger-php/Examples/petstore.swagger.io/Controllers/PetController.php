@@ -1,9 +1,10 @@
 <?php
 
-namespace OpenApi\Examples\PetstoreSwaggerIo\Controllers;
+namespace PetstoreIO;
 
 final class PetController
 {
+
     /**
      * @OA\Get(
      *     path="/pet/findByTags",
@@ -17,8 +18,8 @@ final class PetController
      *         description="Tags to filter by",
      *         required=true,
      *         @OA\Schema(
-     *             type="array",
-     *             @OA\Items(type="string"),
+     *           type="array",
+     *           @OA\Items(type="string"),
      *         ),
      *         style="form"
      *     ),
@@ -57,12 +58,12 @@ final class PetController
      *         description="Status values that need to be considered for filter",
      *         required=true,
      *         @OA\Schema(
-     *             type="array",
-     *             @OA\Items(
-     *                 type="string",
-     *                 enum={"available", "pending", "sold"},
-     *                 default="available"
-     *             ),
+     *         type="array",
+     *           @OA\Items(
+     *               type="string",
+     *               enum={"available", "pending", "sold"},
+     *               default="available"
+     *           ),
      *         ),
      *         style="form"
      *     ),
@@ -70,8 +71,8 @@ final class PetController
      *         response=200,
      *         description="successful operation",
      *         @OA\JsonContent(
-     *             type="array",
-     *             @OA\Items(ref="#/components/schemas/Pet")
+     *            type="array",
+     *            @OA\Items(ref="#/components/schemas/Pet")
      *         )
      *     ),
      *     @OA\Response(
@@ -79,7 +80,7 @@ final class PetController
      *         description="Invalid status value",
      *     ),
      *     security={
-     *         {"petstore_auth": {"write:pets", "read:pets"}}
+     *       {"petstore_auth": {"write:pets", "read:pets"}}
      *     }
      * )
      */
@@ -100,8 +101,8 @@ final class PetController
      *         name="petId",
      *         required=true,
      *         @OA\Schema(
-     *             type="integer",
-     *             format="int64"
+     *           type="integer",
+     *           format="int64"
      *         )
      *     ),
      *     @OA\Response(
@@ -118,7 +119,7 @@ final class PetController
      *         description="Pet not found"
      *     ),
      *     security={
-     *         {"api_key": {}}
+     *       {"api_key": {}}
      *     }
      * )
      */
@@ -154,7 +155,7 @@ final class PetController
      *         response=405,
      *         description="Invalid input",
      *     ),
-     *     security={{"petstore_auth": {"write:pets", "read:pets"}}}
+     *     security={{"petstore_auth":{"write:pets", "read:pets"}}}
      * )
      */
     public function addPet()
@@ -166,15 +167,15 @@ final class PetController
      *     path="/pet",
      *     tags={"pet"},
      *     operationId="updatePet",
-     *     summary="Update an existing pet.",
+     *     summary="Update an existing pet",
      *     description="",
      *     @OA\RequestBody(
      *         required=true,
      *         description="Pet object that needs to be added to the store",
      *         @OA\JsonContent(ref="#/components/schemas/Pet"),
      *         @OA\MediaType(
-     *             mediaType="application/xml",
-     *             @OA\Schema(ref="#/components/schemas/Pet"),
+     *            mediaType="application/xml",
+     *            @OA\Schema(ref="#/components/schemas/Pet"),
      *         )
      *     ),
      *     @OA\Response(
@@ -189,7 +190,7 @@ final class PetController
      *         response=405,
      *         description="Validation exception",
      *     ),
-     *     security={{"petstore_auth": {"write:pets", "read:pets"}}}
+     *     security={{"petstore_auth":{"write:pets", "read:pets"}}}
      * )
      */
     public function updatePet()
@@ -229,7 +230,7 @@ final class PetController
      *         response=404,
      *         description="Pet not found"
      *     ),
-     *     security={{"petstore_auth": {"write:pets", "read:pets"}}}
+     *     security={{"petstore_auth":{"write:pets", "read:pets"}}}
      * )
      */
     public function deletePet()
@@ -238,44 +239,44 @@ final class PetController
 
     /**
      * @OA\Post(
-     *     path="/pet/{petId}",
-     *     tags={"pet"},
-     *     summary="Updates a pet in the store with form data",
-     *     description="",
-     *     operationId="updatePetWithForm",
-     *     @OA\RequestBody(
-     *         required=false,
-     *         @OA\MediaType(
-     *             mediaType="application/x-www-form-urlencoded",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 @OA\Property(
-     *                     property="name",
-     *                     description="Updated name of the pet",
-     *                     type="string"
-     *                 ),
-     *                 @OA\Property(
-     *                     property="status",
-     *                     description="Updated status of the pet",
-     *                     type="string"
-     *                 ),
-     *             )
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="petId",
-     *         in="path",
-     *         description="ID of pet that needs to be updated",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="integer",
-     *             format="int64"
-     *         )
-     *     ),
-     *     @OA\Response(response="405", description="Invalid input"),
-     *     security={{
-     *         "petstore_auth": {"write:pets", "read:pets"}
-     *     }}
+     *   path="/pet/{petId}",
+     *   tags={"pet"},
+     *   summary="Updates a pet in the store with form data",
+     *   description="",
+     *   operationId="updatePetWithForm",
+     *   @OA\RequestBody(
+     *       required=false,
+     *       @OA\MediaType(
+     *           mediaType="application/x-www-form-urlencoded",
+     *           @OA\Schema(
+     *               type="object",
+     *               @OA\Property(
+     *                   property="name",
+     *                   description="Updated name of the pet",
+     *                   type="string"
+     *               ),
+     *               @OA\Property(
+     *                   property="status",
+     *                   description="Updated status of the pet",
+     *                   type="string"
+     *               ),
+     *           )
+     *       )
+     *   ),
+     *   @OA\Parameter(
+     *     name="petId",
+     *     in="path",
+     *     description="ID of pet that needs to be updated",
+     *     required=true,
+     *     @OA\Schema(
+     *         type="integer",
+     *         format="int64"
+     *     )
+     *   ),
+     *   @OA\Response(response="405",description="Invalid input"),
+     *   security={{
+     *     "petstore_auth": {"write:pets", "read:pets"}
+     *   }}
      * )
      */
     public function updatePetWithForm()
@@ -326,8 +327,8 @@ final class PetController
      *     security={
      *         {
      *             "petstore_auth": {
-     *                 "read:pets",
-     *                 "write:pets"
+     *                  "read:pets",
+     *                  "write:pets"
      *             }
      *         }
      *     },
