@@ -47,7 +47,7 @@
                                         <input id="password" class="form-control" placeholder="Password" name="password" type="password" value="">
                                     </div>
                                     <!-- Change this to a button or input when using this as a form -->
-                                    <a onclick="doLog();" class="btn btn-lg btn-success btn-block">Login</a>
+                                    <a onclick="doLogin();" class="btn btn-lg btn-success btn-block">Login</a>
                                 </fieldset>
                             </form>
                         </div>
@@ -69,12 +69,13 @@
         <script src="./assets/js/startmin.js"></script>-->
 
         <script type="text/javascript">
-          function doLog() {
-              alter("login");
-              var email = $("#email").val();
-              var password =  $("#password").val();
+          function doLogin() {
+            var login_info={
+              "email" : $("#email").val(),
+             "password" :  $("#password").val()
+           };
 
-              console.log(email, password);
+             console.log(login_info);
             }
               </script>
     </body>

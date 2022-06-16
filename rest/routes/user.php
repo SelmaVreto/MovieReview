@@ -105,8 +105,13 @@ Flight::route('PUT /user/@id', function($id){
  *     @OA\Response(response="200", description="Message upon successfull activation.")
  * )
  */
-Flight::route('GET /confirm/@token', function($token){
+Flight::route('GET /user/confirm/@token', function($token){
   Flight::json(Flight::jwt(Flight::userService()->confirm($token)));
   Flight::json(["message" => "Your account has been activated"]);
+});
+
+Flight::route('POST /users/login', function(){
+  $data = Flight::request()->data->getData();
+  Flight::json(Flight::userService()->login($data));
 });
  ?>

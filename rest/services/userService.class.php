@@ -1,12 +1,22 @@
 <?php
 require_once dirname(__FILE__).'/../dao/userDao.class.php';
 require_once dirname(__FILE__). '/baseService.class.php';
-
+require_once dirname(__FILE__).'/../clients/SMTPClient.class.php';
 class userService extends baseService{
+
+private $smtpClient;
 
   public function __construct(){
     $this->dao = new userDao();
+    //instanca
+    $this->smtpClient = new SMTPClient();
+
   }
+  public function get_by_id($id){
+     $user = $this->dao->get_by_id($id);
+     $this->smtpClient->send_register_user_token($user);
+      return $user;
+    }
   public function get_all(){
       return $this->dao->get_all_directors();
     }
@@ -44,17 +54,19 @@ class userService extends baseService{
        "created_at" => date(Config::DATE_FORMAT),
        "token" => md5(random_bytes(16))
      ]);
+     $this->dao->commit();
    } catch(\Exception $e){
        throw $e;
      }
+     $this->smtpClient->send_register_user_token($user);
     return $user;
   }
+
   public function confirm($token){
   $user = $this->dao->get_user_by_token($token);
 
   if (!isset($user['id'])) throw new Exception("Invalid token", 400);
-
-  $this->dao->update($user['id'], ["status" => "ACTIVE", "token" => NULL]);
+  $this->dao->update($user['id'], ["status" => "ACTIVE"]);
 
   return $user;
 }
