@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @OA\Get(path="/user", tags={"user"}, security={{"ApiKeyAuth": {}}},
  *         summary="Return all user notes from the API. ",
@@ -106,11 +105,25 @@ Flight::route('PUT /user/@id', function($id){
  * )
  */
 Flight::route('GET /user/confirm/@token', function($token){
-  Flight::json(Flight::jwt(Flight::userService()->confirm($token)));
+  Flight::json(Flight::userService()->confirm($token));
   Flight::json(["message" => "Your account has been activated"]);
 });
+/**
+ * @OA\Post(path="/user/login",tags={"user"},
+ *         summary="register user in API. ",
+*    @OA\RequestBody(description="objest that needs to be added", required=true,
+*       @OA\MediaType(mediaType="application/json",
+*    			@OA\Schema(
+*    				 @OA\Property(property="email", type="string", example="",	description="" ),
+*    				 @OA\Property(property="password", type="string", example="",	description="" )
+*          )
+*        )
+*     ),
+*     @OA\Response(response="200", description="Message upon successfull activation.")
+ * )
+ */
 
-Flight::route('POST /users/login', function(){
+Flight::route('POST /user/login', function(){
   $data = Flight::request()->data->getData();
   Flight::json(Flight::userService()->login($data));
 });

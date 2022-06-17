@@ -19,7 +19,7 @@ public function send_register_user_token($user){
    $message = (new Swift_Message('Confirm your account'))
      ->setFrom(['selma@shfy.io' => 'MoviRew'])
      ->setTo([$user['email']])
-     ->setBody('Here is the confirmation link: http://localhost/movies/rest/confirm/'.$user['token']);
+     ->setBody('Here is the confirmation link: http://localhost/movies/rest/user/confirm/'.$user['token']);
    $this->mailer->send($message);
  }
  public function send_user_recovery_token($user){

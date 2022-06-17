@@ -34,15 +34,15 @@ class userDao extends baseDao {
  }
 //parcijalni update podataka by id
   public function update_user($userID, $user){
-    $this->update("user", $userID, $user);
+    $this->execute_update("user", $userID, $user);
 }
 
 public function update_user_by_email($email, $user){
-    $this->update("user", $email, $user, "email");
+    $this->execute_update("user", $email, $user, "email");
   }
 
 public function get_user_by_token($token){
-      return $this->query_unique("SELECT * FROM users WHERE token = :token", ["token" => $token]);
+      return $this->query_unique("SELECT * FROM user WHERE token = :token", ["token" => $token]);
     }
 }
 ?>

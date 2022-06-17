@@ -5,7 +5,7 @@ require_once dirname(__FILE__).'/../clients/SMTPClient.class.php';
 class userService extends baseService{
 
 private $smtpClient;
-
+  public $dao;
   public function __construct(){
     $this->dao = new userDao();
     //instanca
@@ -54,7 +54,7 @@ private $smtpClient;
        "created_at" => date(Config::DATE_FORMAT),
        "token" => md5(random_bytes(16))
      ]);
-     $this->dao->commit();
+    //this->dao->commit();
    } catch(\Exception $e){
        throw $e;
      }
@@ -63,12 +63,21 @@ private $smtpClient;
   }
 
   public function confirm($token){
-  $user = $this->dao->get_user_by_token($token);
+    $user = $this->dao->get_user_by_token($token);
 
-  if (!isset($user['id'])) throw new Exception("Invalid token", 400);
-  $this->dao->update($user['id'], ["status" => "ACTIVE"]);
+    if (!isset($user['id'])) throw new Exception("Invalid token", 400);
+    $this->dao->update_user($user['id'], ["status" => "ACTIVE"]);
 
-  return $user;
+    return $user;
+}
+public function login($user){
+  $db_user = $this->dao->get_user_by_email($user['email']);
+
+  if ($db_user['password'] != $user['password']) throw new Exception("Invalid password", 400);
+  if ($db_user['email'] != $user['email']) throw new Exception("Invalid email", 400);
+  if ($db_user['status'] != 'ACTIVE') throw new Exception("Account needs to be activated", 400);
+
+  return $db_user;
 }
 }
 ?>
