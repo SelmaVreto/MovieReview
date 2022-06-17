@@ -12,7 +12,7 @@ class baseService {
   }
 
   public function update($id, $data){
-    $this->dao->update($id, $data);
+    $this->dao->update_user($id, $data);
     return $this->dao->get_by_id($id);
   }
 

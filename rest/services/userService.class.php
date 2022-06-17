@@ -79,5 +79,18 @@ public function login($user){
 
   return $db_user;
 }
+public function forgot($user){
+  $db_user = $this->dao->get_user_by_email($user['email']);
+  // generate token - and save it to db
+  $db_user = $this->update($db_user['id'], ['token' => md5(random_bytes(16))]);
+  // send email
+  $this->smtpClient->send_user_recovery_token($db_user);
+}
+public function reset($user){
+  $db_user = $this->dao->get_user_by_token($user['token']);
+  if (!isset($user['id'])) throw new Exception("Invalid token", 400);
+  $this->update($db_user['id'], ['password' => md5($user['password']), 'token' => NULL]);
+}
+
 }
 ?>
