@@ -89,6 +89,7 @@ public function forgot($user){
 public function reset($user){
   $db_user = $this->dao->get_user_by_token($user['token']);
   if (!isset($user['id'])) throw new Exception("Invalid token", 400);
+  if (strtotime(date(Config::DATE_FORMAT)) - strtotime($db_user['token_created_at']) > 300) throw new Exception("Token expired", 400);
   $this->update($db_user['id'], ['password' => md5($user['password']), 'token' => NULL]);
 }
 

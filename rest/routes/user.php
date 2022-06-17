@@ -101,6 +101,7 @@ Flight::route('PUT /user/@id', function($id){
 /**
  * @OA\Get(path="/confirm/{token}", tags={"user"},
  *         summary="confirm token ",
+ *     @OA\Parameter(@OA\Schema(type="string"), in="path", name="token", description="temporary token for activating"),
  *     @OA\Response(response="200", description="Message upon successfull activation.")
  * )
  */
@@ -127,18 +128,7 @@ Flight::route('POST /user/login', function(){
   $data = Flight::request()->data->getData();
   Flight::json(Flight::userService()->login($data));
 });
-/**
- * @OA\Post(path="/user/forgot",tags={"user"},
-*    @OA\RequestBody(description="objest that needs to be added", required=true,
-*       @OA\MediaType(mediaType="application/json",
-*    			@OA\Schema(
-*    				 @OA\Property(property="email", type="string", example="",	description="" ),
-*          )
-*        )
-*     ),
-*     @OA\Response(response="200", description="Message upon successfull activation.")
- * )
- */
+
 Flight::route('POST /user/forgot', function(){
   $data = Flight::request()->data->getData();
   Flight::userService()->forgot($data);
