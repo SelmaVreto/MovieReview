@@ -40,6 +40,10 @@ class ComposerStaticInit5e2147127a93d1fb5cc6aea1a0a5feef
         array (
             'OpenApi\\' => 8,
         ),
+        'F' => 
+        array (
+            'Firebase\\JWT\\' => 13,
+        ),
         'E' => 
         array (
             'Egulias\\EmailValidator\\' => 23,
@@ -95,6 +99,10 @@ class ComposerStaticInit5e2147127a93d1fb5cc6aea1a0a5feef
         'OpenApi\\' => 
         array (
             0 => __DIR__ . '/..' . '/zircote/swagger-php/src',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'Egulias\\EmailValidator\\' => 
         array (

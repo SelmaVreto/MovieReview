@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @OA\Get(path="/user", tags={"user"}, security={{"ApiKeyAuth": {}}},
  *         summary="Return all user notes from the API. ",
@@ -123,7 +124,6 @@ Flight::route('GET /user/confirm/@token', function($token){
 *     @OA\Response(response="200", description="Message upon successfull activation.")
  * )
  */
-
 Flight::route('POST /user/login', function(){
   $data = Flight::request()->data->getData();
   Flight::json(Flight::userService()->login($data));
