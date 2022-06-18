@@ -1,5 +1,12 @@
 <?php
-
+/** SWAGER
+ * @OA\Info(title="Movies API Specs", version="0.2", @OA\Contact(email="selma.vreto@stu.ibu.edu.ba", name="Selma Vreto"))
+ * @OA\OpenApi(
+ *    @OA\Server(url="http://localhost/movies/rest", description="Development Environment" ),
+ *    @OA\Server(url="https://todos.biznet.ba/rest", description="Production Environment" )
+ * ),
+ * @OA\SecurityScheme(securityScheme="ApiKeyAuth", type="apiKey", in="header", name="Authorization", name="Authorization" )
+ */
 /**
  * @OA\Get(path="/user", tags={"user"}, security={{"ApiKeyAuth": {}}},
  *         summary="Return all user notes from the API. ",
@@ -24,6 +31,21 @@ Flight::route('GET /user', function(){
  * )
  */
 Flight::route('GET /user/@id', function($id){
+  // $headers = getallheaders();
+  // $token = @$headers['Authorization'];
+  // try {
+  //    $decoded = (array)\Firebase\JWT\JWT::decode($token, "example_key", ["HS256"]);
+  //    if ($decoded['id'] == $id){'id' == '$db_user["id"]'
+  //      Flight::json(Flight::userService()->get_by_id($id));
+  //    }else{
+  //      Flight::json(["message" => "That account is not for you"], 403);
+  //    }
+  //  } catch (\Exception $e) {
+  //    // Flight::json(["message" => $e->getMessage()], 401);
+  //      print_r($e); die
+  //  }
+  // print_r($headers);
+  // die;
   Flight::json(Flight::userService()->get_by_id($id));
 });
 /**

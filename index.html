@@ -230,6 +230,11 @@
 
             // run app
             app.run();
+            if(window.localStorage.getItem("token")){
+              windod.location="login.html";
+            }else{
+              $('body').show();
+            }
           });
         </script>
 

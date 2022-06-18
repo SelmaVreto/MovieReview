@@ -11,6 +11,8 @@ require_once dirname(__FILE__).'/services/movieService.class.php';
 require_once dirname(__FILE__).'/services/userService.class.php';
 require_once dirname(__FILE__).'/services/movieRatService.class.php';
 require_once dirname(__FILE__).'/dao/userDao.class.php';
+
+
 /* utility function for reading query parameters from URL */
 Flight::map('query', function($name, $default_value = NULL){
   $request = Flight::request();
@@ -20,9 +22,9 @@ Flight::map('query', function($name, $default_value = NULL){
 });
 
 /* error handling for our API */
-Flight::map('error', function(Exception $ex){
-  Flight::json(["message" => $ex->getMessage()], $ex->getCode() ? $ex->getCode() : 500);
-});
+// Flight::map('error', function(Exception $ex){
+//   Flight::json(["message" => $ex->getMessage()], $ex->getCode() ? $ex->getCode() : 500);
+// });
 
 /* register Dao layer */
 Flight::register('genreDao', 'genreDao');

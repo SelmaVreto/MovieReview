@@ -9,6 +9,6 @@ class config {
 const SMTP_HOST = "smtp.mailgun.org";
 const SMTP_PORT = 587;
 const SMTP_USER = "postmaster@sandbox8d56413f3a0144cdaa8481eddffaf3da.mailgun.org";
-const SMTP_PASSWORD = "";//c8534fde7dd2e6a836f9023b6c020312-50f43e91-0af32ff4
+const SMTP_PASSWORD = "c8534fde7dd2e6a836f9023b6c020312-50f43e91-0af32ff4";//c8534fde7dd2e6a836f9023b6c020312-50f43e91-0af32ff4
 }
 ?>
