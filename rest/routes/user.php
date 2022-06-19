@@ -8,12 +8,12 @@
  * @OA\SecurityScheme(securityScheme="ApiKeyAuth", type="apiKey", in="header", name="Authorization", name="Authorization" )
  */
 /**
- * @OA\Get(path="/user", tags={"user"}, security={{"ApiKeyAuth": {}}},
+ * @OA\Get(path="/admin/user", tags={"user"}, security={{"ApiKeyAuth": {}}},
  *         summary="Return all user notes from the API. ",
  *         @OA\Response( response=200, description="List of notes.")
  * )
  */
-Flight::route('GET /user', function(){
+Flight::route('GET /admin/user', function(){
   $offset = Flight::query('offset', 0);
   $limit = Flight::query('limit', 10);
 
@@ -24,20 +24,22 @@ Flight::route('GET /user', function(){
 
 });
 /**
- * @OA\Get(path="/user/{id}", tags={"user"}, security={{"ApiKeyAuth": {}}},
+ * @OA\Get(path="/admin/user/{id}", tags={"user"}, security={{"ApiKeyAuth": {}}},
  *         summary="Return user by id from API. ",
  *     @OA\Parameter(in="path", name="id", example=1, description="Id of note"),
  *     @OA\Response(response="200", description="Fetch individual note")
  * )
  */
-Flight::route('GET /user/@id', function($id){
+Flight::route('GET /admin/user/@id', function($id){
   // $headers = getallheaders();
   // print_r($headers['Authorization']);
   // die;
+  //OVO GORE RADILO
+  // if (Flight::get('user')['id'] != $id) throw new Exception("This account is not for you", 403);
   Flight::json(Flight::userService()->get_by_id($id));
 });
 /**
- * @OA\Post(path="/user", tags={"user"}, security={{"ApiKeyAuth": {}}},
+ * @OA\Post(path="/admin/user", tags={"user"}, security={{"ApiKeyAuth": {}}},
  *         summary="add user in API. ",
  *   @OA\RequestBody(description="Basic user info", required=true,
  *       @OA\MediaType(mediaType="application/json",
@@ -56,13 +58,13 @@ Flight::route('GET /user/@id', function($id){
  * )
  */
 
-Flight::route('POST /user', function(){
+Flight::route('POST /admin/user', function(){
   $data = Flight::request()->data->getData();
   Flight::json(Flight::userService()->add($data));
 });
 
 /**
- * @OA\Post(path="/user/register",tags={"user"}, security={{"ApiKeyAuth": {}}},
+ * @OA\Post(path="/register",tags={"login"}, security={{"ApiKeyAuth": {}}},
  *         summary="register user in API. ",
 *    @OA\RequestBody(description="objest that needs to be added", required=true,
 *       @OA\MediaType(mediaType="application/json",
@@ -80,13 +82,13 @@ Flight::route('POST /user', function(){
 *  @OA\Response(response="200", description="Add user")
  * )
  */
-Flight::route('POST /user/register', function(){
+Flight::route('POST /register', function(){
   $data = Flight::request()->data->getData();
   Flight::json(Flight::userService()->register($data));
 });
 
 /**
- * @OA\Put(path="/user/{id}", tags={"user"},
+ * @OA\Put(path="/admin/user/{id}", tags={"user"},
  *         summary="update user from API. ",
  *     @OA\Parameter(@OA\Schema(type="integer"), in="path", allowReserved=true, name="id", example=1,
 *       @OA\MediaType(mediaType="application/json",
@@ -104,24 +106,24 @@ Flight::route('POST /user/register', function(){
  *     @OA\Response(response="200", description="Update user based on id")
  * )
  */
-Flight::route('PUT /user/@id', function($id){
+Flight::route('PUT /admin/user/@id', function($id){
   $data = Flight::request()->data->getData();
   Flight::json(Flight::movieService()->update($id, $data));
 });
 
 /**
- * @OA\Get(path="/confirm/{token}", tags={"user"},
+ * @OA\Get(path="/confirm/{token}", tags={"login"},
  *         summary="confirm token ",
  *     @OA\Parameter(@OA\Schema(type="string"), in="path", name="token", description="temporary token for activating"),
  *     @OA\Response(response="200", description="Message upon successfull activation.")
  * )
  */
-Flight::route('GET /user/confirm/@token', function($token){
+Flight::route('GET /confirm/@token', function($token){
   Flight::json(Flight::userService()->confirm($token));
   Flight::json(["message" => "Your account has been activated"]);
 });
 /**
- * @OA\Post(path="/user/login",tags={"user"},
+ * @OA\Post(path="/login",tags={"login"},
  *         summary="register user in API. ",
 *    @OA\RequestBody(description="objest that needs to be added", required=true,
 *       @OA\MediaType(mediaType="application/json",
@@ -134,12 +136,12 @@ Flight::route('GET /user/confirm/@token', function($token){
 *     @OA\Response(response="200", description="Message upon successfull activation.")
  * )
  */
-Flight::route('POST /user/login', function(){
+Flight::route('POST /login', function(){
   $data = Flight::request()->data->getData();
   Flight::json(Flight::userService()->login($data));
 });
 /**
- * @OA\Post(path="/user/forgot",tags={"user"},description="send recovery URL to users email address",
+ * @OA\Post(path="/forgot",tags={"login"},description="send recovery URL to users email address",
 *    @OA\RequestBody(description="objest that needs to be added", required=true,
 *       @OA\MediaType(mediaType="application/json",
 *    			@OA\Schema(
@@ -150,13 +152,13 @@ Flight::route('POST /user/login', function(){
 *     @OA\Response(response="200", description="Message that recovery link has been sent.")
  * )
  */
-Flight::route('POST /user/forgot', function(){
+Flight::route('POST /forgot', function(){
   $data = Flight::request()->data->getData();
   Flight::userService()->forgot($data);
   Flight::json(["message"=>"Recovery link has been sent to your email"]);
 });
 /**
- * @OA\Post(path="/user/reset",tags={"user"},description="reset user password using recovery token",
+ * @OA\Post(path="/reset",tags={"login"},description="reset user password using recovery token",
 *    @OA\RequestBody(description="objest that needs to be added", required=true,
 *       @OA\MediaType(mediaType="application/json",
 *    			@OA\Schema(
@@ -168,9 +170,19 @@ Flight::route('POST /user/forgot', function(){
 *     @OA\Response(response="200", description="Message that user has changed password.")
  * )
  */
-Flight::route('POST /user/reset', function(){
+Flight::route('POST /reset', function(){
   $data = Flight::request()->data->getData();
   Flight::userService()->reset($data);
   Flight::json(["message"=>"Password has been changed"]);
+
+  /**
+ * @OA\Get(path="/user/user", tags={"user"}, security={{"ApiKeyAuth": {}}},
+ *     @OA\Response(response="200", description="Fetch user account")
+ * )
+ */
+Flight::route('GET /user/user', function(){
+  Flight::json(Flight::userService()->get_by_id(Flight::get('user')['id']));
+
+});
 });
  ?>

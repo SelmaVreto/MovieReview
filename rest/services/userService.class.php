@@ -86,7 +86,7 @@ public function login($user){
 ];
 $jwt = JWT::encode($payload, $key, 'HS256');
 
-  // $jwt = \Firebase\JWT\JWT::encode(["id" => $db_user["id"], "r" => $db_user["role"]], "JWT SECRET");
+  // $jwt = \Firebase\JWT\JWT::encode(["id" => $db_user["id"], "r" => $db_user["role"]], Config::JWT_SECRET);
 
   return  ["token" => $jwt];
   // return $db_user;
