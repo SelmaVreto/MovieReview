@@ -67,9 +67,9 @@ public function __construct($table){
   //   return $this->insert($this->table, $entity);
   // }
   //
-  // public function update($id, $entity){
-  //   $this->execute_update($this->table, $id, $entity);
-  // }
+  public function update($id, $entity){
+    $this->execute_update($this->table, $id, $entity);
+  }
 
   public function get_by_id($id){
     return $this->query_unique("SELECT * FROM ".$this->table." WHERE id = :id", ["id" => $id]);

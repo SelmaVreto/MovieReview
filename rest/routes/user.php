@@ -150,10 +150,39 @@ Flight::route('POST /user/login', function(){
   $data = Flight::request()->data->getData();
   Flight::json(Flight::userService()->login($data));
 });
-
+/**
+ * @OA\Post(path="/user/forgot",tags={"user"},description="send recovery URL to users email address",
+*    @OA\RequestBody(description="objest that needs to be added", required=true,
+*       @OA\MediaType(mediaType="application/json",
+*    			@OA\Schema(
+*    				 @OA\Property(property="email", type="string", example="",	description="" ),
+*          )
+*        )
+*     ),
+*     @OA\Response(response="200", description="Message that recovery link has been sent.")
+ * )
+ */
 Flight::route('POST /user/forgot', function(){
   $data = Flight::request()->data->getData();
   Flight::userService()->forgot($data);
   Flight::json(["message"=>"Recovery link has been sent to your email"]);
+});
+/**
+ * @OA\Post(path="/user/reset",tags={"user"},description="reset user password using recovery token",
+*    @OA\RequestBody(description="objest that needs to be added", required=true,
+*       @OA\MediaType(mediaType="application/json",
+*    			@OA\Schema(
+*    				 @OA\Property(property="token", type="string", example="",	description="recovery token" ),
+*    				 @OA\Property(property="password", type="string", example="",	description="new password" ),
+*          )
+*        )
+*     ),
+*     @OA\Response(response="200", description="Message that user has changed password.")
+ * )
+ */
+Flight::route('POST /user/reset', function(){
+  $data = Flight::request()->data->getData();
+  Flight::userService()->reset($data);
+  Flight::json(["message"=>"Password has been changed"]);
 });
  ?>
