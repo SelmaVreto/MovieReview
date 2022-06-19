@@ -85,11 +85,10 @@ public function login($user){
     'role' => '$db_user["role"]'
 ];
 $jwt = JWT::encode($payload, $key, 'HS256');
-// print_r($jwt);
 
   // $jwt = JWT::encode(["id" => $db_user["id"], "r" => $db_user["role"]], "example_key ");
-  //
-  return  $jwt;
+  
+  return  ["token" => $jwt];
   // return $db_user;
 }
 public function forgot($user){
