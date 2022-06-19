@@ -32,19 +32,7 @@ Flight::route('GET /user', function(){
  */
 Flight::route('GET /user/@id', function($id){
   // $headers = getallheaders();
-  // $token = @$headers['Authorization'];
-  // try {
-  //    $decoded = (array)\Firebase\JWT\JWT::decode($token, "example_key", ["HS256"]);
-  //    if ($decoded['id'] == $id){'id' == '$db_user["id"]'
-  //      Flight::json(Flight::userService()->get_by_id($id));
-  //    }else{
-  //      Flight::json(["message" => "That account is not for you"], 403);
-  //    }
-  //  } catch (\Exception $e) {
-  //    // Flight::json(["message" => $e->getMessage()], 401);
-  //      print_r($e); die
-  //  }
-  // print_r($headers);
+  // print_r($headers['Authorization']);
   // die;
   Flight::json(Flight::userService()->get_by_id($id));
 });

@@ -17,7 +17,7 @@ private $smtpClient;
   }
   public function get_by_id($id){
      $user = $this->dao->get_by_id($id);
-     $this->smtpClient->send_register_user_token($user);
+     // $this->smtpClient->send_register_user_token($user);
       return $user;
     }
   public function get_all(){
@@ -86,16 +86,15 @@ public function login($user){
 ];
 $jwt = JWT::encode($payload, $key, 'HS256');
 
-  // $jwt = JWT::encode(["id" => $db_user["id"], "r" => $db_user["role"]], "example_key ");
-  
+  // $jwt = \Firebase\JWT\JWT::encode(["id" => $db_user["id"], "r" => $db_user["role"]], "JWT SECRET");
+
   return  ["token" => $jwt];
   // return $db_user;
 }
 public function forgot($user){
   $db_user = $this->dao->get_user_by_email($user['email']);
-  // generate token - and save it to db
+
   $db_user = $this->update($db_user['id'], ['token' => md5(random_bytes(16)), 'token_created_at' => date(Config::DATE_FORMAT)]);
-  // send email
   $this->smtpClient->send_user_recovery_token($db_user);
 }
 public function reset($user){

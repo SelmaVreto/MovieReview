@@ -12,6 +12,7 @@ require_once dirname(__FILE__).'/services/userService.class.php';
 require_once dirname(__FILE__).'/services/movieRatService.class.php';
 require_once dirname(__FILE__).'/dao/userDao.class.php';
 
+use \Firebase\JWT\JWT;
 
 /* utility function for reading query parameters from URL */
 Flight::map('query', function($name, $default_value = NULL){
@@ -53,6 +54,7 @@ require_once dirname(__FILE__).'/routes/directors.php';
 require_once dirname(__FILE__).'/routes/movie.php';
 require_once dirname(__FILE__).'/routes/user.php';
 require_once dirname(__FILE__).'/routes/movieRat.php';
+require_once dirname(__FILE__).'/routes/middleware.php';
 
 Flight::start();
 
