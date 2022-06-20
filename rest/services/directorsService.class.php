@@ -23,9 +23,14 @@ class directorsService extends baseService{
       return $this->dao->get_all_directors();
     }
   }
+  public function get_by_id($id){
+     $directors = $this->dao->get_by_id($id);
+      return $directors;
+    }
   public function add($directors){
   if (!isset($directors['directors_name'])) throw new Exception("director is missing");
   return parent::add($directors);
 }
+
 }
 ?>
