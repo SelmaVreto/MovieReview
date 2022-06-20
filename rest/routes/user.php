@@ -8,7 +8,7 @@
  * @OA\SecurityScheme(securityScheme="ApiKeyAuth", type="apiKey", in="header", name="Authorization", name="Authorization" )
  */
 /**
- * @OA\Get(path="/admin/user", tags={"user"}, security={{"ApiKeyAuth": {}}},
+ * @OA\Get(path="/admin/user", tags={"a-user"}, security={{"ApiKeyAuth": {}}},
  *         summary="Return all user notes from the API. ",
  *         @OA\Response( response=200, description="List of notes.")
  * )
@@ -21,16 +21,27 @@ Flight::route('GET /admin/user', function(){
 
    Flight::json(Flight::userService()->get_user_by_name($search, $offset, $limit));
    Flight::json(Flight::userService()->get_user_by_surname($search, $offset, $limit));
+   Flight::json(Flight::userService()->get_user_by_email($search, $offset, $limit));
 
 });
 /**
- * @OA\Get(path="/admin/user/{id}", tags={"user"}, security={{"ApiKeyAuth": {}}},
+ * @OA\Get(path="/admin/user/{id}", tags={"a-user"}, security={{"ApiKeyAuth": {}}},
  *         summary="Return user by id from API. ",
  *     @OA\Parameter(in="path", name="id", example=1, description="Id of note"),
  *     @OA\Response(response="200", description="Fetch individual note")
  * )
  */
 Flight::route('GET /admin/user/@id', function($id){
+  Flight::json(Flight::userService()->get_by_id($id));
+});
+/**
+ * @OA\Get(path="/user/user/{id}", tags={"u-user"}, security={{"ApiKeyAuth": {}}},
+ *         summary="Return user by id from API. ",
+ *     @OA\Parameter(in="path", name="id", example=1, description="Id of note"),
+ *     @OA\Response(response="200", description="Fetch individual note")
+ * )
+ */
+Flight::route('GET /user/user/@id', function($id){
   // $headers = getallheaders();
   // print_r($headers['Authorization']);
   // die;
@@ -39,7 +50,7 @@ Flight::route('GET /admin/user/@id', function($id){
   Flight::json(Flight::userService()->get_by_id($id));
 });
 /**
- * @OA\Post(path="/admin/user", tags={"user"}, security={{"ApiKeyAuth": {}}},
+ * @OA\Post(path="/admin/user", tags={"a-user"}, security={{"ApiKeyAuth": {}}},
  *         summary="add user in API. ",
  *   @OA\RequestBody(description="Basic user info", required=true,
  *       @OA\MediaType(mediaType="application/json",
@@ -88,7 +99,7 @@ Flight::route('POST /register', function(){
 });
 
 /**
- * @OA\Put(path="/admin/user/{id}", tags={"user"},
+ * @OA\Put(path="/admin/user/{id}", tags={"a-user"}, security={{"ApiKeyAuth": {}}},
  *         summary="update user from API. ",
  *     @OA\Parameter(@OA\Schema(type="integer"), in="path", allowReserved=true, name="id", example=1,
 *       @OA\MediaType(mediaType="application/json",
@@ -182,7 +193,6 @@ Flight::route('POST /reset', function(){
  */
 Flight::route('GET /user/user', function(){
   Flight::json(Flight::userService()->get_by_id(Flight::get('user')['id']));
-
 });
 });
  ?>

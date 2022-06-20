@@ -11,28 +11,37 @@ private $smtpClient;
   public $dao;
   public function __construct(){
     $this->dao = new userDao();
-    //instanca
     $this->smtpClient = new SMTPClient();
-
   }
+
   public function get_by_id($id){
      $user = $this->dao->get_by_id($id);
-     // $this->smtpClient->send_register_user_token($user);
       return $user;
     }
+
   public function get_all(){
       return $this->dao->get_all_directors();
     }
-  public function get_user_by_name($search, $offset, $limit){//by name
+
+  public function get_user_by_name($search, $offset, $limit){
     if ($search){
       return $this->dao->get_user_by_name($search, $offset, $limit);
     }else{
       return $this->dao->get_all_users($offset, $limit);
     }
   }
+
   public function get_user_by_surname($search, $offset, $limit){
     if ($search){
       return $this->dao->get_user_by_surname($search, $offset, $limit);
+    }else{
+      return $this->dao->get_all_users($offset, $limit);
+    }
+  }
+
+  public function get_user_by_email($search, $offset, $limit){
+    if ($search){
+      return $this->dao->get_user_by_email($search, $offset, $limit);
     }else{
       return $this->dao->get_all_users($offset, $limit);
     }
@@ -41,8 +50,8 @@ private $smtpClient;
        if (!isset($user['name'])) throw new Exception("Name is missing");
        $user['created_at'] = date(Config::DATE_FORMAT);
      }
+
   public function register($user){
-     // if (!isset($user['username'])) throw new Exception("Username field is required");
      try{
        $dao= new userDao();
      $user = $dao->add_user([
@@ -57,14 +66,11 @@ private $smtpClient;
        "created_at" => date(Config::DATE_FORMAT),
        "token" => md5(random_bytes(16))
      ]);
-    //this->dao->commit();
    } catch(\Exception $e){
        throw $e;
      }
      $this->smtpClient->send_register_user_token($user);
     return $user;
-    //    return $db_user;
-
   }
 
   public function confirm($token){
@@ -72,9 +78,7 @@ private $smtpClient;
 
     if (!isset($user['id'])) throw new Exception("Invalid token", 400);
     $this->dao->update_user($user['id'], ["status" => "ACTIVE"]);//, 'token' => NULL
-
     return $user;
-  //  return $db_user;
 
 }
 public function login($user){
@@ -90,7 +94,7 @@ public function login($user){
 ];
 $jwt = JWT::encode($payload, $key, 'HS256');
 
-  // $jwt = \Firebase\JWT\JWT::encode(["id" => $db_user["id"], "r" => $db_user["role"]], Config::JWT_SECRET);
+// $jwt = \Firebase\JWT\JWT::encode(["id" => $db_user["id"], "r" => $db_user["role"]], Config::JWT_SECRET);
 //  za token expire time  $jwt = \Firebase\JWT\JWT::encode(["exp" => (time() + Config::JWT_TOKEN_TIME), "id" => $db_user["id"],  "r" => $db_user["role"]], Config::JWT_SECRET);
 
   return  ["token" => $jwt];
