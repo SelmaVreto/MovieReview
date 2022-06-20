@@ -22,6 +22,20 @@ class movieService extends baseService{
       return $this->dao->get_all($offset, $limit);
     }
   }
+  public function get_movie_by_genre($search, $offset, $limit){
+    if ($search){
+      return $this->dao->get_movie_by_genre($search, $offset, $limit);
+    }else{
+      return $this->dao->get_all($offset, $limit);
+    }
+  }
+  public function get_movie_by_director($search, $offset, $limit){
+    if ($search){
+      return $this->dao->get_movie_by_director($search, $offset, $limit);
+    }else{
+      return $this->dao->get_all($offset, $limit);
+    }
+  }
   public function add($movie){
   // validation of account data
   if (!isset($movie['movie_title'])) throw new Exception("Movie is missing");

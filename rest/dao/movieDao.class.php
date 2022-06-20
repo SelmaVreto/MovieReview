@@ -18,11 +18,15 @@ class movieDao extends baseDao {
   public function get_movie_by_genre($genreID) {
         return $this->query_unique("SELECT * FROM movie WHERE genreID = :genre", ["genre" => $genreID]);
      }
+
   public function get_movie($search, $offset, $limit){
        return $this->query("SELECT *
                             FROM movie
                             WHERE LOWER(movie_title) LIKE CONCAT('%', :movie_title, '%')
                             LIMIT ${limit} OFFSET ${offset}", ["movie_title" => strtolower($search)]);
+     }
+ public function add($movie){
+       return $this->insert("movie", $movie);
      }
 }
 

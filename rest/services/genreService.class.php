@@ -15,7 +15,10 @@ class genreService extends baseService{
       return $this->dao->get_all($offset, $limit);
     }
   }
-
+  public function get_by_id($id){
+     $genre = $this->dao->get_by_id($id);
+      return $genre;
+    }
   public function add($genre){
   // validation of data
   if (!isset($genre['genre_name'])) throw new Exception("Genre is missing");

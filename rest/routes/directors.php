@@ -10,11 +10,9 @@ Flight::route('GET /admin/directors', function(){
   $limit = Flight::query('limit', 10);
   $search = Flight::query('search');
 
-    if ($search){
-      Flight::json(Flight::directorsDao()->get_directors_by_name($search, $offset, $limit));
-    }else{
-      Flight::json(Flight::directorsDao()->get_all_directors());
-    }
+      Flight::json(Flight::directorsService()->get_directors_by_name($search, $offset, $limit));
+      Flight::json(Flight::directorsService()->get_directors_by_surname($search, $offset, $limit));
+
 });
 /**
  * @OA\Get(path="/user/directors", tags={"u-directors"}, security={{"ApiKeyAuth": {}}},
@@ -55,7 +53,7 @@ Flight::route('GET /user/directors/@id', function($id){
 });
 /**
  * @OA\Post(path="/admin/directors", tags={"a-directors"}, security={{"ApiKeyAuth": {}}},
- *         summary="add user in API. ",
+ *         summary="add director in API. ",
  *   @OA\RequestBody(description="Basic user info", required=true,
  *       @OA\MediaType(mediaType="application/json",
  *    			@OA\Schema(
