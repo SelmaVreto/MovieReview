@@ -1,4 +1,7 @@
 <?php
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
 /** SWAGER
  * @OA\Info(title="Movies API Specs", version="0.2", @OA\Contact(email="selma.vreto@stu.ibu.edu.ba", name="Selma Vreto"))
  * @OA\OpenApi(
@@ -42,12 +45,33 @@ Flight::route('GET /admin/user/@id', function($id){
  * )
  */
 Flight::route('GET /user/user/@id', function($id){
-  // $headers = getallheaders();
-  // print_r($headers['Authorization']);
-  // die;
+  $headers = getallheaders();
+  $token = $headers['Authorization'];
+  // $key = 'JWT_SECRET';
+    try {
+      $decoded = (array)JWT::decode($token, new Key("JWT_SECRET", 'HS256'));
+//  $decoded = \Firebase\JWT\JWT::decode($token, new Key("JWT_SECRET", ["HS256"]));
+//  $decoded = \Firebase\JWT\JWT::decode($token, new Key($key, 'HS256'));
+
+    //   print_r($decoded);
+      // die;
+  if ($decoded['id'] == $id){
+    Flight::json(Flight::userService()->get_by_id($id));
+    }else{
+      Flight::json(["message" => "That account is not for you"], 403);
+    }
+  } catch (\Exception $e) {
+   Flight::json(["message" => "wrong token"], 403);
+    die;
+   }
+  //   Flight::json(["message" => $e->getMessage()], 401);
+  // }
+//  print_r($headers['Authorization']);
+
+  // try
   //OVO GORE RADILO
   // if (Flight::get('user')['id'] != $id) throw new Exception("This account is not for you", 403);
-  Flight::json(Flight::userService()->get_by_id($id));
+ //Flight::json(Flight::userService()->get_by_id($id));
 });
 /**
  * @OA\Post(path="/admin/user", tags={"a-user"}, security={{"ApiKeyAuth": {}}},
@@ -151,40 +175,6 @@ Flight::route('POST /login', function(){
   $data = Flight::request()->data->getData();
   Flight::json(Flight::userService()->login($data));
 });
-/**
- * @OA\Post(path="/forgot",tags={"login"},description="send recovery URL to users email address",
-*    @OA\RequestBody(description="objest that needs to be added", required=true,
-*       @OA\MediaType(mediaType="application/json",
-*    			@OA\Schema(
-*    				 @OA\Property(property="email", type="string", example="",	description="" ),
-*          )
-*        )
-*     ),
-*     @OA\Response(response="200", description="Message that recovery link has been sent.")
- * )
- */
-Flight::route('POST /forgot', function(){
-  $data = Flight::request()->data->getData();
-  Flight::userService()->forgot($data);
-  Flight::json(["message"=>"Recovery link has been sent to your email"]);
-});
-/**
- * @OA\Post(path="/reset",tags={"login"},description="reset user password using recovery token",
-*    @OA\RequestBody(description="objest that needs to be added", required=true,
-*       @OA\MediaType(mediaType="application/json",
-*    			@OA\Schema(
-*    				 @OA\Property(property="token", type="string", example="",	description="recovery token" ),
-*    				 @OA\Property(property="password", type="string", example="",	description="new password" ),
-*          )
-*        )
-*     ),
-*     @OA\Response(response="200", description="Message that user has changed password.")
- * )
- */
-Flight::route('POST /reset', function(){
-  $data = Flight::request()->data->getData();
-  Flight::userService()->reset($data);
-  Flight::json(["message"=>"Password has been changed"]);
 
   /**
  * @OA\Get(path="/user/user", tags={"user"}, security={{"ApiKeyAuth": {}}},
@@ -194,5 +184,5 @@ Flight::route('POST /reset', function(){
 Flight::route('GET /user/user', function(){
   Flight::json(Flight::userService()->get_by_id(Flight::get('user')['id']));
 });
-});
+
  ?>

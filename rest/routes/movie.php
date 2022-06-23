@@ -55,7 +55,21 @@ Flight::route('GET /movie/@id', function($MovieID){
   Flight::route('GET /user/movie/@id', function($MovieID){
     Flight::json(Flight::movieService()->get_by_id($MovieID));
 });
-
+/**
+* @OA\Post(path="/admin/movie", tags={"a-movies"}, security={{"ApiKeyAuth": {}}},
+*         summary="add genre in API. ",
+*   @OA\RequestBody(description="Basic user info", required=true,
+*       @OA\MediaType(mediaType="application/json",
+*    			@OA\Schema(
+*    				 @OA\Property(property="movie_title", type="string", example="",	description="name of directors" ),
+*    				 @OA\Property(property="movie_year", type="int", example="",	description="name of directors" ),
+*    				 @OA\Property(property="movie_summary", type="string", example="",	description="name of directors" )
+*          )
+*       )
+*     ),
+*  @OA\Response(response="200", description="Directors that has been added into database .")
+* )
+*/
 Flight::route('POST /admin/movie', function(){
   $data = Flight::request()->data->getData();
   Flight::json(Flight::movieService()->add($data));

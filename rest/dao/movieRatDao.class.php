@@ -19,7 +19,7 @@ public function add($comments){
       return $this->insert("movie_rat_rew", $comments);
     }
 public function delete($id){
-      return $this->query("DELETE FROM movie_rat_rew WHERE id=:id");
+      return $this->query("DELETE FROM movie_rat_rew WHERE id=:id", ["id" => $id]);
     }
   }
 ?>

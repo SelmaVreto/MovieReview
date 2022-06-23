@@ -38,6 +38,7 @@
         <![endif]-->
     </head>
     <body>
+      <body style="display:none;">
 
         <div id="wrapper">
 
@@ -236,6 +237,11 @@
               $('body').show();
             }
           });
+          function doLogout(){
+            window.localStorage.clear();
+            windod.location="index.html";
+
+          }
         </script>
 
     </body>

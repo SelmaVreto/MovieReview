@@ -2,8 +2,8 @@
 require_once dirname(__FILE__).'/../dao/userDao.class.php';
 require_once dirname(__FILE__). '/baseService.class.php';
 require_once dirname(__FILE__).'/../clients/SMTPClient.class.php';
-
-use \Firebase\JWT\JWT;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 class userService extends baseService{
 
@@ -87,35 +87,11 @@ public function login($user){
   if ($db_user['password'] != $user['password']) throw new Exception("Invalid password", 400);
   if ($db_user['email'] != $user['email']) throw new Exception("Invalid email", 400);
   if ($db_user['status'] != 'ACTIVE') throw new Exception("Account needs to be activated", 400);
-  $key = 'example_key';
-  $payload = [
-    'id' => '$db_user["id"]',
-    'role' => '$db_user["role"]'
-];
-$jwt = JWT::encode($payload, $key, 'HS256');
 
-// $jwt = \Firebase\JWT\JWT::encode(["id" => $db_user["id"], "r" => $db_user["role"]], Config::JWT_SECRET);
-//  za token expire time  $jwt = \Firebase\JWT\JWT::encode(["exp" => (time() + Config::JWT_TOKEN_TIME), "id" => $db_user["id"],  "r" => $db_user["role"]], Config::JWT_SECRET);
+ $jwt = JWT::encode(["id" => $db_user["id"], "r" => $db_user["role"]], "JWT_SECRET", 'HS256');
 
   return  ["token" => $jwt];
-  //return $db_user;
-
-
-}
-public function forgot($user){
-  $db_user = $this->dao->get_user_by_email($user['email']);
-
-  $db_user = $this->update($db_user['id'], ['token' => md5(random_bytes(16)), 'token_created_at' => date(Config::DATE_FORMAT)]);
-  $this->smtpClient->send_user_recovery_token($db_user);
-
-}
-public function reset($user){
-  $db_user = $this->dao->get_user_by_token($user['token']);
-  if (!isset($user['id'])) throw new Exception("Invalid token", 400);
-  //if(strtotime(date(Config::DATE_FORMAT)) - strtotime($db_user['token_created_at'])>300) throw new Exception("Invalid token", 400);
-  $this->update($db_user['id'], ['password' => md5($user['password'])]);//, 'token' => NULL
-  return $db_user;
-
+  // return $db_user;
 }
 
 }

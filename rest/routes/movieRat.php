@@ -59,5 +59,24 @@ Flight::route('POST /movieRat', function(){
   Flight::json(Flight::movieRatService()->add($data));
 });
 
-
+/**
+* @OA\Delete(
+*     path="/movieRat/{id}", security={{"ApiKeyAuth": {}}},
+*     description="Delete movie rating",
+*     tags={"a-movieRat"},
+*     @OA\Parameter(in="path", name="id", example=1, description="movieRat ID"),
+*     @OA\Response(
+*         response=200,
+*         description="Note deleted"
+*     ),
+*     @OA\Response(
+*         response=500,
+*         description="Error"
+*     )
+* )
+*/
+Flight::route('DELETE /movieRat/@id', function($id){
+  Flight::movieRatService()->delete($id);
+  Flight::json(["message" => "deleted"]);
+});
  ?>
