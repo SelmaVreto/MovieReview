@@ -45,33 +45,7 @@ Flight::route('GET /admin/user/@id', function($id){
  * )
  */
 Flight::route('GET /user/user/@id', function($id){
-  $headers = getallheaders();
-  $token = $headers['Authorization'];
-  // $key = 'JWT_SECRET';
-    try {
-      $decoded = (array)JWT::decode($token, new Key("JWT_SECRET", 'HS256'));
-//  $decoded = \Firebase\JWT\JWT::decode($token, new Key("JWT_SECRET", ["HS256"]));
-//  $decoded = \Firebase\JWT\JWT::decode($token, new Key($key, 'HS256'));
-
-    //   print_r($decoded);
-      // die;
-  if ($decoded['id'] == $id){
-    Flight::json(Flight::userService()->get_by_id($id));
-    }else{
-      Flight::json(["message" => "That account is not for you"], 403);
-    }
-  } catch (\Exception $e) {
-   Flight::json(["message" => "wrong token"], 403);
-    die;
-   }
-  //   Flight::json(["message" => $e->getMessage()], 401);
-  // }
-//  print_r($headers['Authorization']);
-
-  // try
-  //OVO GORE RADILO
-  // if (Flight::get('user')['id'] != $id) throw new Exception("This account is not for you", 403);
- //Flight::json(Flight::userService()->get_by_id($id));
+Flight::json(Flight::userService()->get_by_id($id));
 });
 /**
  * @OA\Post(path="/admin/user", tags={"a-user"}, security={{"ApiKeyAuth": {}}},
