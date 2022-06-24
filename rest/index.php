@@ -83,7 +83,7 @@ require_once dirname(__FILE__).'/routes/directors.php';
 require_once dirname(__FILE__).'/routes/movie.php';
 require_once dirname(__FILE__).'/routes/user.php';
 require_once dirname(__FILE__).'/routes/movieRat.php';
-require_once dirname(__FILE__).'/routes/middleware.php';
+
 
 Flight::start();
 

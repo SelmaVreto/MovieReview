@@ -48,7 +48,9 @@
                                         <input id="password" class="form-control" placeholder="Password" name="password" type="password" value="">
                                     </div>
                                     <!-- Change this to a button or input when using this as a form -->
-                                    <a onclick="doLogin();" class="btn btn-lg btn-success btn-block">Login</a>
+                                    <!-- <a button id="login-link" onclick="doLogin();" class="btn btn-lg btn-success btn-block">Login</a> -->
+                                    <a button href="index.html" class="btn btn-lg btn-success btn-block">Login</a>
+
                                 </fieldset>
                             </form>
                         </div>
@@ -70,24 +72,19 @@
         <script src="./assets/js/startmin.js"></script>-->
 
         <script type="text/javascript">
-        $(function){
-          if(window.localStorage.getItem("token")){
-            window.location="index.html";
-          }else{
-            $('body').show();
-          }
-        }
           function doLogin() {
-            var login_info={
-              "email" : $("#email").val(),
-             "password" :  $("#password").val()
-           };
-           $.post("http://localhost/movies/rest/user/login",login_info).done(function(data){
-            window.localStorage.setItem("token", data.token);
-             window.location="index.html";
-           }).fail(function(error){
-             alert("incorrect email or password");
-           });
+            var login_info = {
+           "email" : $("#email").val(),
+           "password" : $("#password").val()
+         };
+         $("#login-link").prop('disabled',true);
+         $.post( "http://localhost/movies/rest/login", login_info).done(function( data ) {
+           window.location = "index.html";
+         }).fail(function(error) {
+           $("#login-link").prop('disabled',false);
+           alert( error.responseJSON.message );
+         });
+
             }
               </script>
     </body>
