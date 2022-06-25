@@ -28,7 +28,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body>
+      <body style="display:none;">
         <div id="wrapper">
             <!-- Navigation -->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -259,6 +259,11 @@
 
            // run app
            app.run();
+           if (!window.localStorage.getItem("token")){
+              window.location = "login.html";
+            }else{
+              $('body').show();
+            }
          });
        </script>
 
