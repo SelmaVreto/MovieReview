@@ -14,10 +14,10 @@ require_once dirname(__FILE__).'/dao/userDao.class.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-/* error handling for our API */
+/* error handling for our API
 Flight::map('error', function(Exception $ex){
   Flight::json(["message" => $ex->getMessage()], $ex->getCode() ? $ex->getCode() : 500);
-});
+});*/
 
 /* utility function for reading query parameters from URL */
 Flight::map('query', function($name, $default_value = NULL){
@@ -32,7 +32,7 @@ Flight::route('/*', function(){
   //return TRUE;
   //perform JWT decode
   $path = Flight::request()->url;
-  if ($path == '/login' || $path == '/docs.json') return TRUE; // exclude login route from middleware
+  if ($path == '/login' || $path == '/docs.json' || $path == '/register') return TRUE; // exclude login route from middleware
 
   $headers = getallheaders();
   if (@!$headers['Authorization']){

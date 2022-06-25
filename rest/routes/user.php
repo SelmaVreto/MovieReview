@@ -73,7 +73,7 @@ Flight::route('POST /admin/user', function(){
 });
 
 /**
- * @OA\Post(path="/register",tags={"login"}, security={{"ApiKeyAuth": {}}},
+ * @OA\Post(path="/register",tags={"login"},
  *         summary="register user in API. ",
 *    @OA\RequestBody(description="objest that needs to be added", required=true,
 *       @OA\MediaType(mediaType="application/json",
