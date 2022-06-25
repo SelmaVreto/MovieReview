@@ -109,7 +109,7 @@
                             <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <li><a href="#" onclick="doLogout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -265,6 +265,10 @@
               $('body').show();
             }
          });
+         function doLogout(){
+           window.localStorage.clear();
+           window.location = "login.html";
+         }
        </script>
 
                    </body>
