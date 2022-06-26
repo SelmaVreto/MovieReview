@@ -136,6 +136,9 @@
                                 <a href="#tables"><i class="fa fa-table fa-fw"></i> Tables</a>
                             </li>
                             <li>
+                                <a href="#movies"><i class="fa fa-table fa-fw"></i> Movies</a>
+                            </li>
+                            <li>
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
@@ -226,6 +229,7 @@
             <main id="jqueryspapp" role="main">
                    <section id="dashboard" data-load="d.html" ></section>
                    <section id="tables" data-load="tab.html" ></section>
+                   <section id="movies" data-load="movies.html" ></section>
                    <section id="error_404"><h1>Page not found</h1></section>
 
                  </main>
@@ -255,7 +259,7 @@
 
            app.route({view: 'dashboard', load: 'd.html' });
            app.route({view: 'tables', load: 'tab.html' });
-
+           app.route({view: 'movies', load: 'movies.html' });
 
            // run app
            app.run();

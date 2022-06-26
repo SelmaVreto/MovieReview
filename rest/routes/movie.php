@@ -18,12 +18,12 @@ Flight::route('GET /admin/movie', function(){
 
 });
 /**
- * @OA\Get(path="/user/movie", tags={"u-movies"}, security={{"ApiKeyAuth": {}}},
+ * @OA\Get(path="/movie", tags={"u-movies"},
  *         summary="Return all movie from API. ",
  *         @OA\Response( response=200, description="List of notes.")
  * )
  */
-Flight::route('GET /user/movie', function(){
+Flight::route('GET /movie', function(){
   $offset = Flight::query('offset', 0);
   $limit = Flight::query('limit', 10);
 

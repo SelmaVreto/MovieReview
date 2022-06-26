@@ -21,6 +21,8 @@
         <!-- Custom Fonts -->
         <link href="./assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+        <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" type="text/css">
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -72,7 +74,7 @@
                             <h3 class="panel-title">Register Form</h3>
                         </div>
                         <div class="panel-body">
-                            <form role="form">
+                            <form id="register-form" role="form">
                                 <fieldset>
                                   <div class="form-group">
                                       <input id="register-name" class="form-control" placeholder="Name" name="email" type="text" autofocus>
@@ -108,6 +110,7 @@
 
         <!-- Bootstrap Core JavaScript -->
         <script src="./assets/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 
         <script type="text/javascript">
@@ -137,17 +140,19 @@
 
       };
      $("#register-link").prop('disabled',true);
-      $.post( "http://localhost/movies/rest/register", register_info).done(function( data ) {
+      $.post( "rest/register", register_info).done(function( data ) {
         console.log(data);
         alert( "success register" );
         $("#register-form-container").addClass("hidden");
         $("#register-form-container").removeClass("hidden");
         $("#register-form-alert .alert").html(data.message);
-        alert( "success" );
+        alert("success");
 
       }).fail(function(error) {
       $("#register-link").prop('disabled',false);
-        alert( "greska" );
+      alert("error");
+
+
       });
          }
 
@@ -157,14 +162,14 @@
      "password" : $("#password").val()
    };
   $("#login-link").prop('disabled',true);
-   $.post( "http://localhost/movies/rest/login", login_info).done(function( data ) {
+   $.post( "rest/login", login_info).done(function( data ) {
      window.localStorage.setItem("token", data.token);
 
     window.location = "_index.html";
    }).fail(function(error) {
    $("#login-link").prop('disabled',false);
-     alert( "gresa" );
-   });
+ alert("invalid email or password");
+ });
       }
                </script>
 
