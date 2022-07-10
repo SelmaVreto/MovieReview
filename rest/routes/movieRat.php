@@ -42,12 +42,14 @@ Flight::route('GET /user/movieRat/@id', function($MovieID){
   Flight::json(Flight::movieRatService()->get_comments_by_movieID($MovieID));
 });
 /**
- * @OA\Post(path="/admin/movieRat", tags={"a-movieRat"}, security={{"ApiKeyAuth": {}}},
+ * @OA\Post(path="/movieRat", tags={"a-movieRat"},
  *         summary="add genre in API. ",
- *   @OA\RequestBody(description="Basic user info", required=true,
+ *   @OA\RequestBody(description="add comments", required=true,
  *       @OA\MediaType(mediaType="application/json",
  *    			@OA\Schema(
-*    				 @OA\Property(property="comm'", type="string", example="",	description="name of directors" )
+*    				 @OA\Property(property="commments", type="string", example="",	description="comments" ),
+*    				 @OA\Property(property="userID", type="int", example="",	description="comments" ),
+*    				 @OA\Property(property="movieID", type="int", example="",	description="comments" ),
  *          )
  *       )
  *     ),

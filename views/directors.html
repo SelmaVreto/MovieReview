@@ -15,7 +15,7 @@
 
 </head>
 
-<body id="page-top">
+<body>
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -34,8 +34,6 @@
 				<ul class="nav navbar-nav">
 					<li><a href="_index.html" class="fa-solid fa-house">Home</a></li>
           <li><a href="directors.html" class="nowPlaying">Directors</a></li>
-
-					<li class="admin-stuff"><a href="admin.html" class="nowPlaying">Admin</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Genres<span class="caret"></span></a>
 						<ul class="dropdown-menu">
@@ -99,6 +97,7 @@
 		</div>
 	</div>
 	</div>
+
          <script type="text/javascript">
            $(document).ready(function() {
              var app = $.jQuerySPApp({defaultView  : "login.html"}); // initialize
@@ -106,17 +105,15 @@
                   if (!window.localStorage.getItem("token")){
                      window.location = "login.html";
                    }else{
-										 var user_info = parse_jwt(window.localStorage.getItem("token"));
-										 if (user_info.rl != "ADMIN"){
-												$(".admin-stuff").remove();
-											}
-											localStorage.setItem("id", user_info.id);
-											$('body').show();
+                     $('body').show();
                    }
                 });
                 function doLogout(){
                   window.localStorage.clear();
                   window.location = "login.html";
+                }
+                function seeUser(){
+                  window.location = "user.html";
                 }
               </script>
 	<!-- JQUERY -->

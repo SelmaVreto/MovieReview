@@ -33,7 +33,7 @@ Flight::route('/*', function(){
   //return TRUE;
   //perform JWT decode
   $path = Flight::request()->url;
-  if ($path == '/login' || $path == '/docs.json' || $path == '/register' || $path == '/movie') return TRUE; // exclude login route from middleware
+  if ($path == '/login' || $path == '/docs.json' || $path == '/register' || $path == '/movie' || $path == '/movieRat') return TRUE; // exclude login route from middleware
 
   $headers = getallheaders();
   if (@!$headers['Authorization']){
