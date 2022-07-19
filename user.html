@@ -12,7 +12,102 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Carrois+Gothic+SC" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/6a627c054b.js" crossorigin="anonymous"></script>
+	    <style>
+	* {
+	    margin: 0;
+	    padding: 0
+	}
 
+	body {
+	    background-color: #9966FF
+	}
+
+	.card {
+	    width: 700px;
+			height: 400px;
+	    background-color: #efefef;
+	    border: none;
+	    cursor: pointer;
+	    transition: all 0.5s;
+			margin-left: auto;
+      margin-right: auto;
+	}
+
+	.image img {
+	    transition: all 0.5s
+	}
+
+	.card:hover .image img {
+	    transform: scale(1.5)
+	}
+
+	.btn {
+	    height: 140px;
+	    width: 140px;
+	    border-radius: 50%
+	}
+
+	.name {
+	    font-size: 22px;
+	    font-weight: bold
+	}
+
+	.idd {
+	    font-size: 24px;
+	    font-weight: 600
+
+	}
+
+	.idd1 {
+	    font-size: 22px
+	}
+
+	.number {
+	    font-size: 22px;
+	    font-weight: bold
+	}
+
+	.follow {
+	    font-size: 12px;
+	    font-weight: 500;
+	    color: #444444
+	}
+
+	.btn1 {
+	    height: 40px;
+	    width: 150px;
+	    border: none;
+	    background-color: #000;
+	    color: #8850f6;
+	    font-size: 15px;
+
+	}
+
+	.text span {
+	    font-size: 23px;
+	    color: #545454;
+	    font-weight: 500
+	}
+
+	.icons i {
+	    font-size: 19px
+	}
+
+	hr .new1 {
+	    border: 1px solid
+	}
+
+	.join {
+	    font-size: 24px;
+	    color: #a0a0a0;
+	    font-weight: bold
+	}
+
+	.date {
+	    background-color: #ccc
+	}
+
+	    </style>
 </head>
 
 <body>
@@ -82,22 +177,24 @@
 
 	</nav>
 
-
-	<!-- Displaying the movies -->
-	<div id="movie-display">
-	<div class="container">
-		<div class="row">
-			<div class="genreLabel">
-				<h1 id="movieGenreLabel"></h1></div>
-			<!-- We need the h1 to change accordingly depending on what was clicked. -->
-			<div id="movie-grid">
-
-				<!-- Jquery get us the movie posters! Need a place to put the poster images -->
+	<div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+		<div class="card p-4"> <div class=" image d-flex flex-column justify-content-center align-items-center">
+			<button class="btn btn-secondary">
+				<img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
+			</button>
+			<span class="name mt-3">Selma Vreto</span>
+			<br></br>
+			<span class="idd">@selma</span>
+			<div class="d-flex flex-row justify-content-center align-items-center gap-2">
 			</div>
+						<br></br>
+									<br></br>
+			<div class="text mt-3">
+				<span>Selma Vreto is a creator of minimalistic x bold graphics and digital artwork.<br><br> Artist/ Creative Director by Day #NFT minting@ with FND night. </span> </div> <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> <span><i class="fa fa-twitter"></i></span> <span><i class="fa fa-facebook-f"></i></span> <span><i class="fa fa-instagram"></i></span>
+	</div>
+	</div>
+	</div>
 		</div>
-	</div>
-	</div>
-
          <script type="text/javascript">
            $(document).ready(function() {
              var app = $.jQuerySPApp({defaultView  : "login.html"}); // initialize
