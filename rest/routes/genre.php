@@ -1,8 +1,8 @@
 <?php
 /**
  * @OA\Get(path="/admin/genre", tags={"a-genre"}, security={{"ApiKeyAuth": {}}},
- *         summary="Return all movie from API. ",
- *         @OA\Response( response=200, description="List of notes.")
+ *         summary="Return all genres from API. ",
+ *         @OA\Response( response=200, description="List of genres.")
  * )
  */
 Flight::route('GET /admin/genre', function(){
@@ -14,8 +14,8 @@ Flight::route('GET /admin/genre', function(){
 });
 /**
  * @OA\Get(path="/user/genre", tags={"u-genre"}, security={{"ApiKeyAuth": {}}},
- *         summary="Return all movie from API. ",
- *         @OA\Response( response=200, description="List of notes.")
+ *         summary="Return all genres from API. ",
+ *         @OA\Response( response=200, description="List of genre.")
  * )
  */
 Flight::route('GET /user/genre', function(){
@@ -27,9 +27,9 @@ Flight::route('GET /user/genre', function(){
 });
 /**
  * @OA\Get(path="/admin/genre/{id}", tags={"a-genre"}, security={{"ApiKeyAuth": {}}},
- *         summary="Return admin genre by id from API. ",
- *     @OA\Parameter(in="path", name="id", example=1, description="Id of note"),
- *     @OA\Response(response="200", description="Fetch individual note")
+ *         summary="Return genre by id from API. ",
+ *     @OA\Parameter(in="path", name="id", example=1, description="Id of genre"),
+ *     @OA\Response(response="200", description="One genre.")
  * )
  */
 Flight::route('GET /admin/genre/@id', function($id){
@@ -37,9 +37,9 @@ Flight::route('GET /admin/genre/@id', function($id){
 });
 /**
  * @OA\Get(path="/user/genre/{id}", tags={"u-genre"}, security={{"ApiKeyAuth": {}}},
- *         summary="Return user genre by id from API. ",
- *     @OA\Parameter(in="path", name="id", example=1, description="Id of note"),
- *     @OA\Response(response="200", description="Fetch individual note")
+ *         summary="Return genre by id from API. ",
+ *     @OA\Parameter(in="path", name="id", example=1, description="Id of genre"),
+ *     @OA\Response(response="200", description="One genre.")
  * )
  */
 Flight::route('GET /user/genre/@id', function($id){
@@ -47,15 +47,15 @@ Flight::route('GET /user/genre/@id', function($id){
 });
 /**
  * @OA\Post(path="/admin/genre", tags={"a-genre"}, security={{"ApiKeyAuth": {}}},
- *         summary="add genre in API. ",
- *   @OA\RequestBody(description="Basic user info", required=true,
+ *         summary="Add genre in API. ",
+ *   @OA\RequestBody(description="Basic genre info", required=true,
  *       @OA\MediaType(mediaType="application/json",
  *    			@OA\Schema(
-*    				 @OA\Property(property="genre_name", type="string", example="",	description="name of directors" )
+*    				 @OA\Property(property="genre_name", type="string", example="",	description="name of genre" )
  *          )
  *       )
  *     ),
- *  @OA\Response(response="200", description="Directors that has been added into database .")
+ *  @OA\Response(response="200", description="Genre that has been added into database .")
  * )
  */
 Flight::route('POST /admin/genre', function(){

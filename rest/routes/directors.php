@@ -1,8 +1,8 @@
 <?php
 /**
  * @OA\Get(path="/admin/directors", tags={"a-directors"}, security={{"ApiKeyAuth": {}}},
- *         summary="Return all admin directors notes from the API. ",
- *         @OA\Response( response=200, description="List of notes.")
+ *         summary="Return all directors  from the API. ",
+ *         @OA\Response( response=200, description="List of directors.")
  * )
  */
 Flight::route('GET /admin/directors', function(){
@@ -11,15 +11,15 @@ Flight::route('GET /admin/directors', function(){
   $search = Flight::query('search');
 
       Flight::json(Flight::directorsService()->get_directors_by_name($search, $offset, $limit));
-      Flight::json(Flight::directorsService()->get_directors_by_surname($search, $offset, $limit));
 
 });
 /**
  * @OA\Get(path="/user/directors", tags={"u-directors"}, security={{"ApiKeyAuth": {}}},
- *         summary="Return all user directors notes from the API. ",
- *         @OA\Response( response=200, description="List of notes.")
+ *         summary="Return all directors  from the API. ",
+ *         @OA\Response( response=200, description="List of directors.")
  * )
  */
+
 Flight::route('GET /user/directors', function(){
   $offset = Flight::query('offset', 0);
   $limit = Flight::query('limit', 10);
@@ -33,9 +33,9 @@ Flight::route('GET /user/directors', function(){
 });
 /**
  * @OA\Get(path="/admin/directors/{id}", tags={"a-directors"}, security={{"ApiKeyAuth": {}}},
- *         summary="Return admin directors by id from API. ",
- *     @OA\Parameter(in="path", name="id", example=1, description="Id of note"),
- *     @OA\Response(response="200", description="Fetch individual note")
+ *         summary="Return directors by id from API. ",
+ *     @OA\Parameter(in="path", name="id", example=1, description="Id of director"),
+ *     @OA\Response(response="200", description="One director.")
  * )
  */
 Flight::route('GET /admin/directors/@id', function($id){
@@ -43,9 +43,9 @@ Flight::route('GET /admin/directors/@id', function($id){
 });
 /**
  * @OA\Get(path="/user/directors/{id}", tags={"u-directors"}, security={{"ApiKeyAuth": {}}},
- *         summary="Return user directors by id from API. ",
- *     @OA\Parameter(in="path", name="id", example=1, description="Id of note"),
- *     @OA\Response(response="200", description="Fetch individual note")
+ *         summary="Return directors by id from API. ",
+ *     @OA\Parameter(in="path", name="id", example=1, description="Id of director"),
+ *     @OA\Response(response="200", description="One director.")
  * )
  */
 Flight::route('GET /user/directors/@id', function($id){
@@ -53,7 +53,7 @@ Flight::route('GET /user/directors/@id', function($id){
 });
 /**
  * @OA\Post(path="/admin/directors", tags={"a-directors"}, security={{"ApiKeyAuth": {}}},
- *         summary="add director in API. ",
+ *         summary="Add director in API.",
  *   @OA\RequestBody(description="Basic user info", required=true,
  *       @OA\MediaType(mediaType="application/json",
  *    			@OA\Schema(
