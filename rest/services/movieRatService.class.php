@@ -14,7 +14,7 @@ class movieRatService extends baseService{
         return $this->dao->get_comments_by_movieID($MovieID);
       }
   public function add($movie_rat_rew){
-      if (!isset($movie_rat_rew['comments'])) throw new Exception("comment is missing");
+      if (!isset($movie_rat_rew['comments'])) throw new Exception("comments is missing");
       return parent::add($movie_rat_rew);
     }
     public function delete($id){

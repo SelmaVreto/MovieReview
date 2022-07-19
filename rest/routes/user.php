@@ -10,12 +10,12 @@ use Firebase\JWT\Key;
  * ),
  * @OA\SecurityScheme(securityScheme="ApiKeyAuth", type="apiKey", in="header", name="Authorization", name="Authorization" )
  */
-/**
- * @OA\Get(path="/admin/user", tags={"a-user"}, security={{"ApiKeyAuth": {}}},
- *         summary="Return all user notes from the API. ",
- *         @OA\Response( response=200, description="List of notes.")
- * )
- */
+ /**
+  * @OA\Get(path="/admin/user", tags={"a-user"}, security={{"ApiKeyAuth": {}}},
+  *         summary="Return all user from API. ",
+  *         @OA\Response( response=200, description="List of all users")
+  * )
+  */
 Flight::route('GET /admin/user', function(){
   $offset = Flight::query('offset', 0);
   $limit = Flight::query('limit', 10);
@@ -23,53 +23,19 @@ Flight::route('GET /admin/user', function(){
   $search = Flight::query('search');
 
    Flight::json(Flight::userService()->get_user_by_name($search, $offset, $limit));
-   Flight::json(Flight::userService()->get_user_by_surname($search, $offset, $limit));
-   Flight::json(Flight::userService()->get_user_by_email($search, $offset, $limit));
+   // Flight::json(Flight::userService()->get_user_by_surname($search, $offset, $limit));
+   // Flight::json(Flight::userService()->get_user_by_email($search, $offset, $limit));
 
 });
 /**
  * @OA\Get(path="/admin/user/{id}", tags={"a-user"}, security={{"ApiKeyAuth": {}}},
- *         summary="Return user by id from API. ",
- *     @OA\Parameter(in="path", name="id", example=1, description="Id of note"),
- *     @OA\Response(response="200", description="Fetch individual note")
+ *         summary="Return user from API.",
+ *     @OA\Parameter(in="path", name="id", example=1, description="One user"),
+ *     @OA\Response(response="200", description="One movie.")
  * )
  */
 Flight::route('GET /admin/user/@id', function($id){
   Flight::json(Flight::userService()->get_by_id($id));
-});
-/**
- * @OA\Get(path="/user/user/{id}", tags={"u-user"}, security={{"ApiKeyAuth": {}}},
- *         summary="Return user by id from API. ",
- *     @OA\Parameter(in="path", name="id", example=1, description="Id of note"),
- *     @OA\Response(response="200", description="Fetch individual note")
- * )
- */
-Flight::route('GET /user/user/@id', function($id){
-Flight::json(Flight::userService()->get_by_id($id));
-});
-/**
- * @OA\Post(path="/admin/user", tags={"a-user"}, security={{"ApiKeyAuth": {}}},
- *         summary="add user in API. ",
- *   @OA\RequestBody(description="Basic user info", required=true,
- *       @OA\MediaType(mediaType="application/json",
- *    			@OA\Schema(
-*    				 @OA\Property(property="name", type="string", example="Amila",	description="name of user" ),
-*    				 @OA\Property(property="surname", type="string", example="Smajlovic",	description="surname of user" ),
-*    				 @OA\Property(property="username", type="string", example="AmilaS",	description="username of user" ),
-*    				 @OA\Property(property="email", type="string", example="amilica@gmail.com",	description="email of user" ),
-*    				 @OA\Property(property="status", type="string", example="PANDING"),
-*    				 @OA\Property(property="password", type="string", example="amilicaamilica",	description="password of user" ),
-*    				 @OA\Property(property="role", type="string", example="user",	description="user or admin" )
- *          )
- *       )
- *     ),
- *  @OA\Response(response="200", description="Account that has been added into database .")
- * )
- */
-
-Flight::route('POST /admin/user', function(){
-  $data = Flight::request()->data->getData();
-  Flight::json(Flight::userService()->add($data));
 });
 
 /**
@@ -151,7 +117,7 @@ Flight::route('POST /login', function(){
 });
 
   /**
- * @OA\Get(path="/user/user", tags={"user"}, security={{"ApiKeyAuth": {}}},
+ * @OA\Get(path="/user/user", tags={"u-user"}, security={{"ApiKeyAuth": {}}},
  *     @OA\Response(response="200", description="Fetch user account")
  * )
  */

@@ -30,10 +30,8 @@ Flight::map('query', function($name, $default_value = NULL){
 
 // middleware method for login
 Flight::route('/*', function(){
-  //return TRUE;
-  //perform JWT decode
   $path = Flight::request()->url;
-  if ($path == '/login' || $path == '/docs.json' || $path == '/register' || $path == '/movie' || $path == '/movieRat') return TRUE; // exclude login route from middleware
+  if ($path == '/login' || $path == '/docs.json' || $path == '/register') return TRUE; // exclude login route from middleware
 
   $headers = getallheaders();
   if (@!$headers['Authorization']){
@@ -73,10 +71,10 @@ Flight::route('GET /docs.json', function(){
 });
 
 /* utility function for getting header parameters */
-// Flight::map('header', function($name){
-//   $headers = getallheaders();
-//   return @$headers[$name];
-// });
+Flight::map('header', function($name){
+  $headers = getallheaders();
+  return @$headers[$name];
+});
 
 /* include all routes */
 require_once dirname(__FILE__).'/routes/genre.php';
