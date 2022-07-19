@@ -7,8 +7,8 @@
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 
 	<link href="https://fonts.googleapis.com/css?family=Carrois+Gothic+SC" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/6a627c054b.js" crossorigin="anonymous"></script>
@@ -86,21 +86,7 @@
 	</nav>
 
 
-	<!-- Displaying the movies -->
-	<div id="movie-display">
-	<div class="container">
-		<div class="row">
-			<div class="genreLabel">
-				<h1 id="movieGenreLabel"></h1></div>
-			<!-- We need the h1 to change accordingly depending on what was clicked. -->
-			<div id="movie-grid">
-
-				<!-- Jquery get us the movie posters! Need a place to put the poster images -->
-			</div>
-		</div>
-	</div>
-	</div>
-         <script type="text/javascript">
+  <script type="text/javascript">
            $(document).ready(function() {
              var app = $.jQuerySPApp({defaultView  : "login.html"}); // initialize
              app.run();
@@ -123,6 +109,10 @@
 								window.location = "user.html";
 							}
               </script>
+							<script src="./assets/js/jquery-3.6.0.min.js"></script>
+
+<script src="./assets/js/carousel.js"></script>
+<script src="./assets/js/bootstrap.bundle.min.js"></script>
 	<!-- JQUERY -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
@@ -133,6 +123,8 @@
 	<script type="text/javascript" src="assets/javascript/app.js"></script>
 	<!-- <script type="text/javascript" src="assets/javascript/app-1.js"></script>
 	<script type="text/javascript" src="assets/javascript/app-2.js"></script> -->
+
+	<!-- KOMENTARI -->
 	<div class="row">
 					<div class="col-lg-6">
 							<form role="form" id="komentari">
@@ -163,9 +155,5 @@
 	</div>
 	<!-- /.container-fluid -->
 </div>
-	<footer>
-
-</footer>
 </body>
-
 </html>
