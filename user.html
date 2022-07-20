@@ -4,6 +4,7 @@
 <head>
 
 	<title>Movie App</title>
+	<link rel="icon" type="image/x-icon" href="https://img.icons8.com/officel/344/documentary.png">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -106,7 +107,16 @@
 	.date {
 	    background-color: #ccc
 	}
-
+	.logo img {
+		height: 30px;
+	  width: 30px;
+	}
+	.nowPlaying{
+	margin-top: 15px;
+	}
+	.aa{
+	margin-top: 10px;
+	}
 	    </style>
 </head>
 
@@ -127,28 +137,26 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="_index.html" class="fa-solid fa-house">Home</a></li>
+
+					<li><a href="_index.html" class="logo"><img src="https://img.icons8.com/officel/344/documentary.png"></a></li>
           <li><a href="directors.html" class="nowPlaying">Directors</a></li>
+
+					<li class="admin-stuff"><a href="admin.html" class="nowPlaying">Admin</a></li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Genres<span class="caret"></span></a>
+						<a href="#" class="nowPlaying" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Genres<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#" class="action" id="action">Action</a></li>
-							<li><a href="#" class="animation" id="animation">Animation</a></li>
+							<li><a href="#" class="action" id="action">Acttion</a></li>
 							<li><a href="#" class="comedy" id="comedy">Comedy</a></li>
-							<li><a href="#" class="drama" id="drama">Drama</a></li>
-							<li><a href="#" class="family" id="family">Family</a></li>
-							<li><a href="#" class="fantasy" id="fantasy">Fantasy</a></li>
 							<li><a href="#" class="horror" id="horror">Horror</a></li>
-							<li><a href="#" class="music" id="music">Music</a></li>
-							<li><a href="#" class="romance" id="romance">Romance</a></li>
-							<li><a href="#" class="scifi" id="scifi">Science Fiction</a></li>
-							<li><a href="#" class="thriller" id="thriller">Thriller</a></li>
+							<li><a href="#" class="music" id="music">Cartoon</a></li>
+							<li><a href="#" class="romance" id="romance">History</a></li>
+
 						</ul>
 						</li>
 						</ul>
 
 						<ul class="nav navbar-nav navbar-right">
-							<form class="navbar-form navbar-right searchForm">
+							<form class="navbar-form navbar-right nowPlaying">
 								<div class="form-group">
 									<input id="searchMovieNeWindowxfxInput" type="text" class="form-control" placeholder="Search movies">
 								</div>
@@ -157,9 +165,9 @@
 									<i class="glyphicon glyphicon-search"></i>
 								</button>
 							</form>
-              <li class="dropdown">
+              <li class="aa">
                   <a class="navbar-form navbar-right" data-toggle="dropdown" href="#">
-                      <i class="fa fa-user fa-fw"></i> Menu <b class="form"></b>
+                      <i class="fa fa-user fa-fw"></i>Menu<b class="form"></b>
                   </a>
                   <ul class="dropdown-menu dropdown-user">
                       <li><a href="#" onclick="seeUser()"><i class="fa fa-user fa-fw"></i> User Profile</a>
