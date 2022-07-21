@@ -17,6 +17,19 @@ Flight::route('GET /admin/movie', function(){
 
 });
 /**
+ * @OA\Get(path="/movie", tags={"all-movies"},
+ *         summary="Return all movies from API. ",
+ *         @OA\Response( response=200, description="List of movies.")
+ * )
+ */
+Flight::route('GET /movie', function(){
+  $offset = Flight::query('offset', 0);
+  $limit = Flight::query('limit', 10);
+  $search = Flight::query('search');
+
+   Flight::json(Flight::movieService()->get_movie($search, $offset, $limit));
+});
+/**
  * @OA\Get(path="/user/movie", tags={"u-movies"}, security={{"ApiKeyAuth": {}}},
  *         summary="Return all movies from API. ",
  *         @OA\Response( response=200, description="List of movies.")
@@ -44,6 +57,16 @@ Flight::route('GET /user/movie', function(){
 Flight::route('GET /admin/movie/@id', function($MovieID){
   Flight::json(Flight::movieService()->get_by_id($MovieID));
   });
+  /**
+   * @OA\Get(path="/movie/{id}", tags={"all-movies"},
+   *         summary="Return muvie by id from API. ",
+   *     @OA\Parameter(in="path", name="id", example=1, description="Id of movie"),
+   *     @OA\Response(response="200", description="One movie.")
+   * )
+   */
+  Flight::route('GET /movie/@id', function($MovieID){
+    Flight::json(Flight::movieService()->get_by_id($MovieID));
+    });
   /**
    * @OA\Get(path="/user/movie/{id}", tags={"u-movies"}, security={{"ApiKeyAuth": {}}},
    *         summary="Return muvie by id from API. ",
