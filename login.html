@@ -128,7 +128,7 @@
                 </div>
             </div>
         </div>
-        <button class="button button1">homepage</button>
+        <button class="button button1" onclick="homepage()">homepage</button>
 
         <!-- jQuery -->
         <script src="./assets/js/jquery.min.js"></script>
@@ -146,7 +146,6 @@
              $('body').show();
            }
          });
-
          function showRegisterForm(){
            $("#login-form-container").addClass("hidden");
            $("#register-form-container").removeClass("hidden");
@@ -195,6 +194,9 @@
    $("#login-link").prop('disabled',false);
  alert("invalid email or password");
  });
+      }
+      function homepage(){
+        window.location = "homepage.html";
       }
                </script>
 
