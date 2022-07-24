@@ -31,23 +31,17 @@ background: LightBlue ;
 color: black;
 margin-left: 100px;
 margin-top: 7px;
-
 }
-.vaa{
-background: LightBlue ;
-color: black;
-margin-top: 7px;
 
-}
 .page{
 	background-color: #37716c;
 
 }
 .filterDiv {
   float: left;
-  background-color: #2196F3;
-  color: #ffffff;
-  width: 100px;
+  background-color: LightBlue;
+  color: black;
+  width: auto;
   line-height: 100px;
   text-align: center;
   margin: 2px;
@@ -63,12 +57,27 @@ margin-top: 7px;
   overflow: hidden;
 }
 
-
+/* Style the buttons */
 .btn {
-  background-color: #7cafab;
+  border: none;
+  outline: none;
+  padding: 12px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
 }
-.b{
-	color: black;
+
+.btn:hover {
+  background-color: #ddd;
+}
+
+.btn.active {
+  background-color: #666;
+  color: white;
+}
+.logo img {
+	height: 30px;
+  width: 30px;
+	margin-top: 7px;
 }
 	</style>
 </head>
@@ -90,70 +99,81 @@ margin-top: 7px;
 							<button class="v" onclick="doLogout()" >Register</button>
 	          </li>
 						<li class="nav-item">
-							<button class="va" onclick="zanr()" >Genres</button>
+							<button class="va" onclick="red()" >Directors</button>
 						</li>
-						<li class="nav-item">
-							<button class="vaa" onclick="red()" >Directors</button>
-						</li>
+						<li><a href="homepage.html" class="logo"><img src="https://img.icons8.com/cute-clipart/344/circled-left.png"></a></li>
+
 	        </ul>
 	      </div>
 	    </div>
-			<form class="d-flex">
-	<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-	<button class="btn btn-outline-success" type="submit">Search</button>
-</form>
-	  </nav>
-
 	</header>
 	<main class="a">
-		<div class="container">
-
-		    <!-- Three columns of text below the carousel -->
-		    <div id="lista" class="row">
-					<span>Loading...</span>
-
-		      <div class="col-lg-4">
-		        <h2></h2>
-		        <p></p>
-		        <p><a class="btn active" href="#">View details</a></p>
-		      </div><!-- /.col-lg-4 -->
-		    </div><!-- /.row -->
-			</div>
-			<!-- Button trigger modal -->
-	</main>
-	<footer class="text-muted py-5">
-	  <div class="container">
-	    <p style="text-align:center;">
-	      <a class="b" href="#">Back to top</a>
-	    </p>
-	    </div>
-	</footer>
-
-
   <script type="text/javascript">
                 function doLogout(){
                   window.localStorage.clear();
                   window.location = "login.html";
                 }
-								function zanr(){
-									window.location = "genre.html";
-								}
-								function red(){
-									window.location = "dir.html";
-								}
-
     </script>
 		<script src="js/jquery-3.6.0.min.js"></script>
 		<script src="js/bootstrap.bundle.min.js"></script>
-		<nav aria-label="Page navigation example">
-		  <div class="pagination">
-		    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-		    <li class="page-item"><a class="page-link" href="#">1</a></li>
-		    <li class="page-item"><a class="page-link" href="#">2</a></li>
-		    <li class="page-item"><a class="page-link" href="#">3</a></li>
-		    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-		  </div>
-		</nav>
+		<!-- Control buttons -->
+<div id="myBtnContainer">
+	  <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+  <button class="btn" onclick="filterSelection('action')"> Matt Reeves</button>
+  <button class="btn" onclick="filterSelection('horor')"> Jon Watts</button>
+  <button class="btn" onclick="filterSelection('cartoon')"> Noel Cleary</button>
+  <button class="btn" onclick="filterSelection('history')"> Peter Flinth</button>
+</div>
+
+<div class="container">
+  <div class="filterDiv action">THE BATMAN</div>
+  <div class="filterDiv horor">Spider-Man: No Way Home</div>
+  <div class="filterDiv history">Against the Ice</div>
+  <div class="filterDiv action">Cloverfield</div>
+  <div class="filterDiv cartoon">Maya the Bee 3: The Golden Orb</div></div>
+<script>
+filterSelection("all")
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("filterDiv");
+  if (c == "all") c = "";
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+  }
+}
+
+function w3AddClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+  }
+}
+
+function w3RemoveClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);
+    }
+  }
+  element.className = arr1.join(" ");
+}
+
+// Add active class to the current button (highlight it)
+var btnContainer = document.getElementById("myBtnContainer");
+var btns = btnContainer.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function(){
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
 </script>
 </body>
 <script>
