@@ -22,12 +22,8 @@ class movieService extends baseService{
       return $this->dao->get_all($offset, $limit);
     }
   }
-  public function get_movie_by_genre($search, $offset, $limit){
-    if ($search){
-      return $this->dao->get_movie_by_genre($search, $offset, $limit);
-    }else{
-      return $this->dao->get_all($offset, $limit);
-    }
+  public function get_movie_by_genre($genreID){
+      return $this->dao->get_movie_by_genre($genreID);
   }
   public function get_movie_by_director($search, $offset, $limit){
     if ($search){

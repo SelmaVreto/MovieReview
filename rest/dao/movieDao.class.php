@@ -16,7 +16,7 @@ class movieDao extends baseDao {
     }
 
   public function get_movie_by_genre($genreID) {
-        return $this->query_unique("SELECT * FROM movie WHERE genreID = :genre", ["genre" => $genreID]);
+        return $this->query("SELECT * FROM movie WHERE genreID = :genre", ["genre" => $genreID]);
      }
 
   public function get_movie($search, $offset, $limit){

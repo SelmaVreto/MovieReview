@@ -12,6 +12,7 @@ Flight::route('GET /admin/genre', function(){
 
    Flight::json(Flight::genreService()->get_genre($search, $offset, $limit));
 });
+
 /**
  * @OA\Get(path="/user/genre", tags={"u-genre"}, security={{"ApiKeyAuth": {}}},
  *         summary="Return all genres from API. ",
@@ -33,6 +34,10 @@ Flight::route('GET /user/genre', function(){
  * )
  */
 Flight::route('GET /admin/genre/@id', function($id){
+  Flight::json(Flight::genreService()->get_by_id($id));
+});
+
+Flight::route('GET /genre/@id', function($id){
   Flight::json(Flight::genreService()->get_by_id($id));
 });
 /**

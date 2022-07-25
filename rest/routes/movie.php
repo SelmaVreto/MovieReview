@@ -11,9 +11,14 @@ Flight::route('GET /admin/movie', function(){
   $search = Flight::query('search');
 
    Flight::json(Flight::movieService()->get_movie($search, $offset, $limit));
-   // Flight::json(Flight::movieService()->get_movie_by_year($search, $offset, $limit));
+  //Flight::json(Flight::movieService()->get_movie_by_year($search, $offset, $limit));
    // Flight::json(Flight::movieService()->get_movie_by_genre($search, $offset, $limit));
    // Flight::json(Flight::movieService()->get_movie_by_director($search, $offset, $limit));
+
+});
+Flight::route('GET /movie/genre/@id', function($genreID){
+
+   Flight::json(Flight::movieService()->get_movie_by_genre($genreID));
 
 });
 /**
