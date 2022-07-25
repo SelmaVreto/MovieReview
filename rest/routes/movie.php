@@ -21,6 +21,11 @@ Flight::route('GET /movie/genre/@id', function($genreID){
    Flight::json(Flight::movieService()->get_movie_by_genre($genreID));
 
 });
+Flight::route('GET /movie/director/@id', function($directorsID){
+
+   Flight::json(Flight::movieService()->get_movie_by_director($directorsID));
+
+});
 /**
  * @OA\Get(path="/movie", tags={"all-movies"},
  *         summary="Return all movies from API. ",

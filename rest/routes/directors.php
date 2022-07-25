@@ -41,6 +41,9 @@ Flight::route('GET /user/directors', function(){
 Flight::route('GET /admin/directors/@id', function($id){
   Flight::json(Flight::directorsService()->get_by_id($id));
 });
+Flight::route('GET /directors/@id', function($id){
+  Flight::json(Flight::directorsService()->get_by_id($id));
+});
 /**
  * @OA\Get(path="/user/directors/{id}", tags={"u-directors"}, security={{"ApiKeyAuth": {}}},
  *         summary="Return directors by id from API. ",
