@@ -32,6 +32,27 @@ Flight::route('GET /movie/director/@id', function($directorsID){
  *         @OA\Response( response=200, description="List of movies.")
  * )
  */
+Flight::route('GET /movie/prva', function(){
+  $offset = Flight::query('offset', 0);
+  $limit = Flight::query('limit', 2);
+  $search = Flight::query('search');
+
+   Flight::json(Flight::movieService()->get_movie($search, $offset, $limit));
+});
+Flight::route('GET /movie/druga', function(){
+  $offset = Flight::query('offset', 2);
+  $limit = Flight::query('limit', 2);
+  $search = Flight::query('search');
+
+   Flight::json(Flight::movieService()->get_movie($search, $offset, $limit));
+});
+Flight::route('GET /movie/treca', function(){
+  $offset = Flight::query('offset', 4);
+  $limit = Flight::query('limit', 2);
+  $search = Flight::query('search');
+
+   Flight::json(Flight::movieService()->get_movie($search, $offset, $limit));
+});
 Flight::route('GET /movie', function(){
   $offset = Flight::query('offset', 0);
   $limit = Flight::query('limit', 10);
@@ -39,6 +60,7 @@ Flight::route('GET /movie', function(){
 
    Flight::json(Flight::movieService()->get_movie($search, $offset, $limit));
 });
+
 /**
  * @OA\Get(path="/user/movie", tags={"u-movies"}, security={{"ApiKeyAuth": {}}},
  *         summary="Return all movies from API. ",
@@ -106,6 +128,5 @@ Flight::route('POST /admin/movie', function(){
   $data = Flight::request()->data->getData();
   Flight::json(Flight::movieService()->add($data));
 });
-
 
  ?>
