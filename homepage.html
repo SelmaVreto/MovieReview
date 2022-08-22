@@ -113,6 +113,7 @@ margin-top: 7px;
 
 	</header>
 	<main class="a">
+		<h1>Total movies: 6</h1>
 		<div class="container">
 
 		    <!-- Three columns of text below the carousel -->
@@ -166,6 +167,18 @@ margin-top: 7px;
 <script>
 getM();
 searchInit();
+count();
+function count(){
+	let genre;
+	$.ajax({
+			url: "rest/broj",
+			type: "GET",
+			success: function(data) {
+				alert(data[0].broj);
+					}
+				});
+
+}
 function getM(){
 let genre;
 	$.ajax({
@@ -183,7 +196,7 @@ let genre;
 									genre = data[0];
 							}
 					});
-					let modalText = "Genre: " + genre.genre_name  + "  ,Year: " + data[i].movie_year + "  ,Rating: " + data[i].movie_rat_rewID
+					let modalText = "Genre: " + genre.genre_name  + " ,Year: " + data[i].movie_year + "  ,Rating: " + data[i].movie_rat_rewID
 					html += `
 					<div class="col-lg-4">
 				  <div class="card" style="width: 18rem;">
@@ -360,6 +373,7 @@ function search(entity){
 										genre = data[0];
 								}
 						});
+						let modalText = "Genre: " + genre.genre_name  + "  ,Year: " + data[i].movie_year + "  ,Rating: " + data[i].movie_rat_rewID
 						html += `
 						<div class="col-lg-4">
 					  <div class="card" style="width: 18rem;">
@@ -368,7 +382,7 @@ function search(entity){
 					 		 <h5 class="card-title">`+ data[i].movie_title +`</h5>
 					 		 <p class="card-text"> `+ data[i].movie_summary +`</p>
 					 		 <p>
-					 			 <button type="button" class="btn btn-primary" onclick="showModal('`+genre.genre_name+`')">
+					 			 <button type="button" class="btn btn-primary" onclick="showModal('`+modalText+`')">
 					 			view more
 					 			 </button>
 					 		 </p>

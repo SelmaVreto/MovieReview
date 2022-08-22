@@ -51,7 +51,6 @@ public function __construct($table){
     $stmt->execute($params);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
-
   protected function query_unique($query, $params){
     $results = $this->query($query, $params);
     return reset($results);
