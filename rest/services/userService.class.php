@@ -20,7 +20,7 @@ private $smtpClient;
     }
 
   public function get_all(){
-      return $this->dao->get_all_directors();
+      return $this->dao->get_all_users();
     }
 
   public function get_user_by_name($search, $offset, $limit){
@@ -55,7 +55,6 @@ private $smtpClient;
      try{
        $dao= new userDao();
      $user = $dao->add_user([
-       // "id" => $user['id'],
        "name" => $user['name'],
        "surname" => $user['surname'],
        "username" => $user['username'],

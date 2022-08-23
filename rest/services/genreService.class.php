@@ -7,7 +7,7 @@ class genreService extends baseService{
   public function __construct(){
     $this->dao = new genreDao();
   }
-
+//modifikovati ako izbacimo iz dao
   public function get_genre($search, $offset, $limit){
     if ($search){
       return $this->dao->get_genre($search, $offset, $limit);
@@ -20,7 +20,6 @@ class genreService extends baseService{
       return $genre;
     }
   public function add($genre){
-  // validation of data
   if (!isset($genre['genre_name'])) throw new Exception("Genre is missing");
   return parent::add($genre);
 }
