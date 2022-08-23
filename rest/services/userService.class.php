@@ -87,7 +87,7 @@ public function login($user){
   if ($db_user['email'] != $user['email']) throw new Exception("Invalid email", 400);
   if ($db_user['status'] != 'ACTIVE') throw new Exception("Account needs to be activated", 400);
 
- $jwt = JWT::encode(["id" => $db_user["id"], "r" => $db_user["role"]], "JWT_SECRET", 'HS256');
+ $jwt = JWT::encode(["exp" => (time() + Config::JWT_TOKEN_TIME), "id" => $db_user["id"], "r" => $db_user["role"]], "JWT_SECRET", 'HS256');
 
   return  ["token" => $jwt];
   // return $db_user;

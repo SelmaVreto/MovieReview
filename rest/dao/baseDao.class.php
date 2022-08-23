@@ -58,7 +58,7 @@ public function __construct($table){
 
   public function delete($id){
     $stmt = $this->conn->prepare("DELETE FROM ".$this->table_name." WHERE id=:id");
-    // $stmt->bindParam(':id', $id); // SQL injection prevention
+    $stmt->bindParam(':id', $id); // SQL injection prevention
     $stmt->execute();
   }
 
