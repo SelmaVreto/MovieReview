@@ -126,7 +126,7 @@
                                         <input id="register-email" class="form-control" placeholder="Valid e-mail" name="email" type="text" autofocus>
                                     </div>
                                     <div class="form-group">
-                                        <input id="register-password" class="form-control" placeholder="Password" name="password" type="password" value="">
+                                        <input id="register-password" class="form-control" placeholder="Password" name="password" type="text" value="">
                                     </div>
                                     <br></br>
                                     <a id="register" onclick="doRegister();" class="btn btn-lg btn-success btn-block">Register</a>
@@ -148,7 +148,7 @@
         <script type="text/javascript">
         $(function(){
            if (window.localStorage.getItem("token")){
-             window.location="index.html";
+             window.location="_index.html";
            }else{
              $('body').show();
            }
@@ -161,7 +161,6 @@
             $("#login-form-container").removeClass("d-none");
             $("#register-form-container").addClass("d-none");
            }
-
            function doRegister(){
            var register_info = {
         "name" : $("#register-name").val(),
@@ -197,7 +196,7 @@
    $.post( "rest/login", login_info).done(function( data ) {
      window.localStorage.setItem("token", data.token);
 
-    window.location = "index.html";
+    window.location = "_index.html";
    }).fail(function(error) {
    $("#login-link").prop('disabled',false);
  alert("invalid email or password");
