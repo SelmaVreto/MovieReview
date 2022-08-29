@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Startmin - Bootstrap Admin Theme</title>
+        <title>Movie recommendation app</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
@@ -150,6 +150,12 @@
                                 <a href="#view_2" class="active"><i class="fa fa-dashboard fa-fw"></i> view_2</a>
                             </li>
                             <li>
+                                <a href="#users" class="active"><i class="fa fa-dashboard fa-fw"></i> users </a>
+                            </li>
+                            <li>
+                                <a href="#comments" class="active"><i class="fa fa-dashboard fa-fw"></i> comments </a>
+                            </li>
+                            <li>
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
@@ -243,6 +249,9 @@
                               <main id="jqueryspapp" role="main">
                                 <section id="view_1" data-load="view_1.html" ></section>
                                 <section id="view_2" data-load="view_2.html"></section>
+                                <section id="users" data-load="users.html"></section>
+                                <section id="comments" data-load="comments.html"></section>
+
                               </main>
 
                         </div>
@@ -271,9 +280,9 @@
           $(document).ready(function() {
             var app = $.jQuerySPApp({defaultView  : "view_1"}); // initialize
             app.run();
-            // if(!window.localStorage.getItem("token")){
-            //   window.location="login.html";
-            // };
+            if(!window.localStorage.getItem("token")){
+              window.location="login.html";
+            };
           });
           function doLogout(){
             window.localStorage.clear();

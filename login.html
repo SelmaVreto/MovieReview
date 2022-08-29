@@ -97,9 +97,9 @@
                     </div>
                 </div>
             </div>
-            <div id="register-form-alert" class="row d-none" style="margin-top: 50px;">
+            <div id="register-form-alert" class="row d-none" style="margin-right: 800px; margin-top: 100px">
           <div class="alert alert-success" role="alert">
-            This is a success alert—check it out!
+            confirm your email and then log in!
           </div>
         </div>
         </div>
@@ -114,19 +114,19 @@
                             <form id="register-form" role="form">
                                 <fieldset>
                                   <div class="form-group">
-                                      <input id="register-name" class="form-control" placeholder="Name" name="email" type="text" autofocus>
+                                      <input id="register-name" class="form-control" placeholder="Name" name="email" type="text" required>
                                   </div>
                                   <div class="form-group">
-                                      <input id="register-surname" class="form-control" placeholder="Surname" name="surname" type="text" value="">
+                                      <input id="register-surname" class="form-control" placeholder="Surname" name="surname" type="text" required>
                                   </div>
                                   <div class="form-group">
-                                      <input id="register-username" class="form-control" placeholder="Username" name="username" type="text" value="">
+                                      <input id="register-username" class="form-control" placeholder="Username" name="username" type="text" required>
                                   </div>
                                     <div class="form-group">
-                                        <input id="register-email" class="form-control" placeholder="Valid e-mail" name="email" type="text" autofocus>
+                                        <input id="register-email" class="form-control" placeholder="Valid e-mail" name="email" type="text" required>
                                     </div>
                                     <div class="form-group">
-                                        <input id="register-password" class="form-control" placeholder="Password" name="password" type="password" value="">
+                                        <input id="register-password" class="form-control" placeholder="Password" name="password" type="password" required>
                                     </div>
                                     <br></br>
                                     <a id="register" onclick="doRegister();" class="btn btn-lg btn-success btn-block">Register</a>
@@ -162,30 +162,26 @@
             $("#register-form-container").addClass("d-none");
            }
 
-           function doRegister(){
-           var register_info = {
+    function doRegister(){
+        var register_info = {
         "name" : $("#register-name").val(),
         "surname" : $("#register-surname").val(),
         "username" : $("#register-username").val(),
         "email" : $("#register-email").val(),
         "password" : $("#register-password").val()
-
-      };
+        };
      $("#register-link").prop('disabled',true);
       $.post( "rest/register", register_info).done(function( data ) {
         console.log(data);
-        alert( "success register" );
-        $("#register-form-container").addClass("d-none");
-        $("#register-form-container").removeClass("d-none");
-        $("#register-form-alert .alert").html(data.message);
-        alert("success");
-
+        // $("#register-form-container").addClass("d-none");
+        // $("#register-form-alert").removeClass("d-none");
+        // $("#register-form-alert .alert").html(data.message);
+        alert("success, confirm email and than login!")
       }).fail(function(error) {
       $("#register-link").prop('disabled',false);
-      alert("error");
-
-
-      });
+      console.log(error);
+    alert("invalid");
+    });
          }
 
         function doLogin() {
