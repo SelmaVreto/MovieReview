@@ -30,24 +30,24 @@ Flight::map('query', function($name, $default_value = NULL){
 });
 
 //middleware method for login
-Flight::route('/*', function(){
-  $path = Flight::request()->url;
-  if ($path == '/login' || $path == '/docs.json' || $path == '/register') return TRUE; // exclude login route from middleware
-  $headers = getallheaders();
-  if (@!$headers['Authorization']){
-    Flight::json(["message" => "Authorization is missing"], 403);
-    return FALSE;
-  }else{
-    try {
-      $decoded = (array)JWT::decode($headers['Authorization'], new Key("JWT_SECRET", 'HS256'));
-      Flight::set('user', $decoded);
-      return TRUE;
-    } catch (\Exception $e) {
-      Flight::json(["message" => "Authorization token is not valid"], 403);
-      return FALSE;
-    }
-  }
-});
+// Flight::route('/*', function(){
+//   $path = Flight::request()->url;
+//   if ($path == '/login' || $path == '/docs.json' || $path == '/register' || $path == '/selma/{id}' || $path == '/mo') return TRUE; // exclude login route from middleware
+//   $headers = getallheaders();
+//   if (@!$headers['Authorization']){
+//     Flight::json(["message" => "Authorization is missing"], 403);
+//     return FALSE;
+//   }else{
+//     try {
+//       $decoded = (array)JWT::decode($headers['Authorization'], new Key("JWT_SECRET", 'HS256'));
+//       Flight::set('user', $decoded);
+//       return TRUE;
+//     } catch (\Exception $e) {
+//       Flight::json(["message" => "Authorization token is not valid"], 403);
+//       return FALSE;
+//     }
+//   }
+// });
 
 /* register Dao layer */
 Flight::register('genreDao', 'genreDao');

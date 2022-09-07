@@ -13,6 +13,17 @@ Flight::route('GET /movie', function(){
    Flight::json(Flight::movieService()->get_movie($search, $offset, $limit));
 });
 /**
+ * za ne registrovane
+ */
+Flight::route('GET /mo', function(){
+  $offset = Flight::query('offset', 0);
+  $limit = Flight::query('limit', 10);
+  $search = Flight::query('search');
+
+   Flight::json(Flight::movieService()->get_movie($search, $offset, $limit));
+});
+
+/**
  * @OA\Get(path="/movie/{id}", tags={"movies"}, security={{"ApiKeyAuth": {}}},
  *         summary="Return movie by id from API. ",
  *     @OA\Parameter(in="path", name="id", example=1, description="Id of movie"),
