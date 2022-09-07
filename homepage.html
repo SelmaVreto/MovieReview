@@ -142,7 +142,7 @@ let genre;
 					for(let i = 0; i < data.length; i++){
 					$.ajax({
 							async: false,
-							url: "rest/selma/" + data[i].genreID,
+							url: "rest/gen/" + data[i].genreID,
 							type: "GET",
 							success: function(data) {
 									genre = data[0];

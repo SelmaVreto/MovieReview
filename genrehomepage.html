@@ -3,72 +3,54 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Movie App</title>
+	<title>Genres</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="icon" type="image/x-icon" href="https://img.icons8.com/officel/344/documentary.png">
 	<style>
 
-.logo img {
-	height: 30px;
-  width: 30px;
-}
-.nowPlaying{
-margin-top: 15px;
-}
-.a{
-margin-top:100px;
-}
-.hp{
-color:LightBlue;
-}
-.v{
-background:LightBlue;
-color: black;
-margin-top: 10px;
-}
-.va{
-background: LightBlue ;
-color: black;
-margin-left: 100px;
-margin-top: 7px;
-}
-
-.page{
-	background-color: #37716c;
-
-}
-.filterDiv {
-  float: left;
-  background-color: LightBlue;
-  color: black;
-  width: auto;
-  line-height: 100px;
-  text-align: center;
-  margin: 2px;
-  display: none;
-}
-
-.show {
-  display: block;
-}
-
-.container {
-  margin-top: 20px;
-  overflow: hidden;
-}
-
-/* Style the buttons */
-.btn {
-  background-color: #7cafab;
-  cursor: pointer;
-}
-
-
-.logo img {
-	height: 30px;
-  width: 30px;
+	.logo img {
+		height: 30px;
+	  width: 30px;
+		margin-top: 7px;
+	}
+	.v {
+	background:#e17055;
+	color: black;
 	margin-top: 7px;
-}
+	}
+	.va {
+	background: #fab1a0 ;
+	color: black;
+	margin-left: 100px;
+	margin-top: 7px;
+	}
+	.vaa {
+	background: #fab1a0 ;
+	color: black;
+	margin-top: 7px;
+	}
+	.page{
+		background-color: #74b9ff;
+	}
+	.show {
+	  display: block;
+	}
+	.container {
+	  margin-top: 20px;
+	  overflow: hidden;
+	}
+	.btn {
+	  background-color: #fab1a0;
+	}
+	.b{
+		color: #d63031;
+	}
+	.a{
+	margin-top:100px;
+	}
+	.card{
+		margin-top:20px;
+	}
 
 	</style>
 </head>
@@ -125,14 +107,21 @@ margin-top: 7px;
 
 	</div>
 </div>
-
+</main>
+<footer class="text-muted py-5">
+	<div class="container">
+		<p style="text-align:center;">
+			<a class="b" href="#">Back to top</a>
+		</p>
+		</div>
+</footer>
 <script>
 getA('all');
 function getA(zanr){
 let genre;
 if(zanr=="all"){
 	$.ajax({
-			url: "rest/movie",
+			url: "rest/mo",
 			type: "GET",
 			success: function(data) {
 					$("#zanrContainter").html("");
@@ -140,13 +129,13 @@ if(zanr=="all"){
 					for(let i = 0; i < data.length; i++){
 					$.ajax({
 							async: false,
-							url: "rest/genre/" + data[i].genreID,
+							url: "rest/gen/" + data[i].genreID,
 							type: "GET",
 							success: function(data) {
 									genre = data[0];
 							}
 					});
-					// let modalText = "Genre: " + genre.genre_name + "/nDirector" + director.name
+					let modalText = "Genre: " + genre.genre_name  + ",  Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
 					html += `
 					<div class="col-lg-4">
 				  <div class="card" style="width: 18rem;">
@@ -155,7 +144,7 @@ if(zanr=="all"){
 				 		 <h5 class="card-title">`+ data[i].movie_title +`</h5>
 				 		 <p class="card-text"> `+ data[i].movie_summary +`</p>
 				 		 <p>
-						 <button type="button" class="btn btn-primary" onclick="showModal('`+ genre.genre_name+`')">
+						 <button type="button" class="btn btn-primary" onclick="showModal('`+modalText+`')">
 						view more
 						 </button>
 				 		 </p>
@@ -169,7 +158,7 @@ if(zanr=="all"){
 	});
 }else {
 	$.ajax({
-			url: "rest/movie/genre/"+zanr,
+			url: "rest/mo/genre/"+zanr,
 			type: "GET",
 			success: function(data) {
 					$("#zanrContainter").html("");
@@ -177,13 +166,13 @@ if(zanr=="all"){
 					for(let i = 0; i < data.length; i++){
 					$.ajax({
 							async: false,
-							url: "rest/genre/" + data[i].genreID,
+							url: "rest/gen/" + data[i].genreID,
 							type: "GET",
 							success: function(data) {
 									genre = data[0];
 							}
 					});
-					// let modalText = "Genre: " + genre.genre_name + "/nDirector" + director.name
+					let modalText = "Genre: " + genre.genre_name  + ",  Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
 					html += `
 					<div class="col-lg-4">
 				  <div class="card" style="width: 18rem;">
@@ -191,8 +180,8 @@ if(zanr=="all"){
 				 	 <div class="card-body">
 				 		 <h5 class="card-title">`+ data[i].movie_title +`</h5>
 				 		 <p class="card-text"> `+ data[i].movie_summary +`</p>
-				 		 <p>
-				 			 <button type="button" class="btn btn-primary" onclick="showModal('`+ genre.genre_name+`')">
+						 <p>
+				 			 <button type="button" class="btn btn-primary" onclick="showModal('`+modalText+`')">
 				 			view more
 				 			 </button>
 				 		 </p>

@@ -32,7 +32,7 @@ Flight::map('query', function($name, $default_value = NULL){
 //middleware method for login
 // Flight::route('/*', function(){
 //   $path = Flight::request()->url;
-//   if ($path == '/login' || $path == '/docs.json' || $path == '/register' || $path == '/selma/{id}' || $path == '/mo') return TRUE; // exclude login route from middleware
+//   if ($path == '/login' || $path == '/docs.json' || $path == '/register' || $path == '/selma' || $path == '/mo') return TRUE; // exclude login route from middleware
 //   $headers = getallheaders();
 //   if (@!$headers['Authorization']){
 //     Flight::json(["message" => "Authorization is missing"], 403);

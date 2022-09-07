@@ -30,5 +30,11 @@ Flight::route('GET /directors', function(){
 Flight::route('GET /directors/@id', function($id){
   Flight::json(Flight::directorsService()->get_by_id($id));
 });
+/**
+ * za neegistrovane
+ */
+Flight::route('GET /dir/@id', function($id){
+  Flight::json(Flight::directorsService()->get_by_id($id));
+});
 
  ?>

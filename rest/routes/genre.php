@@ -30,7 +30,7 @@ Flight::route('GET /genre/@id', function($id){
  *     @OA\Response(response="200", description="One genre.")
  * )
  */
-Flight::route('GET /selma/@id', function($id){
+Flight::route('GET /gen/@id', function($id){
   Flight::json(Flight::genreService()->get_by_id($id));
 });
  ?>

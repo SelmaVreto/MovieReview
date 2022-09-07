@@ -7,68 +7,49 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="icon" type="image/x-icon" href="https://img.icons8.com/officel/344/documentary.png">
 	<style>
-
-.logo img {
-	height: 30px;
-  width: 30px;
-}
-.nowPlaying{
-margin-top: 15px;
-}
-.a{
-margin-top:100px;
-}
-.hp{
-color:LightBlue;
-}
-.v{
-background:LightBlue;
-color: black;
-margin-top: 10px;
-}
-.va{
-background: LightBlue ;
-color: black;
-margin-left: 100px;
-margin-top: 7px;
-}
-
-.page{
-	background-color: #37716c;
-
-}
-.filterDiv {
-  float: left;
-  background-color: LightBlue;
-  color: black;
-  width: auto;
-  line-height: 100px;
-  text-align: center;
-  margin: 2px;
-  display: none;
-}
-
-.show {
-  display: block;
-}
-
-.container {
-  margin-top: 20px;
-  overflow: hidden;
-}
-
-/* Style the buttons */
-.btn {
-  background-color: #7cafab;
-  cursor: pointer;
-}
-
-
-.logo img {
-	height: 30px;
-  width: 30px;
+	.logo img {
+		height: 30px;
+	  width: 30px;
+		margin-top: 7px;
+	}
+	.v {
+	background:#e17055;
+	color: black;
 	margin-top: 7px;
-}
+	}
+	.va {
+	background: #fab1a0 ;
+	color: black;
+	margin-left: 100px;
+	margin-top: 7px;
+	}
+	.vaa {
+	background: #fab1a0 ;
+	color: black;
+	margin-top: 7px;
+	}
+	.page{
+		background-color: #74b9ff;
+	}
+	.show {
+	  display: block;
+	}
+	.container {
+	  margin-top: 20px;
+	  overflow: hidden;
+	}
+	.btn {
+	  background-color: #fab1a0;
+	}
+	.b{
+		color: #d63031;
+	}
+	.a{
+	margin-top:100px;
+	}
+	.card{
+		margin-top:20px;
+	}
 
 	</style>
 </head>
@@ -87,7 +68,7 @@ margin-top: 7px;
 	            <a class="nav-link">homepage for non-registered users</a>
 	          </li>
 	          <li class="nav-item">
-							<button class="v" onclick="doLogout()" >Register</button>
+							<button class="v" onclick="doLogin()" >Register</button>
 	          </li>
 						<li class="nav-item">
 							<button class="va" onclick="zanr()" >Years</button>
@@ -102,8 +83,7 @@ margin-top: 7px;
 	</header>
 	<main class="a">
   <script type="text/javascript">
-                function doLogout(){
-                  window.localStorage.clear();
+                function doLogin(){
                   window.location = "login.html";
                 }
     </script>
@@ -130,7 +110,7 @@ let directors;
 let genre;
 if(zanr=="all"){
 	$.ajax({
-			url: "rest/movie",
+			url: "rest/mo",
 			type: "GET",
 			success: function(data) {
 					$("#zanrContainter").html("");
@@ -138,13 +118,13 @@ if(zanr=="all"){
 					for(let i = 0; i < data.length; i++){
 					$.ajax({
 							async: false,
-							url: "rest/movie/director/" + data[i].directorsID,
+							url: "rest/mo/director/" + data[i].directorsID,
 							type: "GET",
 							success: function(data) {
 									directors = data[0];
 							}
 					});
-					// let modalText = "Genre: " + genre.genre_name + "/nDirector" + director.name
+					let modalText = "Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
 					html += `
 					<div class="col-lg-4">
 				  <div class="card" style="width: 18rem;">
@@ -153,7 +133,7 @@ if(zanr=="all"){
 				 		 <h5 class="card-title">`+ data[i].movie_title +`</h5>
 				 		 <p class="card-text"> `+ data[i].movie_summary +`</p>
 				 		 <p>
-						 <button type="button" class="btn btn-primary" onclick="showModal('nn')">
+						 <button type="button" class="btn btn-primary" onclick="showModal('`+modalText+`')">
 						view more
 						 </button>
 				 		 </p>
@@ -167,7 +147,7 @@ if(zanr=="all"){
 	});
 }else {
 	$.ajax({
-			url: "rest/movie/director/"+zanr,
+			url: "rest/mo/director/"+zanr,
 			type: "GET",
 			success: function(data) {
 					$("#zanrContainter").html("");
@@ -175,13 +155,13 @@ if(zanr=="all"){
 					for(let i = 0; i < data.length; i++){
 					$.ajax({
 							async: false,
-							url: "rest/director/" + data[i].directorsID,
+							url: "rest/dir/" + data[i].directorsID,
 							type: "GET",
 							success: function(data) {
 									genre = data[0];
 							}
 					});
-					// let modalText = "Genre: " + genre.genre_name + "/nDirector" + director.name
+					let modalText = " Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
 					html += `
 					<div class="col-lg-4">
 				  <div class="card" style="width: 18rem;">
@@ -190,7 +170,7 @@ if(zanr=="all"){
 				 		 <h5 class="card-title">`+ data[i].movie_title +`</h5>
 				 		 <p class="card-text"> `+ data[i].movie_summary +`</p>
 				 		 <p>
-				 			 <button type="button" class="btn btn-primary" onclick="showModal('nn')">
+						 <button type="button" class="btn btn-primary" onclick="showModal('`+modalText+`')">
 				 			view more
 				 			 </button>
 				 		 </p>
