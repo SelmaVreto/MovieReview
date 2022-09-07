@@ -46,10 +46,6 @@ private $smtpClient;
       return $this->dao->get_all_users($offset, $limit);
     }
   }
-  public function add($user){
-       if (!isset($user['name'])) throw new Exception("Name is missing");
-       $user['created_at'] = date(Config::DATE_FORMAT);
-     }
 
   public function register($user){
      try{

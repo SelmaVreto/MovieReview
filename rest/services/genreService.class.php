@@ -19,9 +19,6 @@ class genreService extends baseService{
      $genre = $this->dao->get_by_id($id);
       return $genre;
     }
-  public function add($genre){
-  if (!isset($genre['genre_name'])) throw new Exception("Genre is missing");
-  return parent::add($genre);
-}
+
 }
 ?>

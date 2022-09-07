@@ -21,9 +21,6 @@ class genreDao extends baseDao {
                          WHERE LOWER(genre_name) LIKE CONCAT('%', :genre_name, '%')
                          LIMIT ${limit} OFFSET ${offset}", ["genre_name" => strtolower($search)]);
   }
-  public function add($genre){
-    return $this->insert("genre", $genre);
-  }
 
     }
 

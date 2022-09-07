@@ -16,9 +16,9 @@ use Firebase\JWT\Key;
 
 /* error handling for our API*/
 
-Flight::map('error', function(Exception $ex){
-  Flight::json(["message" => $ex->getMessage()], $ex->getCode() ? $ex->getCode() : 500);
-});
+// Flight::map('error', function(Exception $ex){
+//   Flight::json(["message" => $ex->getMessage()], $ex->getCode() ? $ex->getCode() : 500);
+// });
 
 /* utility function for reading query parameters from URL */
 Flight::map('query', function($name, $default_value = NULL){
@@ -48,30 +48,6 @@ Flight::route('/*', function(){
     }
   }
 });
-// //middleware method for users
-// Flight::route('/user/*', function(){
-//     try {
-//       $decoded = (array)JWT::decode($headers['Authorization'], new Key("JWT_SECRET", 'HS256'));
-//       Flight::set('user', $decoded);
-//       return TRUE;
-//     } catch (\Exception $e) {
-//       Flight::json(["message" => "You are user!"], 403);
-//       return FALSE;
-//     }
-//   }
-// });
-// //middleware method for admin
-// Flight::route('/admin/*', function(){
-//     try {
-//       $decoded = (array)JWT::decode($headers['Authorization'], new Key("JWT_SECRET", 'HS256'));
-//       Flight::set('user', $decoded);
-//       return TRUE;
-//     } catch (\Exception $e) {
-//       Flight::json(["message" => "Admin access required"], 403);
-//       return FALSE;
-//     }
-//   }
-// });
 
 /* register Dao layer */
 Flight::register('genreDao', 'genreDao');

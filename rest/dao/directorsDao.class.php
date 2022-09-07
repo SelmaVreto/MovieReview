@@ -27,9 +27,6 @@ class directorsDao extends baseDao{
                              WHERE LOWER(directors_surname) LIKE CONCAT('%', :directors_surname, '%')
                              LIMIT ${limit} OFFSET ${offset}", ["directors_surname" => strtolower($search)]);
       }
-      public function add($directors){
-        return $this->insert("directors", $directors);
-      }
 }
 
 ?>

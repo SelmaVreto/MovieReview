@@ -11,30 +11,30 @@ use Firebase\JWT\Key;
  * @OA\SecurityScheme(securityScheme="ApiKeyAuth", type="apiKey", in="header", name="Authorization", name="Authorization" )
  */
  /**
-  * @OA\Get(path="/admin/user", tags={"a-user"}, security={{"ApiKeyAuth": {}}},
+  * @OA\Get(path="/user", tags={"user"}, security={{"ApiKeyAuth": {}}},
   *         summary="Return all user from API. ",
   *         @OA\Response( response=200, description="List of all users")
   * )
   */
-Flight::route('GET /admin/user', function(){
+Flight::route('GET /user', function(){
   $offset = Flight::query('offset', 0);
   $limit = Flight::query('limit', 10);
 
   $search = Flight::query('search');
 
    Flight::json(Flight::userService()->get_user_by_name($search, $offset, $limit));
-   // Flight::json(Flight::userService()->get_user_by_surname($search, $offset, $limit));
-   // Flight::json(Flight::userService()->get_user_by_email($search, $offset, $limit));
+   Flight::json(Flight::userService()->get_user_by_surname($search, $offset, $limit));
+   Flight::json(Flight::userService()->get_user_by_email($search, $offset, $limit));
 
 });
 /**
- * @OA\Get(path="/admin/user/{id}", tags={"a-user"}, security={{"ApiKeyAuth": {}}},
+ * @OA\Get(path="/user/{id}", tags={"user"}, security={{"ApiKeyAuth": {}}},
  *         summary="Return user from API.",
  *     @OA\Parameter(in="path", name="id", example=1, description="One user"),
  *     @OA\Response(response="200", description="One movie.")
  * )
  */
-Flight::route('GET /admin/user/@id', function($id){
+Flight::route('GET /user/@id', function($id){
   Flight::json(Flight::userService()->get_by_id($id));
 });
 
@@ -63,7 +63,7 @@ Flight::route('POST /register', function(){
 });
 
 /**
- * @OA\Put(path="/admin/user/{id}", tags={"a-user"}, security={{"ApiKeyAuth": {}}},
+ * @OA\Put(path="/user/{id}", tags={"user"}, security={{"ApiKeyAuth": {}}},
  *         summary="update user from API. ",
  *     @OA\Parameter(@OA\Schema(type="integer"), in="path", allowReserved=true, name="id", example=1,
 *       @OA\MediaType(mediaType="application/json",
@@ -81,7 +81,7 @@ Flight::route('POST /register', function(){
  *     @OA\Response(response="200", description="Update user based on id")
  * )
  */
-Flight::route('PUT /admin/user/@id', function($id){
+Flight::route('PUT /user/@id', function($id){
   $data = Flight::request()->data->getData();
   Flight::json(Flight::movieService()->update($id, $data));
 });
@@ -117,7 +117,7 @@ Flight::route('POST /login', function(){
 });
 
   /**
- * @OA\Get(path="/user/user", tags={"u-user"}, security={{"ApiKeyAuth": {}}},
+ * @OA\Get(path="/user/user", tags={"user"}, security={{"ApiKeyAuth": {}}},
  *     @OA\Response(response="200", description="Fetch user account")
  * )
  */

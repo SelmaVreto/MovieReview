@@ -25,9 +25,6 @@ class movieDao extends baseDao {
                             WHERE LOWER(movie_title) LIKE CONCAT('%', :movie_title, '%')
                             LIMIT ${limit} OFFSET ${offset}", ["movie_title" => strtolower($search)]);
      }
- public function add($movie){
-       return $this->insert("movie", $movie);
-     }
 }
 
 ?>
