@@ -10,32 +10,15 @@ use Firebase\JWT\Key;
  * ),
  * @OA\SecurityScheme(securityScheme="ApiKeyAuth", type="apiKey", in="header", name="Authorization", name="Authorization" )
  */
- /**
-  * @OA\Get(path="/user", tags={"user"}, security={{"ApiKeyAuth": {}}},
-  *         summary="Return all user from API. ",
-  *         @OA\Response( response=200, description="List of all users")
-  * )
-  */
-Flight::route('GET /user', function(){
-  $offset = Flight::query('offset', 0);
-  $limit = Flight::query('limit', 10);
 
-  $search = Flight::query('search');
-
-   Flight::json(Flight::userService()->get_user_by_name($search, $offset, $limit));
-   Flight::json(Flight::userService()->get_user_by_surname($search, $offset, $limit));
-   Flight::json(Flight::userService()->get_user_by_email($search, $offset, $limit));
-
-});
 /**
  * @OA\Get(path="/user/{id}", tags={"user"}, security={{"ApiKeyAuth": {}}},
- *         summary="Return user from API.",
- *     @OA\Parameter(in="path", name="id", example=1, description="One user"),
+ *         summary="Return your profile from API.",
  *     @OA\Response(response="200", description="One movie.")
  * )
  */
 Flight::route('GET /user/@id', function($id){
-  Flight::json(Flight::userService()->get_by_id($id));
+  Flight::json(Flight::userService()->get_by_id(Flight::get('user')['id']));
 });
 
 /**
@@ -116,13 +99,5 @@ Flight::route('POST /login', function(){
   Flight::json(Flight::userService()->login($data));
 });
 
-  /**
- * @OA\Get(path="/user/user", tags={"user"}, security={{"ApiKeyAuth": {}}},
- *     @OA\Response(response="200", description="Fetch user account")
- * )
- */
-Flight::route('GET /user/user', function(){
-  Flight::json(Flight::userService()->get_by_id(Flight::get('user')['id']));
-});
 
  ?>

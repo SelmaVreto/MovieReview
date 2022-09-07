@@ -44,7 +44,7 @@ Flight::route('GET /movie/director/@id', function($directorsID){
 });
 /**
  * @OA\Get(path="/movie/year/{id}", tags={"movies"}, security={{"ApiKeyAuth": {}}},
- *         summary="Return movie by director from API. ",
+ *         summary="Return movie by year from API. ",
  *     @OA\Parameter(in="path", name="id", example=2021, description="Id of movie"),
  *         @OA\Response( response=200, description="List of movies.")
  * )

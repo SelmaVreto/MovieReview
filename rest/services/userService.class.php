@@ -19,25 +19,6 @@ private $smtpClient;
       return $user;
     }
 
-  public function get_all(){
-      return $this->dao->get_all_users();
-    }
-
-  public function get_user_by_name($search, $offset, $limit){
-    if ($search){
-      return $this->dao->get_user_by_name($search, $offset, $limit);
-    }else{
-      return $this->dao->get_all_users($offset, $limit);
-    }
-  }
-
-  public function get_user_by_surname($search, $offset, $limit){
-    if ($search){
-      return $this->dao->get_user_by_surname($search, $offset, $limit);
-    }else{
-      return $this->dao->get_all_users($offset, $limit);
-    }
-  }
 
   public function get_user_by_email($search, $offset, $limit){
     if ($search){
