@@ -16,7 +16,9 @@ class userDao extends baseDao {
   public function update_user($userID, $user){
     $this->execute_update("user", $userID, $user);
 }
-
+public function get_user_by_email($email) {
+    return $this->query_unique("SELECT * FROM user WHERE email = :email", ["email" => $email]);
+ }
 public function update_user_by_email($email, $user){
     $this->execute_update("user", $email, $user, "email");
   }

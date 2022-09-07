@@ -16,9 +16,9 @@ use Firebase\JWT\Key;
 
 /* error handling for our API*/
 
-Flight::map('error', function(Exception $ex){
-  Flight::json(["message" => $ex->getMessage()], $ex->getCode() ? $ex->getCode() : 500);
-});
+// Flight::map('error', function(Exception $ex){
+//   Flight::json(["message" => $ex->getMessage()], $ex->getCode() ? $ex->getCode() : 500);
+// });
 
 /* utility function for reading query parameters from URL */
 Flight::map('query', function($name, $default_value = NULL){
