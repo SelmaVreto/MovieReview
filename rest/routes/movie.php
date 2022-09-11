@@ -34,6 +34,13 @@ Flight::route('GET /mo', function(){
   Flight::route('GET /mo/director/@id', function($directorsID){
      Flight::json(Flight::movieService()->get_movie_by_director($directorsID));
   });
+  /**
+   * za neregistrovane years
+   * )
+   */
+  Flight::route('GET /mo/year/@id', function($movie_year){
+     Flight::json(Flight::movieService()->get_movie_by_year($movie_year));
+  });
 /**
  * @OA\Get(path="/movie/{id}", tags={"movies"}, security={{"ApiKeyAuth": {}}},
  *         summary="Return movie by id from API. ",

@@ -51,30 +51,21 @@ text-align: center;
 .card{
 	margin-top:20px;
 }
-.alert{
-	background-color: #fab1a0;
-}
 	</style>
 </head>
 <body class="page">
 	<header>
 	  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 	    <div class="container-fluid">
-				<li><a class="logo" href="homepage.html"><img src="https://img.icons8.com/officel/344/documentary.png"></a></li>
+				<li><a class="logo" href="prob.html"><img src="https://img.icons8.com/officel/344/documentary.png"></a></li>
 	      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="navbar-toggler-icon"></span>
 	      </button>
 	      <div class="collapse navbar-collapse" id="navbarCollapse">
 	        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-	          <li class="nav-item">
-	            <a class="nav-link">homepage for non-registered users</a>
-	          </li>
-	          <li class="nav-item">
-							<button class="v" onclick="Login()" >Register</button>
-	          </li>
 						<li class="nav-item">
 							<button class="va" onclick="genre()" >Genres</button>
-						</li>
+						</li>g
 						<li class="nav-item">
 							<button class="vaa" onclick="directors()" >Directors</button>
 						</li>
@@ -102,11 +93,6 @@ text-align: center;
 		    </div><!-- /.row -->
 			</div>
 			<!-- Button trigger modal -->
-			<div id="lawmsg" class="alert alert-info alert-dismissible h6 fade show fixed-bottom" role="alert">
-				We're glad you're here! For a better experience, create your profile.<br></br>
-				Now, you are in the role of observer.
-				In order to become interactive users, i.e. to leave comments, rate movies, see other people's ratings and much more, please register by clicking the button in the upper left corner.
-     </div>
 		</main>
 	<footer class="text-muted py-5">
 	  <div class="container">
@@ -118,7 +104,6 @@ text-align: center;
 
   <script type="text/javascript">
                 function Login(){
-									window.localStorage.clear();
                   window.location = "login.html";
                 }
 								function genre(){

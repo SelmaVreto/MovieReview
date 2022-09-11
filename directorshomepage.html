@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Movie App</title>
+	<title>Directors</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="icon" type="image/x-icon" href="https://img.icons8.com/officel/344/documentary.png">
 	<style>
@@ -16,6 +16,10 @@
 	background:#e17055;
 	color: black;
 	margin-top: 7px;
+	}
+	.alert{
+		background-color: #fab1a0;
+		text-align: center;
 	}
 	.va {
 	background: #fab1a0 ;
@@ -59,7 +63,7 @@
 	<header>
 	  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 	    <div class="container-fluid">
-				<li><a class="logo"><img src="https://img.icons8.com/officel/344/documentary.png"></a></li>
+				<li><a class="logo" href="homepage.html"><img src="https://img.icons8.com/officel/344/documentary.png"></a></li>
 	      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="navbar-toggler-icon"></span>
 	      </button>
@@ -83,6 +87,11 @@
 
 	</header>
 	<main class="a">
+		<div id="lawmsg" class="alert alert-info alert-dismissible h6 fade show fixed-bottom" role="alert">
+			We're glad you're here! For a better experience, create your profile.<br></br>
+			Now, you are in the role of observer.
+			In order to become interactive users, i.e. to leave comments, rate movies, see other people's ratings and much more, please register by clicking the button in the upper left corner.
+	 </div>
   <script type="text/javascript">
                 function doLogout(){
                   window.localStorage.clear();
@@ -172,7 +181,7 @@ if(zanr=="all"){
 									genre = data[0];
 							}
 					});
-					let modalText = "Genre: " + genre.genre_name  + ",  Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
+					let modalText =  "  Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
 					html += `
 					<div class="col-lg-4">
 				  <div class="card" style="width: 18rem;">

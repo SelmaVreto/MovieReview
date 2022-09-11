@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Movie App</title>
+	<title>Years</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="icon" type="image/x-icon" href="https://img.icons8.com/officel/344/documentary.png">
 	<style>
@@ -11,6 +11,10 @@
 		height: 30px;
 	  width: 30px;
 		margin-top: 7px;
+	}
+	.alert{
+		background-color: #fab1a0;
+		text-align: center;
 	}
 	.v {
 	background:#e17055;
@@ -58,7 +62,7 @@
 	<header>
 	  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 	    <div class="container-fluid">
-				<li><a class="logo"><img src="https://img.icons8.com/officel/344/documentary.png"></a></li>
+				<li><a class="logo" href="homepage.html"><img src="https://img.icons8.com/officel/344/documentary.png"></a></li>
 	      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="navbar-toggler-icon"></span>
 	      </button>
@@ -82,6 +86,11 @@
 
 	</header>
 	<main class="a">
+		<div id="lawmsg" class="alert alert-info alert-dismissible h6 fade show fixed-bottom" role="alert">
+			We're glad you're here! For a better experience, create your profile.<br></br>
+			Now, you are in the role of observer.
+			In order to become interactive users, i.e. to leave comments, rate movies, see other people's ratings and much more, please register by clicking the button in the upper left corner.
+	 </div>
   <script type="text/javascript">
                 function doLogin(){
                   window.location = "login.html";
@@ -93,8 +102,10 @@
 <div id="myBtnContainer">
 	  <button class="btn active" onclick="getA('all')"> Show all</button>
   <button class="btn" onclick="getA(1)"> 2008</button>
-  <button class="btn" onclick="getA(2)"> 2021</button>
-  <button class="btn" onclick="getA(3)"> 2022</button>
+  <button class="btn" onclick="getA(2)"> 2009</button>
+  <button class="btn" onclick="getA(3)"> 2021</button>
+	<button class="btn" onclick="getA(4)"> 2022</button>
+
 
 </div>
 
@@ -102,132 +113,133 @@
 	<div id="zanrContainter" class="row"></div>
 
 	</div>
+	<script>
+	getA('all');
+	function getA(zanr){
+	let directors;
+	let genre;
+	if(zanr=="all"){
+		$.ajax({
+				url: "rest/mo",
+				type: "GET",
+				success: function(data) {
+						$("#zanrContainter").html("");
+						var html = "";
+						for(let i = 0; i < data.length; i++){
+						$.ajax({
+								async: false,
+								url: "rest/mo/director/" + data[i].directorsID,
+								type: "GET",
+								success: function(data) {
+										directors = data[0];
+								}
+						});
+						let modalText = "Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
+						html += `
+						<div class="col-lg-4">
+					  <div class="card" style="width: 18rem;">
+					  <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1822f960da3%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1822f960da3%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22107.1953125%22%20y%3D%2296.3%22%3E286x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" class="card-img-top" alt="...">
+					 	 <div class="card-body">
+					 		 <h5 class="card-title">`+ data[i].movie_title +`</h5>
+					 		 <p class="card-text"> `+ data[i].movie_summary +`</p>
+					 		 <p>
+							 <button type="button" class="btn btn-primary" onclick="showModal('`+modalText+`')">
+							view more
+							 </button>
+					 		 </p>
+					 	 </div>
+					  </div>
+					  </div>
+						`;
+						}
+						$("#zanrContainter").html(html);
+				}
+		});
+	}else {
+		$.ajax({
+				url: "rest/mo/director/"+zanr,
+				type: "GET",
+				success: function(data) {
+						$("#zanrContainter").html("");
+						var html = "";
+						for(let i = 0; i < data.length; i++){
+						$.ajax({
+								async: false,
+								url: "rest/dir/" + data[i].directorsID,
+								type: "GET",
+								success: function(data) {
+										genre = data[0];
+								}
+						});
+						let modalText =  "  Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
+						html += `
+						<div class="col-lg-4">
+					  <div class="card" style="width: 18rem;">
+					  <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1822f960da3%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1822f960da3%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22107.1953125%22%20y%3D%2296.3%22%3E286x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" class="card-img-top" alt="...">
+					 	 <div class="card-body">
+					 		 <h5 class="card-title">`+ data[i].movie_title +`</h5>
+					 		 <p class="card-text"> `+ data[i].movie_summary +`</p>
+					 		 <p>
+							 <button type="button" class="btn btn-primary" onclick="showModal('`+modalText+`')">
+					 			view more
+					 			 </button>
+					 		 </p>
+					 	 </div>
+					  </div>
+					  </div>
+						`;
+						}
+						$("#zanrContainter").html(html);
+				}
+		});
+	}
+		  }
 
-<script>
-getA('all');
-function getA(zanr){
-let directors;
-let genre;
-if(zanr=="all"){
-	$.ajax({
-			url: "rest/mo",
-			type: "GET",
-			success: function(data) {
-					$("#zanrContainter").html("");
-					var html = "";
-					for(let i = 0; i < data.length; i++){
-					$.ajax({
-							async: false,
-							url: "rest/mo/director/" + data[i].directorsID,
-							type: "GET",
-							success: function(data) {
-									directors = data[0];
-							}
-					});
-					let modalText = "Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
-					html += `
-					<div class="col-lg-4">
-				  <div class="card" style="width: 18rem;">
-				  <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1822f960da3%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1822f960da3%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22107.1953125%22%20y%3D%2296.3%22%3E286x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" class="card-img-top" alt="...">
-				 	 <div class="card-body">
-				 		 <h5 class="card-title">`+ data[i].movie_title +`</h5>
-				 		 <p class="card-text"> `+ data[i].movie_summary +`</p>
-				 		 <p>
-						 <button type="button" class="btn btn-primary" onclick="showModal('`+modalText+`')">
-						view more
-						 </button>
-				 		 </p>
-				 	 </div>
-				  </div>
-				  </div>
-					`;
-					}
-					$("#zanrContainter").html(html);
-			}
-	});
-}else {
-	$.ajax({
-			url: "rest/mo/director/"+zanr,
-			type: "GET",
-			success: function(data) {
-					$("#zanrContainter").html("");
-					var html = "";
-					for(let i = 0; i < data.length; i++){
-					$.ajax({
-							async: false,
-							url: "rest/dir/" + data[i].directorsID,
-							type: "GET",
-							success: function(data) {
-									genre = data[0];
-							}
-					});
-					let modalText = " Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
-					html += `
-					<div class="col-lg-4">
-				  <div class="card" style="width: 18rem;">
-				  <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1822f960da3%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1822f960da3%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22107.1953125%22%20y%3D%2296.3%22%3E286x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" class="card-img-top" alt="...">
-				 	 <div class="card-body">
-				 		 <h5 class="card-title">`+ data[i].movie_title +`</h5>
-				 		 <p class="card-text"> `+ data[i].movie_summary +`</p>
-				 		 <p>
-						 <button type="button" class="btn btn-primary" onclick="showModal('`+modalText+`')">
-				 			view more
-				 			 </button>
-				 		 </p>
-				 	 </div>
-				  </div>
-				  </div>
-					`;
-					}
-					$("#zanrContainter").html(html);
-			}
-	});
-}
+	filterSelection("all")
+	function filterSelection(c) {
+	  var x, i;
+	  x = document.getElementsByClassName("filterDiv");
+	  if (c == "all") c = "";
+	  for (i = 0; i < x.length; i++) {
+	    w3RemoveClass(x[i], "show");
+	    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
 	  }
+	}
 
-filterSelection("all")
-function filterSelection(c) {
-  var x, i;
-  x = document.getElementsByClassName("filterDiv");
-  if (c == "all") c = "";
-  for (i = 0; i < x.length; i++) {
-    w3RemoveClass(x[i], "show");
-    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
-  }
-}
+	function w3AddClass(element, name) {
+	  var i, arr1, arr2;
+	  arr1 = element.className.split(" ");
+	  arr2 = name.split(" ");
+	  for (i = 0; i < arr2.length; i++) {
+	    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+	  }
+	}
 
-function w3AddClass(element, name) {
-  var i, arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (i = 0; i < arr2.length; i++) {
-    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
-  }
-}
+	function w3RemoveClass(element, name) {
+	  var i, arr1, arr2;
+	  arr1 = element.className.split(" ");
+	  arr2 = name.split(" ");
+	  for (i = 0; i < arr2.length; i++) {
+	    while (arr1.indexOf(arr2[i]) > -1) {
+	      arr1.splice(arr1.indexOf(arr2[i]), 1);
+	    }
+	  }
+	  element.className = arr1.join(" ");
+	}
 
-function w3RemoveClass(element, name) {
-  var i, arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (i = 0; i < arr2.length; i++) {
-    while (arr1.indexOf(arr2[i]) > -1) {
-      arr1.splice(arr1.indexOf(arr2[i]), 1);
-    }
-  }
-  element.className = arr1.join(" ");
-}
+	// Add active class to the current button (highlight it)
+	var btnContainer = document.getElementById("myBtnContainer");
+	var btns = btnContainer.getElementsByClassName("btn");
+	for (var i = 0; i < btns.length; i++) {
+	  btns[i].addEventListener("click", function(){
+	    var current = document.getElementsByClassName("active");
+	    current[0].className = current[0].className.replace(" active", "");
+	    this.className += " active";
+	  });
+	}
+	</script>
 
-// Add active class to the current button (highlight it)
-var btnContainer = document.getElementById("myBtnContainer");
-var btns = btnContainer.getElementsByClassName("btn");
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function(){
-    var current = document.getElementsByClassName("active");
-    current[0].className = current[0].className.replace(" active", "");
-    this.className += " active";
-  });
-}
-</script>
+
 </body>
 <script>
 

@@ -71,7 +71,7 @@
                             <i class="fa fa-user fa-fw"></i> MENU <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                            <li><a href="#profile"><i class="fa fa-user fa-fw"></i> User Profile</a>
                             </li>
                             <li class="divider"></li>
                             <li><a href="#" onclick="doLogout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -84,7 +84,7 @@
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
-                            <li class="sidebar-search">
+                            <li id="searchForm" class="sidebar-search">
                                 <div class="input-group custom-search-form">
                                     <input type="text" class="form-control" placeholder="Search...">
                                     <span class="input-group-btn">
@@ -161,6 +161,7 @@
                                 <section id="view_2" data-load="view_2.html"></section>
                                 <section id="users" data-load="users.html"></section>
                                 <section id="comments" data-load="comments.html"></section>
+                                <section id="profile" data-load="profile.html"></section>
 
                               </main>
 
