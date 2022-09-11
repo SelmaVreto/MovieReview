@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Directors</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="icon" type="image/x-icon" href="https://img.icons8.com/officel/344/documentary.png">
+	<style>
+
+.logo img {
+	height: 30px;
+  width: 30px;
+}
+.v {
+background:#D98880;
+color: black;
+margin-top: 7px;
+border-radius: 7px;
+}
+.card-img-top{
+	border-radius: 20px;
+}
+.va {
+background: #fab1a0 ;
+color: black;
+margin-left: 100px;
+margin-top: 7px;
+border-radius: 7px;
+}
+.va:hover{
+	background-color: #D98880;
+}
+
+.vaa {
+background: #fab1a0 ;
+color: black;
+margin-top: 7px;
+margin-left: 10px;
+border-radius: 7px;
+}
+.vaa:hover{
+	background-color: #D98880;
+}
+.page{
+	background-color: #74b9ff;
+}
+.show {
+  display: block;
+}
+.container {
+  margin-top: 20px;
+  overflow: hidden;
+}
+.btn {
+  background-color: #fab1a0;
+}
+.btn:hover{
+	background-color: #D98880;
+}
+.btn-a {
+  background-color: #fab1a0;
+	border-radius: 7px;
+}
+.btn-a:hover{
+	background-color: #D98880;
+}
+.b{
+	color: #d63031;
+}
+.a{
+margin-top:100px;
+text-align: center;
+}
+.card{
+	margin-top:20px;
+	border-radius: 20px;
+}
+	</style>
+</head>
+<body class="page">
+  <header>
+	  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+	    <div class="container-fluid">
+				<li><a class="logo" href="index.html"><img src="https://img.icons8.com/officel/344/documentary.png"></a></li>
+	      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="navbar-toggler-icon"></span>
+	      </button>
+	      <div class="collapse navbar-collapse" id="navbarCollapse">
+	        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+						<li class="nav-item">
+							<button class="v" onclick="home()" >Home</button>
+						</li>
+						<li class="nav-item">
+							<button class="va" onclick="genre()" >Genres</button>
+						</li>
+						<li class="nav-item">
+							<button class="vaa" onclick="directors()" >Directors</button>
+						</li>
+						<li class="nav-item">
+							<button class="vaa" onclick="years()" >Years</button>
+						</li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+	</header>
+	<main class="a">
+  <script type="text/javascript">
+                function doLogout(){
+                  window.localStorage.clear();
+                  window.location = "login.html";
+                }
+    </script>
+		<script src="js/jquery-3.6.0.min.js"></script>
+		<script src="js/bootstrap.bundle.min.js"></script>
+		<!-- Control buttons -->
+<div id="myBtnContainer">
+	  <button class="btn active" onclick="getA('all')"> Show all</button>
+  <button class="btn" onclick="getA(1)"> Matt Reeves</button>
+  <button class="btn" onclick="getA(2)"> Jon Watts</button>
+  <button class="btn" onclick="getA(3)"> Noel Cleary</button>
+  <button class="btn" onclick="getA(4)"> Peter Flinth</button>
+
+</div>
+
+<div class="container">
+	<div id="dirContainter" class="row"></div>
+
+	</div>
+  <script type="text/javascript">
+                function Login(){
+                  window.location = "login.html";
+                }
+								function genre(){
+									window.location = "genre.html";
+								}
+								function directors(){
+									window.location = "directors.html";
+								}
+								function years(){
+									window.location = "years.html";
+								}
+								function home(){
+									window.location = "index.html";
+								}
+    </script>
+</main>
+<footer class="text-muted py-5">
+	<div class="container">
+		<p style="text-align:center;">
+			<a class="b" href="#">Back to top</a>
+		</p>
+		</div>
+</footer>
+<script>
+getA('all');
+function getA(dir){
+let directors;
+let genre;
+if(dir=="all"){
+	$.ajax({
+			url: "rest/mo",
+			type: "GET",
+			success: function(data) {
+					$("#dirContainter").html("");
+					var html = "";
+					for(let i = 0; i < data.length; i++){
+						$.ajax({
+								async: false,
+								url: "rest/gen/" + data[i].genreID,
+								type: "GET",
+								success: function(data) {
+										genre = data[0];
+								}
+						});
+					let modalText = "Genre: " + genre.genre_name  + ",  Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
+					html += `
+					<div class="col-lg-4">
+				  <div class="card" style="width: 18rem;">
+				  <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1822f960da3%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1822f960da3%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22107.1953125%22%20y%3D%2296.3%22%3E286x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" class="card-img-top" alt="...">
+				 	 <div class="card-body">
+				 		 <h5 class="card-title">`+ data[i].movie_title +`</h5>
+				 		 <p class="card-text"> `+ data[i].movie_summary +`</p>
+				 		 <p>
+						 <button type="button" class="btn btn-primary" onclick="showModal('`+modalText+`')">
+						view more
+						 </button>
+				 		 </p>
+				 	 </div>
+				  </div>
+				  </div>
+					`;
+					}
+					$("#dirContainter").html(html);
+			}
+	});
+}else {
+	$.ajax({
+			url: "rest/mo/director/"+dir,
+			type: "GET",
+			success: function(data) {
+					$("#dirContainter").html("");
+					var html = "";
+					for(let i = 0; i < data.length; i++){
+					$.ajax({
+							async: false,
+							url: "rest/dir/" + data[i].directorsID,
+							type: "GET",
+							success: function(data) {
+									genre = data[0];
+							}
+					});
+					let modalText =  "  Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
+					html += `
+					<div class="col-lg-4">
+				  <div class="card" style="width: 18rem;">
+				  <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1822f960da3%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1822f960da3%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22107.1953125%22%20y%3D%2296.3%22%3E286x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" class="card-img-top" alt="...">
+				 	 <div class="card-body">
+				 		 <h5 class="card-title">`+ data[i].movie_title +`</h5>
+				 		 <p class="card-text"> `+ data[i].movie_summary +`</p>
+				 		 <p>
+						 <button type="button" class="btn btn-primary" onclick="showModal('`+modalText+`')">
+				 			view more
+				 			 </button>
+				 		 </p>
+				 	 </div>
+				  </div>
+				  </div>
+					`;
+					}
+					$("#dirContainter").html(html);
+			}
+	});
+}
+	  }
+
+filterSelection("all")
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("filterDiv");
+  if (c == "all") c = "";
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+  }
+}
+
+function w3AddClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+  }
+}
+
+function w3RemoveClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);
+    }
+  }
+  element.className = arr1.join(" ");
+}
+
+// Add active class to the current button (highlight it)
+var btnContainer = document.getElementById("myBtnContainer");
+var btns = btnContainer.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function(){
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
+</script>
+</body>
+<script>
+  function showModal(str){
+  //  $.get('rest/movie/'+id, function(data){
+    //  console.log(data);
+      $("#exampleModal .modal-body").html(str);
+      $("#exampleModal").modal("show");
+  //  })
+  }
+// });
+ </script>
+
+ <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</html>
