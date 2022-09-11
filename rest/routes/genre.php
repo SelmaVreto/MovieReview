@@ -24,7 +24,7 @@ Flight::route('GET /genre/@id', function($id){
   Flight::json(Flight::genreService()->get_by_id($id));
 });
 /**
- * @OA\Get(path="/selma/{id}", tags={"genre"},
+ * @OA\Get(path="/gen/{id}", tags={"nonreg"},
  *         summary="Return genre by id from API. ",
  *     @OA\Parameter(in="path", name="id", example=1, description="Id of genre"),
  *     @OA\Response(response="200", description="One genre.")

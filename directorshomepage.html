@@ -53,6 +53,7 @@
 	}
 	.card{
 		margin-top:20px;
+		text-align: center;
 	}
 
 
@@ -76,7 +77,7 @@
 							<button class="v" onclick="doLogout()" >Register</button>
 	          </li>
 						<li class="nav-item">
-							<button class="va" onclick="zanr()" >Directors</button>
+							<button class="va" onclick="dir()" >Directors</button>
 						</li>
 						<li><a href="homepage.html" class="logo"><img src="https://img.icons8.com/cute-clipart/344/circled-left.png"></a></li>
 
@@ -111,7 +112,7 @@
 </div>
 
 <div class="container">
-	<div id="zanrContainter" class="row"></div>
+	<div id="dirContainter" class="row"></div>
 
 	</div>
 </div>
@@ -125,26 +126,26 @@
 </footer>
 <script>
 getA('all');
-function getA(zanr){
+function getA(dir){
 let directors;
 let genre;
-if(zanr=="all"){
+if(dir=="all"){
 	$.ajax({
 			url: "rest/mo",
 			type: "GET",
 			success: function(data) {
-					$("#zanrContainter").html("");
+					$("#dirContainter").html("");
 					var html = "";
 					for(let i = 0; i < data.length; i++){
-					$.ajax({
-							async: false,
-							url: "rest/mo/director/" + data[i].directorsID,
-							type: "GET",
-							success: function(data) {
-									directors = data[0];
-							}
-					});
-					let modalText = "Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
+						$.ajax({
+								async: false,
+								url: "rest/gen/" + data[i].genreID,
+								type: "GET",
+								success: function(data) {
+										genre = data[0];
+								}
+						});
+					let modalText = "Genre: " + genre.genre_name  + ",  Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
 					html += `
 					<div class="col-lg-4">
 				  <div class="card" style="width: 18rem;">
@@ -162,15 +163,15 @@ if(zanr=="all"){
 				  </div>
 					`;
 					}
-					$("#zanrContainter").html(html);
+					$("#dirContainter").html(html);
 			}
 	});
 }else {
 	$.ajax({
-			url: "rest/mo/director/"+zanr,
+			url: "rest/mo/director/"+dir,
 			type: "GET",
 			success: function(data) {
-					$("#zanrContainter").html("");
+					$("#dirContainter").html("");
 					var html = "";
 					for(let i = 0; i < data.length; i++){
 					$.ajax({
@@ -199,7 +200,7 @@ if(zanr=="all"){
 				  </div>
 					`;
 					}
-					$("#zanrContainter").html(html);
+					$("#dirContainter").html(html);
 			}
 	});
 }

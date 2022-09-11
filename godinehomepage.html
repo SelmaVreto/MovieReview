@@ -53,6 +53,7 @@
 	}
 	.card{
 		margin-top:20px;
+		text-align: center;
 	}
 
 	</style>
@@ -110,31 +111,31 @@
 </div>
 
 <div class="container">
-	<div id="zanrContainter" class="row"></div>
+	<div id="godContainter" class="row"></div>
 
 	</div>
 	<script>
 	getA('all');
-	function getA(zanr){
+	function getA(god){
 	let directors;
 	let genre;
-	if(zanr=="all"){
+	if(god=="all"){
 		$.ajax({
 				url: "rest/mo",
 				type: "GET",
 				success: function(data) {
-						$("#zanrContainter").html("");
+						$("#godContainter").html("");
 						var html = "";
 						for(let i = 0; i < data.length; i++){
-						$.ajax({
-								async: false,
-								url: "rest/mo/director/" + data[i].directorsID,
-								type: "GET",
-								success: function(data) {
-										directors = data[0];
-								}
-						});
-						let modalText = "Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
+							$.ajax({
+									async: false,
+									url: "rest/gen/" + data[i].genreID,
+									type: "GET",
+									success: function(data) {
+											genre = data[0];
+									}
+							});
+							let modalText = "Genre: " + genre.genre_name  + ",  Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
 						html += `
 						<div class="col-lg-4">
 					  <div class="card" style="width: 18rem;">
@@ -152,15 +153,15 @@
 					  </div>
 						`;
 						}
-						$("#zanrContainter").html(html);
+						$("#godContainter").html(html);
 				}
 		});
 	}else {
 		$.ajax({
-				url: "rest/mo/director/"+zanr,
+				url: "rest/mo/director/"+god,
 				type: "GET",
 				success: function(data) {
-						$("#zanrContainter").html("");
+						$("#godContainter").html("");
 						var html = "";
 						for(let i = 0; i < data.length; i++){
 						$.ajax({
@@ -189,7 +190,7 @@
 					  </div>
 						`;
 						}
-						$("#zanrContainter").html(html);
+						$("#godContainter").html(html);
 				}
 		});
 	}

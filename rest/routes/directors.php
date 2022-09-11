@@ -31,7 +31,11 @@ Flight::route('GET /directors/@id', function($id){
   Flight::json(Flight::directorsService()->get_by_id($id));
 });
 /**
- * za neegistrovane
+ * @OA\Get(path="/dir/{id}", tags={"nonreg"},
+ *         summary="Return directors by id from API. ",
+ *     @OA\Parameter(in="path", name="id", example=1, description="Id of director"),
+ *     @OA\Response(response="200", description="One director.")
+ * )
  */
 Flight::route('GET /dir/@id', function($id){
   Flight::json(Flight::directorsService()->get_by_id($id));

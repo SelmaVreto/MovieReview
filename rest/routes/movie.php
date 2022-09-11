@@ -13,7 +13,10 @@ Flight::route('GET /movie', function(){
    Flight::json(Flight::movieService()->get_movie($search, $offset, $limit));
 });
 /**
- * za neregistrovane filmovi
+ * @OA\Get(path="/mo", tags={"nonreg"},
+ *         summary="Return all movies from API. ",
+ *         @OA\Response( response=200, description="List of movies.")
+ * )
  */
 Flight::route('GET /mo', function(){
   $offset = Flight::query('offset', 0);
@@ -23,19 +26,30 @@ Flight::route('GET /mo', function(){
    Flight::json(Flight::movieService()->get_movie($search, $offset, $limit));
 });
 /**
- * za neregistrovane zanrovi
+ * @OA\Get(path="/mo/genre/{id}", tags={"nonreg"},
+ *         summary="Return movie by genre from API. ",
+ *     @OA\Parameter(in="path", name="id", example=1, description="Id of movie"),
+ *         @OA\Response( response=200, description="List of movies.")
+ * )
  */
  Flight::route('GET /mo/genre/@id', function($genreID){
     Flight::json(Flight::movieService()->get_movie_by_genre($genreID));
  });
  /**
-  * za neregistrovane directors
+  * @OA\Get(path="/mo/director/{id}", tags={"nonreg"},
+  *         summary="Return movie by genre from API. ",
+  *     @OA\Parameter(in="path", name="id", example=1, description="Id of movie"),
+  *         @OA\Response( response=200, description="List of movies.")
+  * )
   */
   Flight::route('GET /mo/director/@id', function($directorsID){
      Flight::json(Flight::movieService()->get_movie_by_director($directorsID));
   });
   /**
-   * za neregistrovane years
+   * @OA\Get(path="/mo/year/{id}", tags={"nonreg"},
+   *         summary="Return movie by genre from API. ",
+   *     @OA\Parameter(in="path", name="id", example=2021, description="Id of movie"),
+   *         @OA\Response( response=200, description="List of movies.")
    * )
    */
   Flight::route('GET /mo/year/@id', function($movie_year){

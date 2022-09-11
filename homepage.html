@@ -201,7 +201,7 @@ function search(entity){
 	let genre;
 
 		$.ajax({
-				url: 'rest/movie?search=' + entity['movie_title'],
+				url: 'rest/mo?search=' + entity['movie_title'],
 				type: 'GET',
 				data: JSON.stringify(entity),
 				contentType: "application/json",
@@ -212,16 +212,13 @@ function search(entity){
 						for(let i = 0; i < data.length; i++){
 						$.ajax({
 								async: false,
-								url: "rest/genre/" + data[i].genreID,
+								url: "rest/gen/" + data[i].genreID,
 								type: "GET",
 								success: function(data) {
 										genre = data[0];
 								}
 						});
-						let modalText =
-						"Genre: " + genre.genre_name
-						+ "  ,Year: " + data[i].movie_year
-						+ "  ,Rating: " + data[i].movie_rat_rewID
+						let modalText = "Genre: " + genre.genre_name  + ",  Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
 						html += `
 						<div class="col-lg-4">
 					  <div class="card" style="width: 18rem;">
