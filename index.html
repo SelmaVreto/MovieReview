@@ -52,6 +52,7 @@ border-radius: 7px;
 }
 .btn {
   background-color: #fab1a0;
+	border: none;
 }
 .btn:hover{
 	background-color: #D98880;
@@ -63,9 +64,6 @@ border-radius: 7px;
 .btn-a:hover{
 	background-color: #D98880;
 }
-.b{
-	color: #d63031;
-}
 .a{
 margin-top:100px;
 text-align: center;
@@ -74,6 +72,51 @@ text-align: center;
 	margin-top:20px;
 	border-radius: 20px;
 }
+
+.dropbtn {
+  background-color: #74b9ff;
+	margin-left: 1100px;
+  color: white;
+  padding: 10px;
+  font-size: 13px;
+  border: none;
+	border-radius: 10px;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+	margin-left: 1000px;
+	border-radius: 10px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ea9999;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #ea9999;}
 	</style>
 </head>
 <body class="page">
@@ -95,6 +138,13 @@ text-align: center;
 						<li class="nav-item">
 							<button class="vaa" onclick="years()" >Years</button>
 						</li>
+						<div class="dropdown">
+							<button class="dropbtn">Menu</button>
+							<div class="dropdown-content">
+								<a href="profile.html">Profile</a>
+								<a onclick="Logout()">Log out</a>
+							</div>
+						</div>
 	        </ul>
 	      </div>
 	    </div>
@@ -137,6 +187,10 @@ text-align: center;
 								}
 								function years(){
 									window.location = "years.html";
+								}
+								function Logout(){
+									window.localStorage.clear();
+									window.location = "login.html";
 								}
     </script>
 		<script src="js/jquery-3.6.0.min.js"></script>
