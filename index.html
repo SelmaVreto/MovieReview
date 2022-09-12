@@ -75,7 +75,7 @@ text-align: center;
 
 .dropbtn {
   background-color: #74b9ff;
-	margin-left: 1100px;
+	margin-left: 990px;
   color: white;
   padding: 10px;
   font-size: 13px;
@@ -97,7 +97,7 @@ text-align: center;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-	margin-left: 1000px;
+	margin-left: 890px;
 	border-radius: 10px;
 }
 
@@ -137,6 +137,9 @@ text-align: center;
 						</li>
 						<li class="nav-item">
 							<button class="vaa" onclick="years()" >Years</button>
+						</li>
+						<li class="nav-item">
+							<button class="vaa" onclick="comments()" > Comments</button>
 						</li>
 						<div class="dropdown">
 							<button class="dropbtn">Menu</button>
@@ -191,6 +194,9 @@ text-align: center;
 								function Logout(){
 									window.localStorage.clear();
 									window.location = "login.html";
+								}
+								function comments(){
+									window.location = "comments.html";
 								}
     </script>
 		<script src="js/jquery-3.6.0.min.js"></script>

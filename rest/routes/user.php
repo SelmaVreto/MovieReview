@@ -20,7 +20,16 @@ use Firebase\JWT\Key;
 Flight::route('GET /user/@id', function($id){
   Flight::json(Flight::userService()->get_by_id(Flight::get('user')['id']));
 });
-
+/**
+ * @OA\Get(path="/us/{id}", tags={"user"},
+ *         summary="Return genre by id from API. ",
+ *     @OA\Parameter(in="path", name="id", example=1, description="Id of genre"),
+ *     @OA\Response(response="200", description="One genre.")
+ * )
+ */
+Flight::route('GET /us/@id', function($id){
+  Flight::json(Flight::userService()->get_by_id($id));
+});
 /**
  * @OA\Post(path="/register",tags={"login"},
  *         summary="register user in API. ",

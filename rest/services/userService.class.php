@@ -19,7 +19,6 @@ private $smtpClient;
       return $user;
     }
 
-
   public function get_user_by_email($search, $offset, $limit){
     if ($search){
       return $this->dao->get_user_by_email($search, $offset, $limit);

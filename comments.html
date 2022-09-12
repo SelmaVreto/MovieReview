@@ -78,7 +78,7 @@ text-align: center;
 }
 .dropbtn {
   background-color: #74b9ff;
-	margin-left: 990px;
+	margin-left: 1500px;
   color: white;
   padding: 10px;
   font-size: 13px;
@@ -100,7 +100,7 @@ text-align: center;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-	margin-left: 890px;
+	margin-left: 1400px;
 	border-radius: 10px;
 }
 
@@ -136,18 +136,6 @@ text-align: center;
 						<li class="nav-item">
 							<button class="v" onclick="home()" >Home</button>
 						</li>
-						<li class="nav-item">
-							<button class="va" onclick="genre()" >Genres</button>
-						</li>
-						<li class="nav-item">
-							<button class="vaa" onclick="directors()" >Directors</button>
-						</li>
-						<li class="nav-item">
-							<button class="vaa" onclick="years()" >Years</button>
-						</li>
-						<li class="nav-item">
-							<button class="vaa" onclick="comments()" > Comments</button>
-						</li>
 						<div class="dropdown">
 							<button class="dropbtn">Menu</button>
 							<div class="dropdown-content">
@@ -167,46 +155,18 @@ text-align: center;
                 }
     </script>
 		<!-- Control buttons -->
-<div id="myBtnContainer">
-	  <button class="btn active" onclick="getA('all')"> Show all</button>
-  <button class="btn" onclick="getA(1)"> 2008</button>
-  <button class="btn" onclick="getA(2)"> 2009</button>
-  <button class="btn" onclick="getA(3)"> 2021</button>
-	<button class="btn" onclick="getA(4)"> 2022</button>
-
-
-</div>
 
 <div class="container">
 	<div id="godContainter" class="row"></div>
 
 	</div>
   </main>
-  <footer class="text-muted py-5">
-    <div class="container">
-      <p style="text-align:center;">
-        <a class="b" href="#">Back to top</a>
-      </p>
-      </div>
-  </footer>
   <script type="text/javascript">
                 function Login(){
                   window.location = "login.html";
                 }
-								function genre(){
-									window.location = "genre.html";
-								}
-								function directors(){
-									window.location = "directors.html";
-								}
-								function years(){
-									window.location = "years.html";
-								}
 								function home(){
 									window.location = "index.html";
-								}
-								function comments(){
-									window.location = "comments.html";
 								}
     </script>
   <script src="js/jquery-3.6.0.min.js"></script>
@@ -236,7 +196,6 @@ text-align: center;
 						html += `
 						<div class="col-lg-4">
 					  <div class="card" style="width: 18rem;">
-					  <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1822f960da3%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1822f960da3%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22107.1953125%22%20y%3D%2296.3%22%3E286x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" class="card-img-top" alt="...">
 					 	 <div class="card-body">
 					 		 <h5 class="card-title">`+ data[i].movie_title +`</h5>
 					 		 <p class="card-text"> `+ data[i].movie_summary +`</p>

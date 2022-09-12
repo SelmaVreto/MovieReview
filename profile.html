@@ -1,0 +1,246 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Home</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="icon" type="image/x-icon" href="https://img.icons8.com/officel/344/documentary.png">
+	<style>
+
+.logo img {
+	height: 30px;
+  width: 30px;
+}
+.v {
+background:#e17055;
+color: black;
+margin-top: 7px;
+}
+.card-img-top{
+	border-radius: 20px;
+}
+.va {
+background: #fab1a0 ;
+color: black;
+margin-left: 100px;
+margin-top: 7px;
+border-radius: 7px;
+}
+.va:hover{
+	background-color: #D98880;
+}
+
+.vaa {
+background: #fab1a0 ;
+color: black;
+margin-top: 7px;
+margin-left: 10px;
+border-radius: 7px;
+}
+.vaa:hover{
+	background-color: #D98880;
+}
+.page{
+	background-color: #74b9ff;
+}
+.show {
+  display: block;
+}
+.container {
+  margin-top: 20px;
+  overflow: hidden;
+}
+.btn {
+  background-color: #fab1a0;
+	border: none;
+}
+.btn:hover{
+	background-color: #D98880;
+}
+.btn-a {
+  background-color: #fab1a0;
+	border-radius: 7px;
+}
+.btn-a:hover{
+	background-color: #D98880;
+}
+.a{
+margin-top:100px;
+text-align: center;
+}
+.home{
+	margin-left: 20px;
+	margin-top: 7px;
+	border-radius: 7px;
+	background:#D98880;
+	color: black;
+}
+.card{
+	margin-top:20px;
+	border-radius: 20px;
+}
+
+.dropbtn {
+  background-color: #74b9ff;
+	margin-left: 1550px;
+  color: white;
+  padding: 10px;
+  font-size: 13px;
+  border: none;
+	border-radius: 10px;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+	margin-left: 1450px;
+	border-radius: 10px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.name{
+	color: #fc8f83;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ea9999;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #ea9999;}
+	</style>
+</head>
+<body class="page">
+	<header>
+	  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+	    <div class="container-fluid">
+				<li><a class="logo" href="index.html"><img src="https://img.icons8.com/officel/344/documentary.png"></a></li>
+	      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="navbar-toggler-icon"></span>
+	      </button>
+	      <div class="collapse navbar-collapse" id="navbarCollapse">
+	        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+						<li class="nav-item">
+							<button class="home" onclick="home()" >Home</button>
+						</li>
+						<div class="dropdown">
+							<button class="dropbtn">Menu</button>
+							<div class="dropdown-content">
+								<a href="profile.html">Profile</a>
+								<a onclick="Logout()">Log out</a>
+							</div>
+						</div>
+	        </ul>
+	      </div>
+	    </div>
+	</header>
+
+	<main class="a">
+</div>
+</div>
+		<div class="container">
+		    <div id="lista" class="row">
+					<span>Loading in progress...</span>
+		      <div class="col-lg-4">
+		        <h2></h2>
+		        <p></p>
+		      </div><!-- /.col-lg-4 -->
+		    </div><!-- /.row -->
+			</div>
+			<!-- Button trigger modal -->
+		</main>
+  <script type="text/javascript">
+								function Logout(){
+									window.localStorage.clear();
+									window.location = "login.html";
+								}
+								function home(){
+									window.location = "index.html";
+								}
+    </script>
+		<script src="js/jquery-3.6.0.min.js"></script>
+		<script src="js/bootstrap.bundle.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+</body>
+<script>
+getM();
+function getM(){
+let genre;
+	$.ajax({
+			url: "rest/genre",
+			type: "GET",
+			success: function(data) {
+				$("#lista").html("");
+				var html = "";
+				for(let i = 0; i < data.length; i++){
+				html += `
+				<div class="container rounded bg-white mt-5 mb-5">
+				<div class="row">
+						<div class="col-md-3 border-right">
+								<div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="text-black-50">`+ data[i].id +`</span><span> </span></div>
+						</div>
+						<div class="col-md-5 border-right">
+								<div class="p-3 py-5">
+										<div class="d-flex justify-content-between align-items-center mb-3">
+												<h4 class="text-right">Profile</h4>
+										</div>
+										<div class="row mt-2">
+										<div class="col-md-12"><label class="labels">Name: `+ data[i].id +`</label></div>
+										<div class="col-md-12"><label class="labels">Surname: `+ data[i].genre_name +`</label></div>
+										<div class="col-md-12"><label class="labels">Username: `+ data[i].genre_name +`</label></div>
+										</div>
+								</div>
+						</div>
+				</div>
+		</div>
+				`;
+				}
+				$("#lista").html(html);
+							}
+	});
+	  }
+$(function(){
+	 if (!window.localStorage.getItem("token")){
+		 window.location="login.html";
+	 }else{
+		 $('body').show();
+	 }
+ });
+ </script>
+
+ <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">about</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</html>
