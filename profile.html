@@ -121,6 +121,12 @@ text-align: center;
 .name{
 	color: #fc8f83;
 }
+.row{
+	text-align: left;
+	text-decoration: underline;
+	text-decoration-color: blue;
+
+}
 
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {background-color: #ea9999;}
@@ -189,7 +195,7 @@ getM();
 function getM(){
 let genre;
 	$.ajax({
-			url: "rest/user/1",
+			url: "rest/user/47",
 			type: "GET",
 			success: function(data) {
 				$("#lista").html("");
@@ -198,7 +204,7 @@ let genre;
 				<div class="container rounded bg-white mt-5 mb-5">
 				<div class="row">
 						<div class="col-md-3 border-right">
-								<div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="text-black-50">`+ data.id +`</span><span> </span></div>
+								<div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"><span class="text-black-100">`+ data.email +`</span><span> </span></div>
 						</div>
 						<div class="col-md-5 border-right">
 								<div class="p-3 py-5">
@@ -206,9 +212,10 @@ let genre;
 												<h4 class="text-right">Profile</h4>
 										</div>
 										<div class="row mt-2">
-										<div class="col-md-12"><label class="labels">Name: `+ data.id +`</label></div>
-										<div class="col-md-12"><label class="labels">Surname: `+ data.name +`</label></div>
-										<div class="col-md-12"><label class="labels">Username: `+ data.surname +`</label></div>
+										<div class="col-md-12"><label class="labels">Name: `+ data.name +`</label></div>
+										<div class="col-md-12"><label class="labels">Surname: `+ data.surname +`</label></div>
+										<div class="col-md-12"><label class="labels">Username: `+ data.username +`</label></div>
+										<div class="col-md-12"><label class="labels">Date of access to the application: `+ data.created_at +`</label></div>
 										</div>
 								</div>
 						</div>
