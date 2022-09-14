@@ -14,10 +14,6 @@ private $smtpClient;
     $this->smtpClient = new SMTPClient();
   }
 
-  public function get_by_id($id){
-     $user = $this->dao->get_by_id($id);
-      return $user;
-    }
 
   public function get_user_by_email($search, $offset, $limit){
     if ($search){

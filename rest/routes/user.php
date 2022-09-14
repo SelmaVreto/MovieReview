@@ -14,11 +14,12 @@ use Firebase\JWT\Key;
 /**
  * @OA\Get(path="/user/{id}", tags={"user"}, security={{"ApiKeyAuth": {}}},
  *         summary="Return your profile from API.",
+ *     @OA\Parameter(in="path", name="id", example=1, description="Id of genre"),
  *     @OA\Response(response="200", description="One movie.")
  * )
  */
 Flight::route('GET /user/@id', function($id){
-  Flight::json(Flight::userService()->get_by_id(Flight::get('user')['id']));
+  Flight::json(Flight::userService()->get_by_id($id));
 });
 /**
  * @OA\Post(path="/register",tags={"login"},
