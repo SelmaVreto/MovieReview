@@ -32,7 +32,6 @@ Flight::route('GET /movieRat/@id', function($MovieID){
 *    				 @OA\Property(property="movieID", type="int", example="",	description="which film directors" ),
 *    				 @OA\Property(property="comments", type="string", example="",	description="your comment" ),
 *    				 @OA\Property(property="rating", type="int", example="",	description="your comment" )
-
 *          )
 *       )
 *     ),

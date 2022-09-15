@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="utf-8">
-	<title>Comments</title>
+	<title>Home</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="icon" type="image/x-icon" href="https://img.icons8.com/officel/344/documentary.png">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,10 +15,9 @@
   width: 30px;
 }
 .v {
-background:#D98880;
+background:#e17055;
 color: black;
 margin-top: 7px;
-border-radius: 7px;
 }
 .card-img-top{
 	border-radius: 20px;
@@ -58,7 +56,7 @@ border-radius: 7px;
 }
 .btn {
   background-color: #fab1a0;
-	margin-top: 10px;
+	border: none;
 }
 .btn:hover{
 	background-color: #D98880;
@@ -66,12 +64,10 @@ border-radius: 7px;
 .btn-a {
   background-color: #fab1a0;
 	border-radius: 7px;
+	margin-right: 10px;
 }
 .btn-a:hover{
 	background-color: #D98880;
-}
-.b{
-	color: #d63031;
 }
 .a{
 margin-top:100px;
@@ -81,9 +77,10 @@ text-align: center;
 	margin-top:20px;
 	border-radius: 20px;
 }
+
 .dropbtn {
   background-color: #74b9ff;
-	margin-left: 1500px;
+	margin-left: 1400px;
   color: white;
   padding: 10px;
   font-size: 13px;
@@ -105,7 +102,7 @@ text-align: center;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-	margin-left: 1400px;
+	margin-left: 1290px;
 	border-radius: 10px;
 }
 
@@ -125,15 +122,10 @@ text-align: center;
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #ea9999;}
-.col{
-	margin-top: 100px;
-	margin-left: 400px;
-	margin-right: 400px;
-}
 	</style>
 </head>
 <body class="page">
-  <header>
+	<header>
 	  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 	    <div class="container-fluid">
 				<li><a class="logo" href="index.html"><img src="https://img.icons8.com/officel/344/documentary.png"></a></li>
@@ -143,7 +135,7 @@ text-align: center;
 	      <div class="collapse navbar-collapse" id="navbarCollapse">
 	        <ul class="navbar-nav me-auto mb-2 mb-md-0">
 						<li class="nav-item">
-							<button class="v" onclick="home()" >Home</button>
+							<button class="vaa" onclick="comments()" > Comments</button>
 						</li>
 						<div class="dropdown">
 							<button class="dropbtn">Menu</button>
@@ -157,211 +149,81 @@ text-align: center;
 	    </div>
 	  </nav>
 	</header>
+
 	<main class="a">
+		<div class="container">
+		    <div id="lista" class="row">
+					<span>Loading in progress...</span>
+		      <div class="col-lg-4">
+		        <h2></h2>
+		        <p></p>
+		      </div><!-- /.col-lg-4 -->
+		    </div><!-- /.row -->
+			</div>
+			<!-- Button trigger modal -->
+		</main>
   <script type="text/javascript">
-                function doLogout(){
-                  window.localStorage.clear();
-                  window.location = "login.html";
-                }
+
+								function Logout(){
+									window.localStorage.clear();
+									window.location = "login.html";
+								}
+								function comments(){
+									window.location = "comments.html";
+								}
     </script>
 		<script src="js/jquery-3.6.0.min.js"></script>
 		<script src="js/bootstrap.bundle.min.js"></script>
-		<!-- Control buttons -->
-<div class="container">
-	<div id="zanrContainter" class="row"></div>
-
-	</div>
-	<div class="row">
-					<div class="col">
-							<form role="form" id="komentari">
-									<div class="form-group">
-											<label>Leave a comment</label>
-											<textarea class="form-control" rows="3" required minlength="3"></textarea>
-									</div>
-									<div class="form-group">
-											<label>Rate the movie</label>
-											<select class="form-control">
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
-													<option>5</option>
-											</select>
-									</div>
-									<div class="form-group">
-											<label>Chose a movie</label>
-											<select class="form-control">
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
-													<option>5</option>
-											</select>
-									</div>
-									<div class="form-group">
-											<label>User</label>
-											<select class="form-control">
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
-													<option>5</option>
-											</select>
-									</div>
-									<button type="submit" onclick="getM()" class="btn btn-default">Submit Button</button>
-									<button type="reset" class="btn btn-default">Reset Button</button>
-
-							</form>
-					</div>
-					<!-- /.col-lg-6 (nested) -->
-			</div>
-</main>
-<script type="text/javascript">
-							function home(){
-								window.location = "index.html";
-							}
-  </script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+</body>
 <script>
-getA('all');
-function getA(zanr){
+getM();
+
+function getM(){
 let genre;
-if(zanr=="all"){
 	$.ajax({
-			url: "rest/mo",
+			url: "rest/movie",
 			type: "GET",
 			success: function(data) {
-					$("#zanrContainter").html("");
+					$("#lista").html("");
 					var html = "";
 					for(let i = 0; i < data.length; i++){
-						$.ajax({
-								async: false,
-								url: "rest/movieRat/" + data[i].id,
-								type: "GET",
-								success: function(data) {
-										genre = data[0];
-								}
-						});
-					let modalText = " Rating: " + data[i].movie_rat_rewID;
-					let modal = " Comments: " + data[i].comments;
+					$.ajax({
+							async: false,
+							url: "rest/genre/" + data[i].genreID,
+							type: "GET",
+							success: function(data) {
+									genre = data[0];
+							}
+					});
 					html += `
 					<div class="col-lg-4">
 				  <div class="card" style="width: 18rem;">
+						<img src="`+ data[i].image +`" class="card-img-top" alt="...">
 				 		 <h5 class="card-title">`+ data[i].movie_title +`</h5>
-						 <p>
-						 <button type="button" class="btn btn-primary" onclick="showModal('`+modal+`')">
-						 Comments
-						 </button>
-						 <button type="button" class="btn btn-primary" onclick="showModal('`+modalText+`')">
-						 Rating
-						 </button>
+				 		 <p>
+				 			 <button type="button" class="btn btn-primary">
+				 			view more
+				 			 </button>
 				 		 </p>
 				 	 </div>
 				  </div>
 				  </div>
 					`;
 					}
-					$("#zanrContainter").html(html);
+					$("#lista").html(html);
 			}
 	});
-}
-}
-
-filterSelection("all")
-function filterSelection(c) {
-  var x, i;
-  x = document.getElementsByClassName("filterDiv");
-  if (c == "all") c = "";
-  for (i = 0; i < x.length; i++) {
-    w3RemoveClass(x[i], "show");
-    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
-  }
-}
-
-function w3AddClass(element, name) {
-  var i, arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (i = 0; i < arr2.length; i++) {
-    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
-  }
-}
-
-function w3RemoveClass(element, name) {
-  var i, arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (i = 0; i < arr2.length; i++) {
-    while (arr1.indexOf(arr2[i]) > -1) {
-      arr1.splice(arr1.indexOf(arr2[i]), 1);
-    }
-  }
-  element.className = arr1.join(" ");
-}
-
-</script>
-<script>
-function getM(){
-let genre;
-	$.ajax({
-			url: "rest/genre",
-			type: "GET",
-			success: function(data) {
-				$("#lista").html("");
-				var html = "";
-				for(let i = 0; i < data.length; i++){
-				html += `
-				<div class="container rounded bg-white mt-5 mb-5">
-				<div class="row">
-						<div class="col-md-3 border-right">
-								<div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="text-black-50">`+ data[i].id +`</span><span> </span></div>
-						</div>
-						<div class="col-md-5 border-right">
-								<div class="p-3 py-5">
-										<div class="d-flex justify-content-between align-items-center mb-3">
-												<h4 class="text-right">Profile</h4>
-										</div>
-										<div class="row mt-2">
-										<div class="col-md-12"><label class="labels">Name: `+ data[i].id +`</label></div>
-										<div class="col-md-12"><label class="labels">Surname: `+ data[i].genre_name +`</label></div>
-										<div class="col-md-12"><label class="labels">Username: `+ data[i].genre_name +`</label></div>
-										</div>
-								</div>
-						</div>
-				</div>
-		</div>
-				`;
-				}
-				$("#lista").html(html);
-							}
-	});
 	  }
-		</script>
 
-<script>
-  function showModal(str){
-  //  $.get('rest/movie/'+id, function(data){
-    //  console.log(data);
-      $("#exampleModal .modal-body").html(str);
-      $("#exampleModal").modal("show");
-  //  })
-  }
-// });
+
+$(function(){
+	 if (!window.localStorage.getItem("token")){
+		 window.location="login.html";
+	 }else{
+		 $('body').show();
+	 }
+ });
  </script>
 
- <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 </html>
