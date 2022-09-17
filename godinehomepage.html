@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Years</title>
+	<title>Genres</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="icon" type="image/x-icon" href="https://img.icons8.com/officel/344/documentary.png">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -99,7 +99,7 @@ text-align: center;
 	            <a class="nav-link">homepage for non-registered users</a>
 	          </li>
 	          <li class="nav-item">
-							<button class="v" onclick="doLogin()" >Register</button>
+							<button class="v" onclick="doLogout()" >Register</button>
 	          </li>
 						<li class="nav-item">
 							<button class="va" onclick="zanr()" >Years</button>
@@ -119,7 +119,8 @@ text-align: center;
 			In order to become interactive users, i.e. to leave comments, rate movies, see other people's ratings and much more, please register by clicking the button in the upper left corner.
 	 </div>
   <script type="text/javascript">
-                function doLogin(){
+                function doLogout(){
+                  window.localStorage.clear();
                   window.location = "login.html";
                 }
     </script>
@@ -128,143 +129,147 @@ text-align: center;
 		<!-- Control buttons -->
 <div id="myBtnContainer">
 	  <button class="btn active" onclick="getA('all')"> Show all</button>
-  <button class="btn" onclick="getA(1)"> 2008</button>
-  <button class="btn" onclick="getA(2)"> 2009</button>
-  <button class="btn" onclick="getA(3)"> 2021</button>
-	<button class="btn" onclick="getA(4)"> 2022</button>
-
-
+  <button class="btn" onclick="getA(1)"> 2022 </button>
+  <button class="btn" onclick="getA(2)"> 2021 </button>
+  <button class="btn" onclick="getA(3)"> 2009 </button>
+  <button class="btn" onclick="getA(4)"> 2008 </button>
 </div>
 
 <div class="container">
-	<div id="godContainter" class="row"></div>
+	<div id="zanrContainter" class="row"></div>
 
 	</div>
-	<script>
-	getA('all');
-	function getA(god){
-	let directors;
-	let genre;
-	if(god=="all"){
-		$.ajax({
-				url: "rest/mo",
-				type: "GET",
-				success: function(data) {
-						$("#godContainter").html("");
-						var html = "";
-						for(let i = 0; i < data.length; i++){
-							$.ajax({
-									async: false,
-									url: "rest/gen/" + data[i].genreID,
-									type: "GET",
-									success: function(data) {
-											genre = data[0];
-									}
-							});
-							let modalText = "Genre: " + genre.genre_name  + ",  Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
-						html += `
-						<div class="col-lg-4">
-					  <div class="card" style="width: 18rem;">
-						<img src="`+ data[i].image +`" class="card-img-top" alt="...">
-					 		 <h5 class="card-title">`+ data[i].movie_title +`</h5>
-					 		 <p class="card-text"> `+ data[i].movie_summary +`</p>
-					 		 <p>
-							 <button type="button" class="btn btn-primary" onclick="showModal('`+modalText+`')">
-							view more
-							 </button>
-					 		 </p>
-					 	 </div>
-					  </div>
-					  </div>
-						`;
-						}
-						$("#godContainter").html(html);
-				}
-		});
-	}else {
-		$.ajax({
-				url: "rest/mo/director/"+god,
-				type: "GET",
-				success: function(data) {
-						$("#godContainter").html("");
-						var html = "";
-						for(let i = 0; i < data.length; i++){
-						$.ajax({
-								async: false,
-								url: "rest/dir/" + data[i].directorsID,
-								type: "GET",
-								success: function(data) {
-										genre = data[0];
-								}
-						});
-						let modalText =  "  Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
-						html += `
-						<div class="col-lg-4">
-					  <div class="card" style="width: 18rem;">
-						<img src="`+ data[i].image +`" class="card-img-top" alt="...">
-					 		 <h5 class="card-title">`+ data[i].movie_title +`</h5>
-					 		 <p class="card-text"> `+ data[i].movie_summary +`</p>
-					 		 <p>
-							 <button type="button" class="btn btn-primary" onclick="showModal('`+modalText+`')">
-					 			view more
-					 			 </button>
-					 		 </p>
-					 	 </div>
-					  </div>
-					  </div>
-						`;
-						}
-						$("#godContainter").html(html);
-				}
-		});
-	}
-		  }
-
-	filterSelection("all")
-	function filterSelection(c) {
-	  var x, i;
-	  x = document.getElementsByClassName("filterDiv");
-	  if (c == "all") c = "";
-	  for (i = 0; i < x.length; i++) {
-	    w3RemoveClass(x[i], "show");
-	    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+</div>
+</main>
+<footer class="text-muted py-5">
+	<div class="container">
+		<p style="text-align:center;">
+			<a class="b" href="#">Back to top</a>
+		</p>
+		</div>
+</footer>
+<script>
+getA('all');
+function getA(zanr){
+let genre;
+if(zanr=="all"){
+	$.ajax({
+			url: "rest/mo",
+			type: "GET",
+			success: function(data) {
+					$("#zanrContainter").html("");
+					var html = "";
+					for(let i = 0; i < data.length; i++){
+					$.ajax({
+							async: false,
+							url: "rest/gen/" + data[i].genreID,
+							type: "GET",
+							success: function(data) {
+									genre = data[0];
+							}
+					});
+					let modalText = "Genre: " + genre.genre_name  + ",  Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
+					html += `
+					<div class="col-lg-4">
+				  <div class="card" style="width: 18rem;">
+					<img src="`+ data[i].image +`" class="card-img-top" alt="...">
+				 		 <h5 class="card-title">`+ data[i].movie_title +`</h5>
+				 		 <p class="card-text"> `+ data[i].movie_summary +`</p>
+				 		 <p>
+						 <button type="button" class="btn btn-primary" onclick="showModal('`+modalText+`')">
+						view more
+						 </button>
+				 		 </p>
+				 	 </div>
+				  </div>
+				  </div>
+					`;
+					}
+					$("#zanrContainter").html(html);
+			}
+	});
+}else {
+	$.ajax({
+			url: "rest/mo/genre/"+zanr,
+			type: "GET",
+			success: function(data) {
+					$("#zanrContainter").html("");
+					var html = "";
+					for(let i = 0; i < data.length; i++){
+					$.ajax({
+							async: false,
+							url: "rest/gen/" + data[i].genreID,
+							type: "GET",
+							success: function(data) {
+									genre = data[0];
+							}
+					});
+					let modalText = "Genre: " + genre.genre_name  + ",  Year: " + data[i].movie_year + ",  Rating: " + data[i].movie_rat_rewID
+					html += `
+					<div class="col-lg-4">
+				  <div class="card" style="width: 18rem;">
+					<img src="`+ data[i].image +`" class="card-img-top" alt="...">
+				 		 <h5 class="card-title">`+ data[i].movie_title +`</h5>
+				 		 <p class="card-text"> `+ data[i].movie_summary +`</p>
+						 <p>
+				 			 <button type="button" class="btn btn-primary" onclick="showModal('`+modalText+`')">
+				 			view more
+				 			 </button>
+				 		 </p>
+				 	 </div>
+				  </div>
+				  </div>
+					`;
+					}
+					$("#zanrContainter").html(html);
+			}
+	});
+}
 	  }
-	}
 
-	function w3AddClass(element, name) {
-	  var i, arr1, arr2;
-	  arr1 = element.className.split(" ");
-	  arr2 = name.split(" ");
-	  for (i = 0; i < arr2.length; i++) {
-	    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
-	  }
-	}
+filterSelection("all")
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("filterDiv");
+  if (c == "all") c = "";
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+  }
+}
 
-	function w3RemoveClass(element, name) {
-	  var i, arr1, arr2;
-	  arr1 = element.className.split(" ");
-	  arr2 = name.split(" ");
-	  for (i = 0; i < arr2.length; i++) {
-	    while (arr1.indexOf(arr2[i]) > -1) {
-	      arr1.splice(arr1.indexOf(arr2[i]), 1);
-	    }
-	  }
-	  element.className = arr1.join(" ");
-	}
+function w3AddClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+  }
+}
 
-	// Add active class to the current button (highlight it)
-	var btnContainer = document.getElementById("myBtnContainer");
-	var btns = btnContainer.getElementsByClassName("btn");
-	for (var i = 0; i < btns.length; i++) {
-	  btns[i].addEventListener("click", function(){
-	    var current = document.getElementsByClassName("active");
-	    current[0].className = current[0].className.replace(" active", "");
-	    this.className += " active";
-	  });
-	}
-	</script>
+function w3RemoveClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);
+    }
+  }
+  element.className = arr1.join(" ");
+}
 
-
+// Add active class to the current button (highlight it)
+var btnContainer = document.getElementById("myBtnContainer");
+var btns = btnContainer.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function(){
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
+</script>
 </body>
 <script>
 
@@ -283,7 +288,7 @@ text-align: center;
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">about</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

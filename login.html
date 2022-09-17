@@ -72,6 +72,9 @@
   .form-group{
     margin-top: 25px;
   }
+  .button{
+    border-radius: 7px;
+  }
     </style>
         <div class="container">
             <div id="login-form-container" class="row">
@@ -180,7 +183,7 @@
         // $("#register-form-container").addClass("d-none");
         // $("#register-form-alert").removeClass("d-none");
         // $("#register-form-alert .alert").html(data.message);
-        alert("success, confirm email and than login!")
+        alert("success, confirm email and than login!");
       }).fail(function(error) {
       $("#register-link").prop('disabled',false);
       console.log(error);

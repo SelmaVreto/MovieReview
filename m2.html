@@ -221,7 +221,7 @@ text-align: center;
 																					</div>
 																					<div hidden class="form-group">
 																							<label>movieID</label>
-																							<input type="text" name="movieID" value="1" class="form-control">
+																							<input type="text" name="movieID" value="2" class="form-control">
 																					</div>
 																					<div class="form-group">
 																							<label>comments</label>
@@ -313,7 +313,7 @@ $(function(){
  }
  function getAllUsers(){
 	 $.ajax({
-					url: "rest/movieRat/1",
+					url: "rest/movieRat/2",
 					type: "GET",
 				 beforeSend: function(xhr){xhr.setRequestHeader('Authorization', localStorage.getItem("token"));},
 					success: function(data) {

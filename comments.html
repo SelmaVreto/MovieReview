@@ -77,7 +77,12 @@ text-align: center;
 	margin-top:20px;
 	border-radius: 20px;
 }
-
+.v {
+background:#D98880;
+color: black;
+margin-top: 7px;
+border-radius: 7px;
+}
 .dropbtn {
   background-color: #74b9ff;
 	margin-left: 1400px;
@@ -135,6 +140,9 @@ text-align: center;
 	      <div class="collapse navbar-collapse" id="navbarCollapse">
 	        <ul class="navbar-nav me-auto mb-2 mb-md-0">
 						<li class="nav-item">
+							<button class="v" onclick="home()" >Home</button>
+						</li>
+						<li class="nav-item">
 							<button class="vaa" onclick="comments()" > Comments</button>
 						</li>
 						<div class="dropdown">
@@ -152,14 +160,77 @@ text-align: center;
 
 	<main class="a">
 		<div class="container">
-		    <div id="lista" class="row">
-					<span>Loading in progress...</span>
-		      <div class="col-lg-4">
-		        <h2></h2>
-		        <p></p>
-		      </div><!-- /.col-lg-4 -->
-		    </div><!-- /.row -->
+		  <div class="row">
+		    <div class="col-sm">
+					<div class="card" style="width: 18rem;">
+						<img src="https://static.hbo.com/2022-03/the-batman-ka-1920_8.jpg" class="card-img-top" alt="...">
+						 <h5 class="card-title">THE BATMAN</h5>
+						 <p>
+						 <button type="button" class="btn btn-primary" onclick="m1()">
+							 review
+							 </button>
+						 </p>
+					 </div>
+					</div>
+		    <div class="col-sm">
+					<div class="card" style="width: 18rem;">
+						<img src="https://mixer.hr/wp-content/uploads/2021/08/Pazi-spojleri-Sto-znamo-o-novom-filmu-Spider-Man-No-Way-Home-mixer.hr_.jpg" class="card-img-top" alt="...">
+						 <h5 class="card-title">Spider-Man: No Way Home</h5>
+						 <p>
+						 <button type="button" class="btn btn-primary" onclick="m2()">
+							 review
+							 </button>
+						 </p>
+					 </div>
+				 </div>
+				 <div class="col-sm">
+					 <div class="card" style="width: 18rem;">
+						 <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2022/03/Against-the-Ice-true-story.jpg" class="card-img-top" alt="...">
+							<h5 class="card-title">Against the Ice</h5>
+							<p>
+							<button type="button" class="btn btn-primary" onclick="m3()">
+								review
+								</button>
+							</p>
+						</div>
+					 </div>
+		  </div>
+			<div class="row">
+				<div class="col-sm">
+					<div class="card" style="width: 18rem;">
+						<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeaBOjP9gv2n_hHz-hOKQvsJKY8mmCq9mWvVVnp9Z7hW214UneEvuTF_WHBMc_FrtlZzw&usqp=CAU" class="card-img-top" alt="...">
+						 <h5 class="card-title">Cloverfield</h5>
+						 <p>
+						 <button type="button" class="btn btn-primary" onclick="m4()">
+							 review
+							 </button>
+						 </p>
+					 </div>
+					</div>
+				<div class="col-sm">
+					<div class="card" style="width: 18rem;">
+						<img src="https://www.du-hd.com/wp-content/uploads/2019/09/The-Collector-2009-400x240.png" class="card-img-top" alt="...">
+						 <h5 class="card-title">The Collector</h5>
+						 <p>
+						 <button type="button" class="btn btn-primary" onclick="m5()">
+							 review
+							 </button>
+						 </p>
+					 </div>
+				 </div>
+				 <div class="col-sm">
+ 					<div class="card" style="width: 18rem;">
+ 						<img src="https://i0.wp.com/dmtalkies.com/wp-content/uploads/2021/04/ezgif-6-c78c97433c77-compressed.jpg?fit=900%2C506&amp;ssl=1" class="card-img-top" alt="...">
+ 						 <h5 class="card-title">Maya the Bee 3: The Golden Orb</h5>
+ 						 <p>
+ 						 <button type="button" class="btn btn-primary" onclick="m6()">
+ 							 review
+ 							 </button>
+ 						 </p>
+ 					 </div>
+ 				  </div>
 			</div>
+		</div>
 			<!-- Button trigger modal -->
 		</main>
   <script type="text/javascript">
@@ -171,51 +242,33 @@ text-align: center;
 								function comments(){
 									window.location = "comments.html";
 								}
+								function m1(){
+									window.location = "m1.html";
+								}
+								function m2(){
+									window.location = "m2.html";
+								}
+								function m3(){
+									window.location = "m3.html";
+								}
+								function m4(){
+									window.location = "m4.html";
+								}
+								function m5(){
+									window.location = "m5.html";
+								}
+								function m6(){
+									window.location = "m6.html";
+								}
+								function home(){
+									window.location = "index.html";
+								}
     </script>
 		<script src="js/jquery-3.6.0.min.js"></script>
 		<script src="js/bootstrap.bundle.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 </body>
 <script>
-getM();
-
-function getM(){
-let genre;
-	$.ajax({
-			url: "rest/movie",
-			type: "GET",
-			success: function(data) {
-					$("#lista").html("");
-					var html = "";
-					for(let i = 0; i < data.length; i++){
-					$.ajax({
-							async: false,
-							url: "rest/genre/" + data[i].genreID,
-							type: "GET",
-							success: function(data) {
-									genre = data[0];
-							}
-					});
-					html += `
-					<div class="col-lg-4">
-				  <div class="card" style="width: 18rem;">
-						<img src="`+ data[i].image +`" class="card-img-top" alt="...">
-				 		 <h5 class="card-title">`+ data[i].movie_title +`</h5>
-				 		 <p>
-				 			 <button type="button" class="btn btn-primary">
-				 			view more
-				 			 </button>
-				 		 </p>
-				 	 </div>
-				  </div>
-				  </div>
-					`;
-					}
-					$("#lista").html(html);
-			}
-	});
-	  }
-
 
 $(function(){
 	 if (!window.localStorage.getItem("token")){
@@ -224,6 +277,7 @@ $(function(){
 		 $('body').show();
 	 }
  });
+ 
  </script>
 
 </html>
