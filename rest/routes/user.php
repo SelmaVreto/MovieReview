@@ -57,7 +57,7 @@ Flight::route('POST /register', function(){
 *    				 @OA\Property(property="email", type="string", example="",	description="" ),
 *    				 @OA\Property(property="status", type="string", example="PANDING",	description="" ),
 *    				 @OA\Property(property="password", type="string", example="",	description="" ),
-*    				 @OA\Property(property="role", type="string", example="",	description="" ),
+*    				 @OA\Property(property="role", type="string", example="",	description="" )
 *          )
 *        )
 *     ),
