@@ -27,13 +27,13 @@ Flight::route('GET /user/@id', function($id){
 *    @OA\RequestBody(description="objest that needs to be added", required=true,
 *       @OA\MediaType(mediaType="application/json",
 *    			@OA\Schema(
-*    				 @OA\Property(property="name", type="string", example="",	description="", required=true ),
-*    				 @OA\Property(property="surname", type="string", example="",	description="", required=true),
-*    				 @OA\Property(property="username", type="string", example="",	description="", required=true),
-*    				 @OA\Property(property="email", type="string", example="",	description="", required=true),
-*    				 @OA\Property(property="status", type="string", example="PANDING",	description="", required=true ),
-*    				 @OA\Property(property="password", type="string", example="",	description="", required=true ),
-*    				 @OA\Property(property="role", type="string", example="",	description="", required=true ),
+*    				 @OA\Property(property="name", type="string", example="",	description=""),
+*    				 @OA\Property(property="surname", type="string", example="",	description=""),
+*    				 @OA\Property(property="username", type="string", example="",	description=""),
+*    				 @OA\Property(property="email", type="string", example="",	description=""),
+*    				 @OA\Property(property="status", type="string", example="PANDING",	description="" ),
+*    				 @OA\Property(property="password", type="string", example="",	description=""),
+*    				 @OA\Property(property="role", type="string", example="",	description="" ),
 *          )
 *        )
 *     ),
@@ -66,7 +66,7 @@ Flight::route('POST /register', function(){
  */
 Flight::route('PUT /user/@id', function($id){
   $data = Flight::request()->data->getData();
-  Flight::json(Flight::movieService()->update($id, $data));
+  Flight::json(Flight::userService()->update($id, $data));
 });
 
 /**
