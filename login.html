@@ -179,15 +179,10 @@
         };
      $("#register-link").prop('disabled',true);
       $.post( "rest/register", register_info).done(function( data ) {
-        console.log(data);
-        // $("#register-form-container").addClass("d-none");
-        // $("#register-form-alert").removeClass("d-none");
-        // $("#register-form-alert .alert").html(data.message);
+       console.log(data);
         alert("success, confirm email and than login!");
       }).fail(function(error) {
-      $("#register-link").prop('disabled',false);
-      console.log(error);
-    alert("Please fill out form with Your valid data!");
+      alert("Please fill out form with Your valid data!");
     });
          }
 
