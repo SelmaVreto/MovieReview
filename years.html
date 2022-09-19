@@ -5,126 +5,12 @@
 	<meta charset="utf-8">
 	<title>Years</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/years.css" rel="stylesheet">
 	<link rel="icon" type="image/x-icon" href="https://img.icons8.com/officel/344/documentary.png">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Tillana:wght@400;500&display=swap" rel="stylesheet">
-	<style>
 
-.logo img {
-	height: 30px;
-  width: 30px;
-}
-.v {
-background:#D98880;
-color: black;
-margin-top: 7px;
-border-radius: 7px;
-}
-.card-img-top{
-	border-radius: 20px;
-}
-.va {
-background: #fab1a0 ;
-color: black;
-margin-left: 100px;
-margin-top: 7px;
-border-radius: 7px;
-}
-.va:hover{
-	background-color: #D98880;
-}
-
-.vaa {
-background: #fab1a0 ;
-color: black;
-margin-top: 7px;
-margin-left: 10px;
-border-radius: 7px;
-}
-.vaa:hover{
-	background-color: #D98880;
-}
-.page{
-	background-color: #74b9ff;
-	font-family: 'Tillana', cursive;
-}
-.show {
-  display: block;
-}
-.container {
-  margin-top: 20px;
-  overflow: hidden;
-}
-.btn {
-  background-color: #fab1a0;
-}
-.btn:hover{
-	background-color: #D98880;
-}
-.btn-a {
-  background-color: #fab1a0;
-	border-radius: 7px;
-}
-.btn-a:hover{
-	background-color: #D98880;
-}
-.b{
-	color: #d63031;
-}
-.a{
-margin-top:100px;
-text-align: center;
-}
-.card{
-	margin-top:20px;
-	border-radius: 20px;
-}
-.dropbtn {
-  background-color: #74b9ff;
-	margin-left: 990px;
-  color: white;
-  padding: 10px;
-  font-size: 13px;
-  border: none;
-	border-radius: 10px;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-	margin-left: 890px;
-	border-radius: 10px;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ea9999;}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #ea9999;}
-	</style>
 </head>
 <body class="page">
 
@@ -173,10 +59,10 @@ text-align: center;
 		<!-- Control buttons -->
 <div id="myBtnContainer">
 	  <button class="btn active" onclick="getA('all')"> Show all</button>
-  <button class="btn" onclick="getA(1)"> 2008</button>
-  <button class="btn" onclick="getA(2)"> 2009</button>
-  <button class="btn" onclick="getA(3)"> 2021</button>
-	<button class="btn" onclick="getA(4)"> 2022</button>
+  <button class="btn" onclick="getA(1)"> 2022</button>
+  <button class="btn" onclick="getA(2)"> 2021</button>
+  <button class="btn" onclick="getA(3)"> 2009</button>
+	<button class="btn" onclick="getA(4)"> 2008</button>
 
 
 </div>
@@ -342,7 +228,12 @@ text-align: center;
 
 </body>
 <script>
-
+$(function(){
+	 if (!window.localStorage.getItem("token")){
+		 window.location="login.html";
+	 }else{
+		 $('body').show();
+	 }
   function showModal(str){
   //  $.get('rest/movie/'+id, function(data){
     //  console.log(data);
