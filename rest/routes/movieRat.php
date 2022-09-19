@@ -14,8 +14,8 @@ Flight::route('GET /movieRat', function(){
 /**
  * @OA\Get(path="/movieRat/{id}", tags={"movieRat"}, security={{"ApiKeyAuth": {}}},
  *         summary="Return all review by movieID from API.",
- *     @OA\Parameter(in="path", name="id", example=1, description="All rew of oone movie"),
- *     @OA\Response(response="200", description="One movie.")
+ *     @OA\Parameter(in="path", name="id", example=1, description="movieId"),
+ *     @OA\Response(response="200", description="All rew of one movie.")
  * )
  */
 Flight::route('GET /movieRat/@id', function($MovieID){

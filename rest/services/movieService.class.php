@@ -15,12 +15,15 @@ class movieService extends baseService{
       return $this->dao->get_all($offset, $limit);
     }
   }
+
   public function get_movie_by_year($movie_year){
       return $this->dao->get_movie_by_year($movie_year);
   }
+
   public function get_movie_by_genre($genreID){
       return $this->dao->get_movie_by_genre($genreID);
   }
+  
   public function get_movie_by_director($directorsID){
       return $this->dao->get_movie_by_director($directorsID);
   }

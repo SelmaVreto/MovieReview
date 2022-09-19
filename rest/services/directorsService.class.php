@@ -9,20 +9,10 @@ class directorsService extends baseService{
     $this->dao = new directorsDao();
   }
 
-  public function get_directors_by_name($search, $offset, $limit){
-    if ($search){
-      return $this->dao->get_directors_by_name($search, $offset, $limit);
-    }else{
-      return $this->dao->get_all_directors();
-    }
+  public function get_directors_by_name($offset, $limit){
+      return $this->dao->get_all_directors($offset, $limit);
   }
-  public function get_directors_by_surname($search, $offset, $limit){
-    if ($search){
-      return $this->dao->get_directors_by_surname($search, $offset, $limit);
-    }else{
-      return $this->dao->get_all_directors();
-    }
-  }
+
   public function get_by_id($id){
      $directors = $this->dao->get_by_id($id);
       return $directors;

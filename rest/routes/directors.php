@@ -10,14 +10,8 @@
 Flight::route('GET /directors', function(){
   $offset = Flight::query('offset', 0);
   $limit = Flight::query('limit', 10);
-  $search = Flight::query('search');
+  Flight::json(Flight::directorsDao()->get_all_directors());
 
-    if ($search){
-      Flight::json(Flight::directorsDao()->get_directors_by_name($search, $offset, $limit));
-      Flight::json(Flight::directorsDao()->get_directors_by_surname($search, $offset, $limit));
-    }else{
-      Flight::json(Flight::directorsDao()->get_all_directors());
-    }
 });
 
 /**
@@ -34,7 +28,7 @@ Flight::route('GET /directors/@id', function($id){
  * @OA\Get(path="/dir/{id}", tags={"nonreg"},
  *         summary="Return directors by id from API. ",
  *     @OA\Parameter(in="path", name="id", example=1, description="Id of director"),
- *     @OA\Response(response="200", description="One director.")
+ *     @OA\Response(response="200", description="One director for non-reg.")
  * )
  */
 Flight::route('GET /dir/@id', function($id){

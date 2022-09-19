@@ -8,9 +8,7 @@
 Flight::route('GET /genre', function(){
   $offset = Flight::query('offset', 0);
   $limit = Flight::query('limit', 10);
-  $search = Flight::query('search');
-
-   Flight::json(Flight::genreService()->get_genre($search, $offset, $limit));
+   Flight::json(Flight::genreService()->get_genre($offset, $limit));
 });
 
 /**
@@ -27,7 +25,7 @@ Flight::route('GET /genre/@id', function($id){
  * @OA\Get(path="/gen/{id}", tags={"nonreg"},
  *         summary="Return genre by id from API. ",
  *     @OA\Parameter(in="path", name="id", example=1, description="Id of genre"),
- *     @OA\Response(response="200", description="One genre.")
+ *     @OA\Response(response="200", description="One genre for non-reg.")
  * )
  */
 Flight::route('GET /gen/@id', function($id){
