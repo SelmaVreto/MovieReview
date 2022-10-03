@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Directors</title>
+	<title>MOVIEDAR</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/directors.css" rel="stylesheet">
 	<link rel="icon" type="image/x-icon" href="https://img.icons8.com/officel/344/documentary.png">
@@ -49,13 +49,6 @@
 	    </div>
 	  </nav>
 	</header>
-	<main class="a">
-  <script type="text/javascript">
-                function doLogout(){
-                  window.localStorage.clear();
-                  window.location = "login.html";
-                }
-    </script>
 		<script src="js/jquery-3.6.0.min.js"></script>
 		<script src="js/bootstrap.bundle.min.js"></script>
 		<!-- Control buttons -->
@@ -73,9 +66,10 @@
 
 	</div>
   <script type="text/javascript">
-                function Login(){
-                  window.location = "login.html";
-                }
+	function Logout(){
+		localStorage.clear();
+		window.location = "login.html";
+	}
 								function genre(){
 									window.location = "genre.html";
 								}

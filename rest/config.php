@@ -1,10 +1,10 @@
 <?php
 class config {
   const DATE_FORMAT = "Y-m-d H:i:s";
-  const DB_HOST = "sql11.freemysqlhosting.net";
-  const DB_USERNAME = "sql11520918";
-  const DB_PASSWORD = "ydzY2muHLj";
-  const DB_SCHEME = "sql11520918";
+  const DB_HOST = "localhost";
+  const DB_USERNAME = "moviesrandr";
+  const DB_PASSWORD = "movie";
+  const DB_SCHEME = "moviesr";
 
 const SMTP_HOST = "smtp.mailgun.org";
 const SMTP_PORT = 587;

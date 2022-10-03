@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Years</title>
+	<title>MOVIEDAR</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/years.css" rel="stylesheet">
 	<link rel="icon" type="image/x-icon" href="https://img.icons8.com/officel/344/documentary.png">
@@ -51,11 +51,6 @@
 	  </nav>
 	</header>
 	<main class="a">
-  <script type="text/javascript">
-                function doLogin(){
-                  window.location = "login.html";
-                }
-    </script>
 		<!-- Control buttons -->
 <div id="myBtnContainer">
 	  <button class="btn active" onclick="getA('all')"> Show all</button>
@@ -80,7 +75,8 @@
       </div>
   </footer>
   <script type="text/javascript">
-                function Login(){
+                function Logout(){
+									localStorage.clear();
                   window.location = "login.html";
                 }
 								function genre(){
@@ -229,6 +225,7 @@
 </body>
 <script>
 $(function(){
+
 	 if (!window.localStorage.getItem("token")){
 		 window.location="login.html";
 	 }else{
